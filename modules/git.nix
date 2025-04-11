@@ -9,6 +9,6 @@
     };
     aliases = {
       lg = "log --oneline --graph --decorate";
-    }
+    };
   };
 }
