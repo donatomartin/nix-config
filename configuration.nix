@@ -87,6 +87,11 @@
   services.xserver.enable = true;
   services.displayManager.ly.enable = true;
 
+  programs.hyprland = {
+  	enable = true;
+  	xwayland.enable = true;
+  };
+
   environment.sessionVariables = {
   	# If your cursor becomes invisible
   	WLR_NO_HARDWARE_CURSORS = "1";
@@ -94,10 +99,6 @@
 	NIXOS_OZONE_WL = "1";
   };
 	
-  programs.hyprland = {
-  	enable = true;
-	xwayland.enable = true;
-  };
 
   hardware = {
   	graphics.enable = true;
