@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -116,104 +114,101 @@
       ];
 
       bind = [
-      # Lanzadores
-      "$mainMod, B, exec, brave"
-      "$mainMod, Q, exec, ghostty"
-      "$mainMod, E, exec, nautilus"
-      "$mainMod, W, exec, wofi --show drun"
-      "$mainMod, C, killactive,"
-      "$mainMod CTRL, N, exit,"
+        # Lanzadores
+        "$mainMod, B, exec, brave"
+        "$mainMod, Q, exec, ghostty"
+        "$mainMod, E, exec, ghostty -e lf"
+        "$mainMod, W, exec, wofi --show drun"
+        "$mainMod, C, killactive,"
+        "$mainMod CTRL, M, exit,"
 
-      # Flotante/pseudotile
-      "$mainMod, V, togglefloating,"
-      "$mainMod, P, pseudo,"
-      "$mainMod, I, togglesplit,"
+        # Flotante/pseudotile
+        "$mainMod, V, togglefloating,"
+        "$mainMod, P, pseudo,"
+        "$mainMod, I, togglesplit,"
 
-      # Movimiento con teclas estilo vim
-      "$mainMod, h, movefocus, l"
-      "$mainMod, l, movefocus, r"
-      "$mainMod, k, movefocus, u"
-      "$mainMod, j, movefocus, d"
+        # Movimiento con teclas estilo vim
+        "$mainMod, h, movefocus, l"
+        "$mainMod, l, movefocus, r"
+        "$mainMod, k, movefocus, u"
+        "$mainMod, j, movefocus, d"
 
-      # Swap de ventanas
-      "$mainMod SHIFT, h, movewindow, l"
-      "$mainMod SHIFT, l, movewindow, r"
-      "$mainMod SHIFT, k, movewindow, u"
-      "$mainMod SHIFT, j, movewindow, d"
+        # Swap de ventanas
+        "$mainMod SHIFT, h, movewindow, l"
+        "$mainMod SHIFT, l, movewindow, r"
+        "$mainMod SHIFT, k, movewindow, u"
+        "$mainMod SHIFT, j, movewindow, d"
 
-      # Workspaces
-      "$mainMod, 1, workspace, 1"
-      "$mainMod, 2, workspace, 2"
-      "$mainMod, 3, workspace, 3"
-      "$mainMod, 4, workspace, 4"
-      "$mainMod, 5, workspace, 5"
-      "$mainMod, 6, workspace, 6"
-      "$mainMod, 7, workspace, 7"
-      "$mainMod, 8, workspace, 8"
-      "$mainMod, 9, workspace, 9"
-      "$mainMod, 0, workspace, 10"
+        # Workspaces
+        "$mainMod, 1, workspace, 1"
+        "$mainMod, 2, workspace, 2"
+        "$mainMod, 3, workspace, 3"
+        "$mainMod, 4, workspace, 4"
+        "$mainMod, 5, workspace, 5"
+        "$mainMod, 6, workspace, 6"
+        "$mainMod, 7, workspace, 7"
+        "$mainMod, 8, workspace, 8"
+        "$mainMod, 9, workspace, 9"
+        "$mainMod, 0, workspace, 10"
 
-      "$mainMod SHIFT, 1, movetoworkspace, 1"
-      "$mainMod SHIFT, 2, movetoworkspace, 2"
-      "$mainMod SHIFT, 3, movetoworkspace, 3"
-      "$mainMod SHIFT, 4, movetoworkspace, 4"
-      "$mainMod SHIFT, 5, movetoworkspace, 5"
-      "$mainMod SHIFT, 6, movetoworkspace, 6"
-      "$mainMod SHIFT, 7, movetoworkspace, 7"
-      "$mainMod SHIFT, 8, movetoworkspace, 8"
-      "$mainMod SHIFT, 9, movetoworkspace, 9"
-      "$mainMod SHIFT, 0, movetoworkspace, 10"
+        "$mainMod SHIFT, 1, movetoworkspace, 1"
+        "$mainMod SHIFT, 2, movetoworkspace, 2"
+        "$mainMod SHIFT, 3, movetoworkspace, 3"
+        "$mainMod SHIFT, 4, movetoworkspace, 4"
+        "$mainMod SHIFT, 5, movetoworkspace, 5"
+        "$mainMod SHIFT, 6, movetoworkspace, 6"
+        "$mainMod SHIFT, 7, movetoworkspace, 7"
+        "$mainMod SHIFT, 8, movetoworkspace, 8"
+        "$mainMod SHIFT, 9, movetoworkspace, 9"
+        "$mainMod SHIFT, 0, movetoworkspace, 10"
 
-      # Special workspace (scratchpad)
-      "$mainMod, G, togglespecialworkspace, magic"
-      "$mainMod SHIFT, G, movetoworkspace, special:magic"
+        # Special workspace (scratchpad)
+        "$mainMod, G, togglespecialworkspace, magic"
+        "$mainMod SHIFT, G, movetoworkspace, special:magic"
 
-      # Navegación entre workspaces
-      "$mainMod SHIFT, N, workspace, e+1"
-      "$mainMod SHIFT, P, workspace, e-1"
+        # Navegación entre workspaces
+        "$mainMod SHIFT, N, workspace, e+1"
+        "$mainMod SHIFT, P, workspace, e-1"
 
-      # Screenshot
-      "$mainMod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of the region taken\" -t 1000"
-      "$mainMod, S, exec, grim - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of whole screen taken\" -t 1000"
-    ];
+        # Screenshot
+        "$mainMod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of the region taken\" -t 1000"
+        "$mainMod, S, exec, grim - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of whole screen taken\" -t 1000"
+      ];
 
-    bindm = [
-      "$mainMod, mouse:272, movewindow"
-      "$mainMod, mouse:273, resizewindow"
-    ];
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
+      ];
 
-    binde = [
+      binde = [
+        # Resize
+        "$mainMod SHIFT, left, resizeactive,-40 0"
+        "$mainMod SHIFT, right, resizeactive,40 0"
+        "$mainMod SHIFT, up, resizeactive,0 -40"
+        "$mainMod SHIFT, down, resizeactive,0 40"
 
-      # Resize
-      "$mainMod, right, resizeactive,-40 0"
-      "$mainMod, left, resizeactive,40 0"
-      "$mainMod, up, resizeactive,0 -40"
-      "$mainMod, down, resizeactive,0 40"
+        # Move
+        "$mainMod, left, moveactive,-40 0"
+        "$mainMod, right, moveactive,40 0"
+        "$mainMod, up, moveactive,0 -40"
+        "$mainMod, down, moveactive,0 40"
+      ];
 
-      # Move
-      "$mainMod SHIFT, right, moveactive,-40 0"
-      "$mainMod SHIFT, left, moveactive,40 0"
-      "$mainMod SHIFT, up, moveactive,0 -40"
-      "$mainMod SHIFT, down, moveactive,0 40"
+      bindel = [
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
+        ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+      ];
 
-    ];
-
-    bindel = [
-      ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-      ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-      ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-      ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
-      ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
-    ];
-
-    bindl = [
-      ",XF86AudioNext, exec, playerctl next"
-      ",XF86AudioPause, exec, playerctl play-pause"
-      ",XF86AudioPlay, exec, playerctl play-pause"
-      ",XF86AudioPrev, exec, playerctl previous"
-    ];
-
+      bindl = [
+        ",XF86AudioNext, exec, playerctl next"
+        ",XF86AudioPause, exec, playerctl play-pause"
+        ",XF86AudioPlay, exec, playerctl play-pause"
+        ",XF86AudioPrev, exec, playerctl previous"
+      ];
     };
   };
 }

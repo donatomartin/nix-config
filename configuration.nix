@@ -2,19 +2,27 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -57,8 +65,11 @@
   users.users.donato = {
     isNormalUser = true;
     description = "Donato";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -67,12 +78,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	wofi
-  	ghostty
-  	brave
-	thunderbird
   ];
- 
+
   programs.zsh.enable = true;
   users.users.donato.shell = pkgs.zsh;
 
@@ -88,21 +95,20 @@
   services.displayManager.ly.enable = true;
 
   programs.hyprland = {
-  	enable = true;
-  	xwayland.enable = true;
+    enable = true;
+    xwayland.enable = true;
   };
 
-  environment.sessionVariables = {
-  	# If your cursor becomes invisible
-  	WLR_NO_HARDWARE_CURSORS = "1";
-	# Hint electron apps to use wayland
-	NIXOS_OZONE_WL = "1";
-  };
-	
+  # environment.sessionVariables = {
+  # 	# If your cursor becomes invisible
+  # 	WLR_NO_HARDWARE_CURSORS = "1";
+  #   # Hint electron apps to use wayland
+  #   NIXOS_OZONE_WL = "1";
+  # };
 
   hardware = {
-  	graphics.enable = true;
-	nvidia.modesetting.enable = true;
+    graphics.enable = true;
+    nvidia.modesetting.enable = true;
   };
 
   # List services that you want to enable:

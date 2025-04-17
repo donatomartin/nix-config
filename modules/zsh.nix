@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   programs.zsh = {
     enable = true;
@@ -14,5 +13,10 @@
       plugins = [ "git" "zoxide" "extract" "vi-mode" "tmux" ];
       extraConfig = "ZSH_TMUX_AUTOSTART=true";
     };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }
