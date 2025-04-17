@@ -3,16 +3,6 @@
 
     keymaps = [
       {
-        mode = "n";
-        key = ";";
-        action = "<cmd>lua vim.api.nvim_feedkeys(':! ', 'm', true)<CR>";
-        options = {
-          silent = true;
-          desc = "Execute terminal command";
-        };
-      }
-      {
-
         mode = [
           "n"
           "i"
