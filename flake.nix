@@ -3,29 +3,38 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-colors.url = "github:misterio77/nix-colors";
 
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nixos-unstable,
       home-manager,
       nixvim,
+      nix-colors,
       ...
     }@inputs:
     let
-      lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      unstable = nixos-unstable.legacyPackages.${system};
+      lib = nixpkgs.lib;
     in
     {
-
       nixosConfigurations.nixos = lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [ ./configuration.nix ];
@@ -33,11 +42,16 @@
 
       homeConfigurations.donato = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+
+        extraSpecialArgs = {
+          inherit nix-colors;
+          inherit unstable;
+        };
+
         modules = [
           ./home.nix
           nixvim.homeManagerModules.default
         ];
       };
-
     };
 }

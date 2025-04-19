@@ -1,6 +1,8 @@
 {
   config,
   pkgs,
+  nix-colors,
+  unstable,
   ...
 }:
 {
@@ -8,11 +10,17 @@
     ./modules/hyprland.nix
     ./modules/zsh.nix
     ./modules/git.nix
+    ./modules/gh.nix
     ./modules/tmux.nix
     ./modules/cursor.nix
-    ./modules/wallpaper.nix
+    ./modules/hyprpaper.nix
     ./modules/ghostty.nix
     ./modules/nvim/nixvim.nix
+    ./modules/fastfetch.nix
+    ./modules/cava.nix
+    ./modules/peaclock.nix
+
+    nix-colors.homeManagerModules.default
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -38,37 +46,50 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    wofi
-    brave
-    libreoffice
-    beeper
-    acpi
-    unzip
-    wl-clipboard
-    neofetch
-    zoxide
-    slurp
-    grim
-    btop
-    ripgrep
+  home.packages = [
+    pkgs.wofi
+    pkgs.wl-clipboard
+    pkgs.cliphist
+    pkgs.brave
+    pkgs.libreoffice
+    pkgs.beeper
+    pkgs.ranger
+    pkgs.acpi
+    pkgs.unzip
+    pkgs.zoxide
+    pkgs.slurp
+    pkgs.grim
+    pkgs.ripgrep
+    pkgs.cowsay
 
-    gcc
-    nodejs_22
-    python313
-    openjdk21
-    go
+    pkgs.gcc
+    pkgs.nodejs_22
+    pkgs.python313
+    pkgs.openjdk21
+    pkgs.go
 
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-
-    (writeShellScriptBin "my-hello" ''
-      echo "Hello, ${config.home.username}!"
-    '')
+    pkgs.nerdfonts.override
+    { fonts = [ "JetBrainsMono" ]; }
   ];
 
-  # Create symlinks for the .dotfiles
-  home.file = {
-  };
+  # https://github.com/tinted-theming/base16-schemes/blob/main/catppuccin-mocha.yaml
+  # base00: "#1e1e2e" # base
+  # base01: "#181825" # mantle
+  # base02: "#313244" # surface0
+  # base03: "#45475a" # surface1
+  # base04: "#585b70" # surface2
+  # base05: "#cdd6f4" # text
+  # base06: "#f5e0dc" # rosewater
+  # base07: "#b4befe" # lavender
+  # base08: "#f38ba8" # red
+  # base09: "#fab387" # peach
+  # base0A: "#f9e2af" # yellow
+  # base0B: "#a6e3a1" # green
+  # base0C: "#94e2d5" # teal
+  # base0D: "#89b4fa" # blue
+  # base0E: "#cba6f7" # mauve
+  # base0F: "#f2cdcd" # flamingo
+  colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
 
   # Declare session variables
   home.sessionVariables = {

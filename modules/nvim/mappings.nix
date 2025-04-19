@@ -1,6 +1,5 @@
 {
   programs.nixvim = {
-
     keymaps = [
       {
         mode = [
@@ -11,16 +10,6 @@
         action = "<cmd>w<CR>";
         options = {
           desc = "file save";
-        };
-
-      }
-      {
-        mode = "n";
-        key = "<leader>n";
-        action = "<cmd>set nu!<CR>";
-        options = {
-          silent = true;
-          desc = "toggle line number";
         };
       }
       {
@@ -62,10 +51,19 @@
       {
         mode = "n";
         key = "<leader>qq";
-        action = "<cmd>Neotree close<CR><cmd>q<CR>";
+        action = "<cmd>lua require('dapui').close()<CR><cmd>Neotree close<CR><cmd>qa<CR>";
         options = {
           silent = true;
           desc = "Clear highlights";
+        };
+      }
+      {
+        mode = "n";
+        key = ";";
+        action = "<cmd>lua vim.api.nvim_feedkeys(':! ', 'm', true)<CR>";
+        options = {
+          silent = true;
+          desc = "Execute terminal command";
         };
       }
     ];

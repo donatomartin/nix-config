@@ -1,25 +1,27 @@
-{ pkgs, ... }:
+{ ... }:
 {
-
+  # Configured plugins
   imports = [
     ./neo-tree.nix
     ./telescope.nix
     ./flash.nix
     ./persistence.nix
     ./conform.nix
+    ./cmp.nix
+    ./lsp.nix
+    ./lspsaga.nix
+    ./dap.nix
     ./undotree.nix
-    ./treesitter.nix
     ./mini.nix
-    ./neoclip.nix
-    ./noice.nix
-    ./vimux.nix
+    ./floaterm.nix
+    ./harpoon.nix
+    ./treesitter.nix
+    ./copilot.nix
   ];
 
+  # Default Configuration Plugins
   programs.nixvim = {
-    colorschemes.catppuccin.enable = true;
-
     plugins = {
-
       lz-n.enable = true; # Lazy Loading
       web-devicons.enable = true; # Icons
       nvim-autopairs.enable = true; # Autopairing
@@ -28,33 +30,14 @@
       flash.enable = true; # Move fast
       tmux-navigator.enable = true; # Tmux integration
       markview.enable = true; # Markdown viewer
-      lualine.enable = true; # Nicer bar
       gitblame.enable = true; # See inline git blames
-
-      colorizer = {
-        enable = true;
-        settings.user_default_options.names = false;
-      };
-
-      oil = {
-        enable = true;
-        lazyLoad.settings.cmd = "Oil";
-      };
-
-      trim = {
-        enable = true;
-        settings = {
-          highlight = true;
-          ft_blocklist = [
-            "checkhealth"
-            "floaterm"
-            "lspinfo"
-            "neo-tree"
-            "TelescopePrompt"
-          ];
-        };
-      };
-
+      gitsigns.enable = true; # View git stuff
+      zen-mode.enable = true; # Enable zen mode
+      vim-suda.enable = true; # Write files with sudo
+      colorizer.enable = true; # Highlight colors
+      lualine.enable = true; # Cooler line
+      comment-box.enable = true; # Nicer comments
     };
   };
+
 }

@@ -1,11 +1,10 @@
 { pkgs, ... }:
 {
   programs.nixvim = {
-
     keymaps = [
       {
         mode = "n";
-        key = "<leader>fmt";
+        key = "<leader>fm";
         action = "<cmd>lua require('conform').format()<CR>";
         options = {
           desc = "format";
@@ -23,7 +22,6 @@
       black
       google-java-format
       isort
-
     ];
     plugins.conform-nvim = {
       enable = true;

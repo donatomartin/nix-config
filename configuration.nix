@@ -1,14 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   config,
   pkgs,
   inputs,
   ...
 }:
-
 {
   imports = [
     # Include the results of the hardware scan.
@@ -30,6 +28,9 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Enable docker
+  virtualisation.docker.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -68,8 +69,11 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
-    packages = with pkgs; [ ];
+    packages = with pkgs; [
+      docker
+    ];
   };
 
   # Allow unfree packages
@@ -129,5 +133,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

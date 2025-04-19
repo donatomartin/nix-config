@@ -1,10 +1,15 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
 
     settings = {
       "$mainMod" = "SUPER";
+
+      exec-once = [
+        "wl-paste --watch cliphist store -max-items 300 &"
+      ];
 
       monitor = [
         "eDP-1,1920x1080@144,0x0,1"
@@ -117,13 +122,14 @@
         # Lanzadores
         "$mainMod, B, exec, brave"
         "$mainMod, Q, exec, ghostty"
-        "$mainMod, E, exec, ghostty -e lf"
+        "$mainMod, E, exec, ghostty -e ranger"
         "$mainMod, W, exec, wofi --show drun"
+        "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
 
         # Flotante/pseudotile
-        "$mainMod, V, togglefloating,"
+        "$mainMod, O, togglefloating,"
         "$mainMod, P, pseudo,"
         "$mainMod, I, togglesplit,"
 
