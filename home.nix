@@ -47,13 +47,20 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+
+    # GUI
     pkgs.wofi
-    pkgs.wl-clipboard
-    pkgs.cliphist
     pkgs.brave
     pkgs.libreoffice
     pkgs.beeper
+    pkgs.prismlauncher
+
+    # TUI
     pkgs.ranger
+
+    # CLI
+    pkgs.wl-clipboard
+    pkgs.cliphist
     pkgs.acpi
     pkgs.unzip
     pkgs.zoxide
@@ -62,12 +69,14 @@
     pkgs.ripgrep
     pkgs.cowsay
 
+    # Toolchains
     pkgs.gcc
     pkgs.nodejs_22
     pkgs.python313
     pkgs.openjdk21
     pkgs.go
 
+    # Fonts
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 

@@ -9,6 +9,10 @@
       nv = "nvim";
       vi = "nvim";
       v = "nvim";
+      l = "ls";
+      la = "ls -a";
+      ll = "ls -a";
+      lla = "ls -la";
     };
     oh-my-zsh = {
       enable = true;
