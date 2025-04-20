@@ -4,7 +4,7 @@
     keymaps = [
       {
         mode = "n";
-        key = "<leader>fm";
+        key = "<leader>mm";
         action = "<cmd>lua require('conform').format()<CR>";
         options = {
           desc = "format";

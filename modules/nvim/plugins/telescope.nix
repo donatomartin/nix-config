@@ -10,9 +10,7 @@
         "<leader>fb" = "buffers";
         "<leader>fh" = "help_tags";
         "<leader>fd" = "diagnostics";
-
-        # FZF like bindings
-        "<leader>fg" = "git_files";
+        "<leader>fr" = "registers";
         "<leader>fo" = "oldfiles";
       };
 

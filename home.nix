@@ -68,11 +68,9 @@
     pkgs.openjdk21
     pkgs.go
 
-    pkgs.nerdfonts.override
-    { fonts = [ "JetBrainsMono" ]; }
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  # https://github.com/tinted-theming/base16-schemes/blob/main/catppuccin-mocha.yaml
   # base00: "#1e1e2e" # base
   # base01: "#181825" # mantle
   # base02: "#313244" # surface0
@@ -89,6 +87,7 @@
   # base0D: "#89b4fa" # blue
   # base0E: "#cba6f7" # mauve
   # base0F: "#f2cdcd" # flamingo
+  # https://github.com/tinted-theming/base16-schemes/blob/main/catppuccin-mocha.yaml
   colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
 
   # Declare session variables

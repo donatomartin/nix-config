@@ -11,12 +11,6 @@
         "wl-paste --watch cliphist store -max-items 300 &"
       ];
 
-      monitor = [
-        "eDP-1,1920x1080@144,0x0,1"
-        "DVI-I-1,1920x1080@60,1920x0,1"
-        "DVI-I-2,1920x1080@60,3840x0,1"
-      ];
-
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"

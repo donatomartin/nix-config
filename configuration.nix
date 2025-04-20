@@ -113,6 +113,7 @@
   hardware = {
     graphics.enable = true;
     nvidia.modesetting.enable = true;
+    bluetooth.enable = true;
   };
 
   # List services that you want to enable:

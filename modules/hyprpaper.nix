@@ -11,8 +11,9 @@ in
   home.packages = with pkgs; [ hyprpaper ];
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = ${wallpaperPath}
-    wallpaper = eDP-1,${wallpaperPath}
+    	preload = ${wallpaperPath}
+    	wallpaper = eDP-1,${wallpaperPath}
+        wallpaper = HDMI-A-1,${wallpaperPath}
   '';
 
   systemd.user.services.hyprpaper = {

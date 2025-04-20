@@ -17,6 +17,7 @@
     ./harpoon.nix
     ./treesitter.nix
     ./copilot.nix
+    ./lazygit.nix
   ];
 
   # Default Configuration Plugins
