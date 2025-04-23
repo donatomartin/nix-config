@@ -24,9 +24,6 @@
           # Snippets
           { name = "luasnip"; }
 
-          # Copilot
-          { name = "copilot"; }
-
           # Dap
           { name = "cmp-dap"; }
 

@@ -72,9 +72,12 @@
     # Toolchains
     pkgs.gcc
     pkgs.nodejs_22
-    pkgs.python313
     pkgs.openjdk21
     pkgs.go
+    (pkgs.python313.withPackages (
+      ps: with ps; [
+      ]
+    ))
 
     # Fonts
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
