@@ -12,6 +12,7 @@
         "<leader>fd" = "diagnostics";
         "<leader>fr" = "registers";
         "<leader>fo" = "oldfiles";
+        "<leader>gt" = "git_status";
       };
 
       settings.defaults = {

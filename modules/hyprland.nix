@@ -113,6 +113,7 @@
       ];
 
       bind = [
+
         # Lanzadores
         "$mainMod, B, exec, brave"
         "$mainMod, Q, exec, ghostty"

@@ -28,6 +28,8 @@
         ZSH_TMUX_AUTOSTART=true
         ZSH_TMUX_AUTOQUIT=false
         ZSH_TMUX_AUTOCONNECT=false
+
+        VI_MODE_SET_CURSOR=true
       '';
     };
   };
