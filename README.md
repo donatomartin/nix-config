@@ -1,5 +1,47 @@
 # My NixOS Configuration
 
-In this repo you will find all my laptop's non sensible configuration, all the tools and services I have enabled on my daily basis. Most of the functionality is installed in the home-manager so it can be installed in any OS without superuser or admin privileges.
+In this repo you will find all my laptop's configuration, all the tools and services I have enabled on my daily basis. Most of the functionality is installed in the home-manager so it can be installed in any OS without superuser or admin privileges using a single-user nix package manager installation.
 
-You will also find here my current nixvim configuration along my tmux and hyprland defaults.
+You will also find my nixvim configuration as a home-manager module, feel free to use, modify and share any of the resources found in this codebase.
+
+## Nix single-user installation
+```bash
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
+```
+
+```bash
+. ~/.nix-profile/etc/profile.d/nix.sh
+```
+
+```bash
+nix --version
+```
+
+Enable the -- sadly -- experimental features for it to work
+```bash
+mkdir -p ~/.config/nix
+echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
+```
+
+Check it's working
+```bash
+nix --version
+```
+
+## Home-manager installation
+
+```bash
+cd ~
+git clone https://github.com/donatomartin/nix-config
+cd nix-config
+```
+
+Replace your-username with your actual username
+```bash
+nix run .#homeConfigurations.your-username.activationPackage
+```
+
+Verify it's working
+```bash
+home-manager generations
+```
