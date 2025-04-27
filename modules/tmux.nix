@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   catppuccinMocha = {
     bg0 = "#1E1E2E";
     bg1 = "#1D1D2C";
@@ -14,7 +15,8 @@
     red = "#F38BA8";
     grey = "#A6ADC8";
   };
-in {
+in
+{
   programs.tmux = {
     enable = true;
     mouse = true;
@@ -74,7 +76,7 @@ in {
       set-window-option -g window-status-current-style bg=${catppuccinMocha.blue},fg=${catppuccinMocha.bg0}
       set-window-option -g window-status-style bg=${catppuccinMocha.bg0},fg=${catppuccinMocha.grey}
 
-      set -g status-right "#[fg=${catppuccinMocha.green},bg=${catppuccinMocha.bg0}]#[fg=${catppuccinMocha.bg0},bg=${catppuccinMocha.green},bold]  %H:%M#[fg=${catppuccinMocha.green}]#[fg=${catppuccinMocha.bg0},bg=${catppuccinMocha.yellow},bold] %Y-%m-%d#[fg=${catppuccinMocha.yellow}]#[fg=${catppuccinMocha.bg0},bg=${catppuccinMocha.red},bold] 󰂄 #(acpi -b | awk '{print $4}' | tr -d ',')#[fg=${catppuccinMocha.red}]"
+      set -g status-right ""
     '';
 
     plugins = with pkgs; [

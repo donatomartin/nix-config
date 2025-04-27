@@ -21,6 +21,8 @@
     ./modules/cava.nix
     ./modules/peaclock.nix
     ./modules/wofi.nix
+    ./modules/waybar.nix
+    ./modules/btop.nix
 
     nix-colors.homeManagerModules.default
   ];
@@ -56,7 +58,7 @@
     pkgs.beeper
     pkgs.prismlauncher
     pkgs.obs-studio
-    pkgs.discord
+    pkgs.vesktop
     pkgs.spotify
     pkgs.vlc
 

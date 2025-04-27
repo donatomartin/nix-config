@@ -122,6 +122,7 @@
         "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
+        "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
 
         # Flotante/pseudotile
         "$mainMod, O, togglefloating,"
