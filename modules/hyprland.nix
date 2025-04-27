@@ -9,6 +9,7 @@
 
       exec-once = [
         "wl-paste --watch cliphist store -max-items 300 &"
+        "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
       ];
 
       env = [
@@ -97,8 +98,7 @@
       };
 
       misc = {
-        force_default_wallpaper = -1;
-        disable_hyprland_logo = false;
+        disable_hyprland_logo = true;
       };
 
       windowrule = [
@@ -110,6 +110,8 @@
         "maxsize 1 1, class:^(xwaylandvideobridge)$"
         "noblur, class:^(xwaylandvideobridge)$"
         "nofocus, class:^(xwaylandvideobridge)$"
+
+        "opacity 0.9 0.9,class:^(Brave-browser)$"
       ];
 
       bind = [

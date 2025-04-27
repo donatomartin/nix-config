@@ -18,6 +18,7 @@
     ./treesitter.nix
     ./copilot.nix
     ./lazygit.nix
+    ./extra-plugins.nix
   ];
 
   # Default Configuration Plugins

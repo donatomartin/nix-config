@@ -7,6 +7,7 @@
 }:
 {
   imports = [
+
     ./modules/hyprland.nix
     ./modules/zsh.nix
     ./modules/git.nix
@@ -19,6 +20,7 @@
     ./modules/fastfetch.nix
     ./modules/cava.nix
     ./modules/peaclock.nix
+    ./modules/wofi.nix
 
     nix-colors.homeManagerModules.default
   ];
@@ -49,11 +51,14 @@
   home.packages = [
 
     # GUI
-    pkgs.wofi
     pkgs.brave
     pkgs.libreoffice
     pkgs.beeper
     pkgs.prismlauncher
+    pkgs.obs-studio
+    pkgs.discord
+    pkgs.spotify
+    pkgs.vlc
 
     # TUI
     pkgs.ranger
@@ -68,6 +73,9 @@
     pkgs.grim
     pkgs.ripgrep
     pkgs.cowsay
+    pkgs.glib
+    pkgs.tldr
+    pkgs.thefuck
 
     # Toolchains
     pkgs.gcc

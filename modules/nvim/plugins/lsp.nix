@@ -13,7 +13,6 @@
           lua_ls.enable = true;
           markdown_oxide.enable = true;
           yamlls.enable = true;
-          jdtls.enable = true;
           pyright.enable = true;
           gopls.enable = true;
         };

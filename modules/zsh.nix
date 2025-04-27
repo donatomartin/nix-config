@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   programs.zsh = {
+
     enable = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
@@ -14,6 +15,7 @@
       ll = "ls -a";
       lla = "ls -la";
     };
+
     oh-my-zsh = {
       enable = true;
       theme = "agnoster"; # puedes cambiarlo por otro
@@ -26,7 +28,7 @@
       ];
       extraConfig = ''
         ZSH_TMUX_AUTOSTART=true
-        ZSH_TMUX_AUTOQUIT=false
+        ZSH_TMUX_AUTOQUIT=true
         ZSH_TMUX_AUTOCONNECT=false
 
         VI_MODE_SET_CURSOR=true

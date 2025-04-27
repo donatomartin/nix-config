@@ -12,8 +12,7 @@ in
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''
     	preload = ${wallpaperPath}
-    	wallpaper = eDP-1,${wallpaperPath}
-        wallpaper = HDMI-A-1,${wallpaperPath}
+    	wallpaper = ,${wallpaperPath}
   '';
 
   systemd.user.services.hyprpaper = {

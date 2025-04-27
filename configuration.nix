@@ -17,6 +17,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  systemd.services.NetworkManager-wait-online.enable = false; # Disable this service to avoid blocking the boot process
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -53,13 +55,17 @@
     LC_TIME = "es_ES.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "es";
-    variant = "";
+  services.xserver = {
+    enable = true;
+    # Configure keymap in X11
+    xkb = {
+      layout = "es";
+      variant = "";
+    };
+    videoDrivers = [ "nvidia" ];
+
   };
 
-  # Configure console keymap
   console.keyMap = "es";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -75,6 +81,23 @@
       docker
     ];
   };
+
+  services.interception-tools =
+    let
+      itools = pkgs.interception-tools;
+      itools-caps = pkgs.interception-tools-plugins.caps2esc;
+    in
+    {
+      enable = true;
+      plugins = [ itools-caps ];
+      # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
+      udevmonConfig = pkgs.lib.mkDefault ''
+        - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
+          DEVICE:
+            EVENTS:
+              EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+      '';
+    };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -96,7 +119,6 @@
   #   enableSSHSupport = true;
   # };
 
-  services.xserver.enable = true;
   services.displayManager.ly.enable = true;
 
   programs.hyprland = {
@@ -113,7 +135,14 @@
 
   hardware = {
     graphics.enable = true;
-    nvidia.modesetting.enable = true;
+
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = true;
+      open = false; # Puedes poner true si quieres usar los drivers abiertos (beta)
+      nvidiaSettings = true;
+    };
+
     bluetooth.enable = true;
   };
 

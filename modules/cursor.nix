@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+
   home.pointerCursor = {
     gtk.enable = true;
     name = "Bibata-Modern-Classic";
