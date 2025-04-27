@@ -110,8 +110,6 @@
         "maxsize 1 1, class:^(xwaylandvideobridge)$"
         "noblur, class:^(xwaylandvideobridge)$"
         "nofocus, class:^(xwaylandvideobridge)$"
-
-        "opacity 0.9 0.9,class:^(Brave-browser)$"
       ];
 
       bind = [
