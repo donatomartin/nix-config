@@ -12,8 +12,9 @@
       v = "nvim";
       l = "ls";
       la = "ls -a";
-      ll = "ls -a";
+      ll = "ls -l";
       lla = "ls -la";
+      zd = "z d";
     };
 
     oh-my-zsh = {

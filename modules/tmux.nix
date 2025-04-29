@@ -60,6 +60,13 @@ in
       bind -n M-H previous-window
       bind -n M-L next-window
 
+      # Resize panes with Alt + h/j/k/l
+      bind -n M-h resize-pane -L 5
+      bind -n M-j resize-pane -D 5
+      bind -n M-k resize-pane -U 5
+      bind -n M-l resize-pane -R 5
+
+
       # New panes inherit current directory
       bind '"' split-window -v -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"

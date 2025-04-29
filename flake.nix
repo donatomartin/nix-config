@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nix-colors.url = "github:misterio77/nix-colors";
+    catppuccin.url = "github:catppuccin/nix";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -20,23 +20,25 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixos-unstable,
       home-manager,
       nixvim,
-      nix-colors,
+      catppuccin,
       ...
-    }@inputs:
+    }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      unstable = nixos-unstable.legacyPackages.${system};
+      unstable = import nixos-unstable {
+        system = system;
+        config.allowUnfree = true;
+        config.allowUnfreePredicate = _: true;
+      };
       lib = nixpkgs.lib;
     in
     {
       nixosConfigurations.nixos = lib.nixosSystem {
-        specialArgs = { inherit inputs; };
         modules = [ ./configuration.nix ];
       };
 
@@ -44,13 +46,13 @@
         inherit pkgs;
 
         extraSpecialArgs = {
-          inherit nix-colors;
           inherit unstable;
         };
 
         modules = [
           ./home.nix
           nixvim.homeManagerModules.default
+          catppuccin.homeModules.catppuccin
         ];
       };
     };

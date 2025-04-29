@@ -19,6 +19,7 @@
     ./copilot.nix
     ./lazygit.nix
     ./extra-plugins.nix
+    ./gitsigns.nix
   ];
 
   # Default Configuration Plugins
@@ -32,8 +33,6 @@
       flash.enable = true; # Move fast
       tmux-navigator.enable = true; # Tmux integration
       markview.enable = true; # Markdown viewer
-      gitblame.enable = true; # See inline git blames
-      gitsigns.enable = true; # View git stuff
       zen-mode.enable = true; # Enable zen mode
       vim-suda.enable = true; # Write files with sudo
       colorizer.enable = true; # Highlight colors

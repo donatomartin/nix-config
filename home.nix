@@ -1,11 +1,12 @@
 {
   config,
   pkgs,
-  nix-colors,
+  catppuccin,
   unstable,
   ...
 }:
 {
+
   imports = [
 
     ./modules/hyprland.nix
@@ -20,11 +21,9 @@
     ./modules/fastfetch.nix
     ./modules/cava.nix
     ./modules/peaclock.nix
-    ./modules/wofi.nix
+    ./modules/rofi.nix
     ./modules/waybar.nix
     ./modules/btop.nix
-
-    nix-colors.homeManagerModules.default
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -61,23 +60,21 @@
     pkgs.vesktop
     pkgs.spotify
     pkgs.vlc
-
-    # TUI
-    pkgs.ranger
+    unstable.anydesk
 
     # CLI
-    pkgs.wl-clipboard
-    pkgs.cliphist
-    pkgs.acpi
-    pkgs.unzip
-    pkgs.zoxide
-    pkgs.slurp
-    pkgs.grim
-    pkgs.ripgrep
-    pkgs.cowsay
-    pkgs.glib
-    pkgs.tldr
-    pkgs.thefuck
+    pkgs.wl-clipboard # wayland clipboard manager
+    pkgs.cliphist # clipboard history
+    pkgs.acpi # battery status
+    pkgs.unzip # unzip files
+    pkgs.zoxide # zsh cd improvement
+    pkgs.slurp # select screen area
+    pkgs.grim # screenshot
+    pkgs.ripgrep # search tool
+    pkgs.cowsay # make a cow say something
+    pkgs.glib # GNU C library
+    pkgs.tldr # tldr pages
+    pkgs.thefuck # fix command line mistakes
 
     # Toolchains
     pkgs.gcc
@@ -88,29 +85,9 @@
       ps: with ps; [
       ]
     ))
-
-    # Fonts
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  # base00: "#1e1e2e" # base
-  # base01: "#181825" # mantle
-  # base02: "#313244" # surface0
-  # base03: "#45475a" # surface1
-  # base04: "#585b70" # surface2
-  # base05: "#cdd6f4" # text
-  # base06: "#f5e0dc" # rosewater
-  # base07: "#b4befe" # lavender
-  # base08: "#f38ba8" # red
-  # base09: "#fab387" # peach
-  # base0A: "#f9e2af" # yellow
-  # base0B: "#a6e3a1" # green
-  # base0C: "#94e2d5" # teal
-  # base0D: "#89b4fa" # blue
-  # base0E: "#cba6f7" # mauve
-  # base0F: "#f2cdcd" # flamingo
-  # https://github.com/tinted-theming/base16-schemes/blob/main/catppuccin-mocha.yaml
-  colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
+  catppuccin.flavor = "mocha";
 
   # Declare session variables
   home.sessionVariables = {
@@ -119,4 +96,5 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
 }

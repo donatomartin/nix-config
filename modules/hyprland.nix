@@ -1,5 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 {
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -118,8 +119,8 @@
         "$mainMod, B, exec, brave"
         "$mainMod, Q, exec, ghostty"
         "$mainMod, E, exec, ghostty -e ranger"
-        "$mainMod, W, exec, wofi --show drun"
-        "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+        "$mainMod, W, exec, rofi -show drun"
+        "$mainMod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
         "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
@@ -135,11 +136,17 @@
         "$mainMod, k, movefocus, u"
         "$mainMod, j, movefocus, d"
 
-        # Swap de ventanas
+        # Movimiento de ventanas
         "$mainMod SHIFT, h, movewindow, l"
         "$mainMod SHIFT, l, movewindow, r"
         "$mainMod SHIFT, k, movewindow, u"
         "$mainMod SHIFT, j, movewindow, d"
+
+        # Swap de ventanas
+        "$mainMod CTRL, h, swapwindow, l"
+        "$mainMod CTRL, l, swapwindow, r"
+        "$mainMod CTRL, k, swapwindow, u"
+        "$mainMod CTRL, j, swapwindow, d"
 
         # Workspaces
         "$mainMod, 1, workspace, 1"
@@ -184,16 +191,16 @@
 
       binde = [
         # Resize
-        "$mainMod SHIFT, left, resizeactive,-40 0"
-        "$mainMod SHIFT, right, resizeactive,40 0"
-        "$mainMod SHIFT, up, resizeactive,0 -40"
-        "$mainMod SHIFT, down, resizeactive,0 40"
+        "$mainMod ALT, h, resizeactive,-40 0"
+        "$mainMod ALT, l, resizeactive,40 0"
+        "$mainMod ALT, k, resizeactive,0 -40"
+        "$mainMod ALT, j, resizeactive,0 40"
 
         # Move
-        "$mainMod, left, moveactive,-40 0"
-        "$mainMod, right, moveactive,40 0"
-        "$mainMod, up, moveactive,0 -40"
-        "$mainMod, down, moveactive,0 40"
+        "$mainMod ALT SHIFT, h, moveactive,-40 0"
+        "$mainMod ALT SHIFT, l, moveactive,40 0"
+        "$mainMod ALT SHIFT, k, moveactive,0 -40"
+        "$mainMod ALT SHIFT, j, moveactive,0 40"
       ];
 
       bindel = [

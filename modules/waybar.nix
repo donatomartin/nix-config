@@ -27,13 +27,13 @@
         };
 
         network = {
-          format-wifi = " {essid} ";
+          format-wifi = "  {essid} ";
           format-ethernet = "󰈀 {ipaddr} ";
           format-disconnected = " Disconnected ";
         };
 
         pulseaudio = {
-          format = " {volume}% ";
+          format = "  {volume}% ";
         };
 
         "hyprland/workspaces" = {
