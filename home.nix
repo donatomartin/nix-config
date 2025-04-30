@@ -84,6 +84,9 @@
       ps: with ps; [
       ]
     ))
+
+    # Fonts
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   catppuccin.flavor = "mocha";

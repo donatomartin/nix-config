@@ -42,17 +42,7 @@
         };
       };
     };
-
-    style = ''
-      * {
-        font-family: JetBrainsMono Nerd Font, sans-serif;
-        font-size: 13px;
-      }
-
-      window#waybar {
-        background-color: rgba(30, 30, 30, 0.8);
-        color: #ffffff;
-      }
-    '';
   };
+
+  catppuccin.waybar.enable = true;
 }
