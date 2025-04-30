@@ -53,7 +53,7 @@
 
     # GUI
     pkgs.brave
-    pkgs.libreoffice
+    unstable.libreoffice
     pkgs.beeper
     pkgs.prismlauncher
     pkgs.obs-studio
@@ -74,7 +74,6 @@
     pkgs.cowsay # make a cow say something
     pkgs.glib # GNU C library
     pkgs.tldr # tldr pages
-    pkgs.thefuck # fix command line mistakes
 
     # Toolchains
     pkgs.gcc
