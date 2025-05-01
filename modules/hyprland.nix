@@ -137,16 +137,16 @@
         "$mainMod, j, movefocus, d"
 
         # Movimiento de ventanas
-        "$mainMod SHIFT, h, movewindow, l"
-        "$mainMod SHIFT, l, movewindow, r"
-        "$mainMod SHIFT, k, movewindow, u"
-        "$mainMod SHIFT, j, movewindow, d"
+        "$mainMod CTRL, h, movewindow, l"
+        "$mainMod CTRL, l, movewindow, r"
+        "$mainMod CTRL, k, movewindow, u"
+        "$mainMod CTRL, j, movewindow, d"
 
         # Swap de ventanas
-        "$mainMod CTRL, h, swapwindow, l"
-        "$mainMod CTRL, l, swapwindow, r"
-        "$mainMod CTRL, k, swapwindow, u"
-        "$mainMod CTRL, j, swapwindow, d"
+        "$mainMod SHIFT, h, swapwindow, l"
+        "$mainMod SHIFT, l, swapwindow, r"
+        "$mainMod SHIFT, k, swapwindow, u"
+        "$mainMod SHIFT, j, swapwindow, d"
 
         # Workspaces
         "$mainMod, 1, workspace, 1"
@@ -204,7 +204,7 @@
       ];
 
       bindel = [
-        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
