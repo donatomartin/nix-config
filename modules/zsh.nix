@@ -33,6 +33,7 @@
         ZSH_TMUX_AUTOCONNECT=false
 
         VI_MODE_SET_CURSOR=true
+        VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=false
       '';
     };
   };
