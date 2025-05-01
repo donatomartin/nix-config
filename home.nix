@@ -67,13 +67,15 @@
     pkgs.cliphist # clipboard history
     pkgs.acpi # battery status
     pkgs.unzip # unzip files
-    pkgs.zoxide # zsh cd improvement
+    pkgs.zoxide # cd improvement
+    pkgs.bat # cat improvement
     pkgs.slurp # select screen area
     pkgs.grim # screenshot
     pkgs.ripgrep # search tool
     pkgs.cowsay # make a cow say something
     pkgs.glib # GNU C library
     pkgs.tldr # tldr pages
+    pkgs.hyprpicker # pick colors from screen
 
     # Toolchains
     pkgs.gcc
