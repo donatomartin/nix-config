@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  catppuccin,
   unstable,
   ...
 }:
@@ -24,6 +22,7 @@
     ./modules/rofi.nix
     ./modules/waybar.nix
     ./modules/btop.nix
+    ./modules/dolphin.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -77,13 +76,26 @@
     pkgs.tldr # tldr pages
     pkgs.hyprpicker # pick colors from screen
 
-    # Toolchains
+    # C
     pkgs.gcc
-    pkgs.nodejs_22
+
+    # Java
     pkgs.openjdk21
+
+    # Go
     pkgs.go
-    (pkgs.python313.withPackages (
+
+    # Web
+    pkgs.nodejs_22
+    pkgs.pnpm
+    pkgs.nodePackages.typescript
+
+    # Python
+    (pkgs.python3.withPackages (
       ps: with ps; [
+        mypy
+        pytest
+        debugpy
       ]
     ))
 
@@ -96,6 +108,9 @@
   # Declare session variables
   home.sessionVariables = {
     EDITOR = "nvim";
+    BROWSER = "firefox";
+    TERMINAL = "ghostty";
+    TERM = "ghostty";
   };
 
   # Let Home Manager install and manage itself.
