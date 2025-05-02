@@ -1,20 +1,10 @@
-{ config, pkgs, ... }:
-
-let
-  catppuccin = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "kde";
-    rev = "main"; # You can pin a specific commit too
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Replace with real hash
-  };
-in
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     dolphin
     filelight
     qt5.qttools # For qt5ct
-    qt5ct # Qt5 configuration utility
-    libsForQt5.kio-fuse
+    libsForQt5.qt5ct # Qt5 configuration utility
     libsForQt5.kio
     libsForQt5.breeze-icons
     libsForQt5.kiconthemes
@@ -26,25 +16,8 @@ in
     QT_QPA_PLATFORMTHEME = "qt5ct";
   };
 
-  # Set GTK/Qt themes (Catppuccin flavor: Mocha in this case)
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Standard-Blue-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "blue" ];
-        variant = "mocha";
-      };
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-  };
-
-  # Copy Catppuccin KDE theme manually (if not using full KDE Plasma)
-  home.file.".local/share/color-schemes/CatppuccinMocha.colors".source =
-    "${catppuccin}/themes/Catppuccin-Mocha/colors/CatppuccinMocha.colors";
+  catppuccin.gtk.enable = true;
+  catppuccin.gtk.icon.enable = true;
 
   # Optional: Dolphin config tweaks
   xdg.configFile."dolphinrc".text = ''

@@ -118,7 +118,7 @@
         # Lanzadores
         "$mainMod, B, exec, brave"
         "$mainMod, Q, exec, ghostty"
-        "$mainMod, E, exec, ghostty -e ranger"
+        "$mainMod, E, exec, dolphin"
         "$mainMod, W, exec, rofi -show drun"
         "$mainMod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mainMod, C, killactive,"
@@ -137,16 +137,16 @@
         "$mainMod, j, movefocus, d"
 
         # Movimiento de ventanas
-        "$mainMod CTRL, h, movewindow, l"
-        "$mainMod CTRL, l, movewindow, r"
-        "$mainMod CTRL, k, movewindow, u"
-        "$mainMod CTRL, j, movewindow, d"
+        "$mainMod SHIFT, h, movewindow, l"
+        "$mainMod SHIFT, l, movewindow, r"
+        "$mainMod SHIFT, k, movewindow, u"
+        "$mainMod SHIFT, j, movewindow, d"
 
         # Swap de ventanas
-        "$mainMod SHIFT, h, swapwindow, l"
-        "$mainMod SHIFT, l, swapwindow, r"
-        "$mainMod SHIFT, k, swapwindow, u"
-        "$mainMod SHIFT, j, swapwindow, d"
+        "$mainMod CTRL, h, swapwindow, l"
+        "$mainMod CTRL, l, swapwindow, r"
+        "$mainMod CTRL, k, swapwindow, u"
+        "$mainMod CTRL, j, swapwindow, d"
 
         # Workspaces
         "$mainMod, 1, workspace, 1"
