@@ -2,17 +2,6 @@
   programs.nixvim = {
     keymaps = [
       {
-        mode = [
-          "n"
-          "i"
-        ];
-        key = "<C-s>";
-        action = "<cmd>w<CR>";
-        options = {
-          desc = "file save";
-        };
-      }
-      {
         mode = "n";
         key = "<leader>rn";
         action = "<cmd>set rnu!<CR>";
