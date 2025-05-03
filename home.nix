@@ -19,7 +19,7 @@
     ./modules/fastfetch.nix
     ./modules/cava.nix
     ./modules/peaclock.nix
-    ./modules/rofi.nix
+    ./modules/wofi.nix
     ./modules/waybar.nix
     ./modules/btop.nix
     ./modules/dolphin.nix
@@ -75,8 +75,9 @@
     pkgs.glib # GNU C library
     pkgs.tldr # tldr pages
     pkgs.hyprpicker # pick colors from screen
+    pkgs.asciiquarium-transparent # aquarium in terminal
+    pkgs.cmatrix # matrix in terminal
 
-    # C
     pkgs.gcc
 
     # Java
