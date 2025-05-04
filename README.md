@@ -36,9 +36,9 @@ git clone https://github.com/donatomartin/nix-config
 cd nix-config
 ```
 
-Replace your-username with your actual username
+Replace donato with your actual username
 ```bash
-nix run .#homeConfigurations.your-username.activationPackage
+nix run .#homeConfigurations.donato.activationPackage
 ```
 
 Verify it's working
