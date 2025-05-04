@@ -125,6 +125,7 @@
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
         "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
+        "CTRL SHIFT, ESC, exec, ghostty -e btop"
 
         # Flotante/pseudotile
         "$mainMod, O, togglefloating,"

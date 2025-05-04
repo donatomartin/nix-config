@@ -9,7 +9,11 @@
         layer = "top";
         position = "top";
 
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [
+          "cpu"
+          "memory"
+          "hyprland/workspaces"
+        ];
         modules-center = [ "clock" ];
         modules-right = [
           "network"
@@ -47,7 +51,17 @@
         };
 
         pulseaudio = {
-          format = "  {volume}% ";
+          format = "{icon}{volume}%";
+          format-muted = "  Muted";
+          format-icons = {
+            default = [
+              "  "
+              "  "
+              "  "
+            ]; # Silencio, volumen bajo, volumen alto
+            headphone = "";
+          };
+          on-click = "pavucontrol";
         };
 
         "hyprland/workspaces" = {
@@ -110,12 +124,22 @@
       #clock,
       #battery,
       #pulseaudio,
+      #cpu,
+      #memory,
       #network {
         padding: 0 10px;
         margin: 5px 4px;
-        background-color: @surface0;
         border-radius: 8px;
-        color: @text;
+      }
+
+      #cpu {
+        background-color: @mauve;
+        color: @base;
+      }
+
+      #memory {
+        background-color: @mauve;
+        color: @base;
       }
 
       #clock {

@@ -2,14 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  config,
   pkgs,
-  inputs,
   ...
 }:
 {
+
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -25,7 +23,7 @@
   ];
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -63,7 +61,6 @@
       variant = "";
     };
     videoDrivers = [ "nvidia" ];
-
   };
 
   console.keyMap = "es";
@@ -78,10 +75,38 @@
       "docker"
     ];
     packages = with pkgs; [
+
+      # CLI
       docker
+
+      # GUI
+      brave
+      libreoffice
+      beeper
+      prismlauncher
+      obs-studio
+      vesktop
+      spotify
+      vlc
+      anydesk
+
     ];
   };
 
+  hardware = {
+    graphics.enable = true;
+
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = true;
+      open = false; # Puedes poner true si quieres usar los drivers abiertos (beta)
+      nvidiaSettings = true;
+    };
+
+    bluetooth.enable = true;
+  };
+
+  # Remap CapsLock to Escape or Ctrl if chorded
   services.interception-tools =
     let
       itools = pkgs.interception-tools;
@@ -111,45 +136,12 @@
   programs.zsh.enable = true;
   users.users.donato.shell = pkgs.zsh;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
   services.displayManager.ly.enable = true;
 
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
-
-  # environment.sessionVariables = {
-  # 	# If your cursor becomes invisible
-  # 	WLR_NO_HARDWARE_CURSORS = "1";
-  #   # Hint electron apps to use wayland
-  #   NIXOS_OZONE_WL = "1";
-  # };
-
-  hardware = {
-    graphics.enable = true;
-
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = true;
-      open = false; # Puedes poner true si quieres usar los drivers abiertos (beta)
-      nvidiaSettings = true;
-    };
-
-    bluetooth.enable = true;
-  };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
