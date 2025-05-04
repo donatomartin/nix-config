@@ -1,6 +1,4 @@
-{
-  ...
-}:
+{ pkgs, ... }:
 let
   wallpaperPath = builtins.toString ./../../wallpapers/wall1.png;
 in

@@ -7,6 +7,7 @@
 }:
 {
 
+  # Import hardware-configuration
   imports = [
     ./hardware-configuration.nix
   ];
@@ -15,25 +16,28 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  systemd.services.NetworkManager-wait-online.enable = false; # Disable this service to avoid blocking the boot process
+  # Disable connecting to the network before the system is up
+  systemd.services.NetworkManager-wait-online.enable = false;
 
+  # Enable flakes
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
 
+  # Define hostname
   networking.hostName = "nixos"; # Define your hostname.
-  #networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true; # Enable Networking
+  # networking.networkmanager.unmanaged = [
+  #   "*"
+  #   "except:type:wwan"
+  #   "except:type:gsm"
+  # ];
+  # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable docker
-  virtualisation.docker.enable = true;
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Madrid";
@@ -53,17 +57,16 @@
     LC_TIME = "es_ES.UTF-8";
   };
 
-  services.xserver = {
-    enable = true;
-    # Configure keymap in X11
-    xkb = {
-      layout = "es";
-      variant = "";
-    };
-    videoDrivers = [ "nvidia" ];
-  };
-
   console.keyMap = "es";
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    ntfs3g
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.donato = {
@@ -93,6 +96,11 @@
     ];
   };
 
+  # Set Zsh as the default shell
+  programs.zsh.enable = true;
+  users.users.donato.shell = pkgs.zsh;
+
+  # Configure Hardware
   hardware = {
     graphics.enable = true;
 
@@ -124,20 +132,13 @@
       '';
     };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # Enable docker
+  virtualisation.docker.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    ntfs3g
-  ];
-
-  programs.zsh.enable = true;
-  users.users.donato.shell = pkgs.zsh;
-
+  # Enable Ly display manager
   services.displayManager.ly.enable = true;
 
+  # Enable Hyprland
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

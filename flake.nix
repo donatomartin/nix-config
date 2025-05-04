@@ -55,5 +55,10 @@
           catppuccin.homeModules.catppuccin
         ];
       };
+
+      packages.${system}.nixvim = pkgs.writeShellScriptBin "nixvim" ''
+        exec ${pkgs.neovim}/bin/nvim "$@"
+      '';
+
     };
 }

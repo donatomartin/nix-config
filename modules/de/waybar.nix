@@ -10,8 +10,6 @@
         position = "top";
 
         modules-left = [
-          "cpu"
-          "memory"
           "hyprland/workspaces"
         ];
         modules-center = [ "clock" ];
@@ -124,40 +122,10 @@
       #clock,
       #battery,
       #pulseaudio,
-      #cpu,
-      #memory,
       #network {
         padding: 0 10px;
         margin: 5px 4px;
         border-radius: 8px;
-      }
-
-      #cpu {
-        background-color: @mauve;
-        color: @base;
-      }
-
-      #memory {
-        background-color: @mauve;
-        color: @base;
-      }
-
-      #clock {
-        background-color: @lavender;
-        color: @base;
-      }
-
-      #battery {
-        background-color: @lavender;
-        color: @base;
-      }
-
-      #pulseaudio {
-        background-color: @lavender;
-        color: @base;
-      }
-
-      #network {
         background-color: @lavender;
         color: @base;
       }
