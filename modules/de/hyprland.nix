@@ -118,7 +118,7 @@
         # Lanzadores
         "$mainMod, B, exec, brave"
         "$mainMod, Q, exec, ghostty"
-        "$mainMod, E, exec, dolphin"
+        "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, wofi --show drun"
         "$mainMod, PERIOD, exec, wofi-emoji"
         "$mainMod, V, exec, cliphist list | wofi -dmenu | cliphist decode | wl-copy"

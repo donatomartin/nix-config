@@ -8,6 +8,7 @@
       mouse-hide-while-typing = true;
       background-opacity = 0.8;
       background-blur = true;
+      cursor-color = "#CDD6F4";
     };
   };
 }

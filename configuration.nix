@@ -84,12 +84,12 @@
 
       # GUI
       brave
+      xfce.thunar
       libreoffice
       beeper
       prismlauncher
       obs-studio
       vesktop
-      spotify
       vlc
       anydesk
 

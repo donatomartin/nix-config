@@ -24,6 +24,7 @@
     ./modules/programs/cava.nix
     ./modules/programs/peaclock.nix
     ./modules/programs/btop.nix
+    ./modules/programs/ranger.nix
     ./modules/nvim/nixvim.nix
 
     # Programming Languages
@@ -49,6 +50,10 @@
 
   home.packages = [
 
+    # TUI
+    pkgs.asciiquarium-transparent # aquarium in terminal
+    pkgs.cmatrix # matrix in terminal
+
     # CLI
     pkgs.wl-clipboard # wayland clipboard manager
     pkgs.cliphist # clipboard history
@@ -63,8 +68,6 @@
     pkgs.glib # GNU C library
     pkgs.tldr # tldr pages
     pkgs.hyprpicker # pick colors from screen
-    pkgs.asciiquarium-transparent # aquarium in terminal
-    pkgs.cmatrix # matrix in terminal
     pkgs.brightnessctl # control brightness
 
     # Fonts
