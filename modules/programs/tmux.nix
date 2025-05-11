@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   ...
 }:
@@ -46,9 +45,9 @@ in
       set-option -g pane-active-border-style "fg=${catppuccinMocha.blue}"
       set-option -g pane-border-style "fg=${catppuccinMocha.bg2}"
 
-      # Swap panes with Ctrl + arrow
-      bind -n C-Up swap-pane -U
-      bind -n C-Down swap-pane -D
+      # Swap panes with Ctrl+b + h/l 
+      bind h swap-pane -U
+      bind l swap-pane -D
 
       # Start copy mode with C-b v
       unbind [
@@ -65,7 +64,6 @@ in
       bind -n M-j resize-pane -D 5
       bind -n M-k resize-pane -U 5
       bind -n M-l resize-pane -R 5
-
 
       # New panes inherit current directory
       bind '"' split-window -v -c "#{pane_current_path}"
