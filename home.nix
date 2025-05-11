@@ -69,6 +69,8 @@
     pkgs.tldr # tldr pages
     pkgs.hyprpicker # pick colors from screen
     pkgs.brightnessctl # control brightness
+    pkgs.ffmpeg # video library
+    pkgs.poppler # PDF rendering library
 
     # Fonts
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
