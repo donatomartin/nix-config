@@ -55,6 +55,15 @@
           desc = "Execute terminal command";
         };
       }
+      {
+        mode = "n";
+        key = "<M-n>";
+        action = "<cmd>buffer #<CR>";
+        options = {
+          silent = true;
+          desc = "Switch to last buffer";
+        };
+      }
     ];
   };
 }
