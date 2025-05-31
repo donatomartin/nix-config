@@ -4,6 +4,7 @@
 {
   pkgs,
   inputs,
+  username,
   ...
 }:
 {
@@ -70,9 +71,9 @@
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.donato = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Donato";
+    description = username;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -101,7 +102,7 @@
 
   # Set Zsh as the default shell
   programs.zsh.enable = true;
-  users.users.donato.shell = pkgs.zsh;
+  users.users.${username}.shell = pkgs.zsh;
 
   # Configure Hardware
   hardware = {

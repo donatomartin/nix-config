@@ -1,75 +1,73 @@
-{ pkgs, ... }:
+{ ... }:
 {
-  programs.nixvim = {
-    plugins = {
+  plugins = {
 
-      lspkind.enable = true; # Icons for CMP
-      cmp-nvim-lsp-signature-help.enable = true;
+    lspkind.enable = true; # Icons for CMP
+    cmp-nvim-lsp-signature-help.enable = true;
 
-      cmp = {
-        enable = true;
-        autoEnableSources = true;
-        settings.sources = [
+    cmp = {
+      enable = true;
+      autoEnableSources = true;
+      settings.sources = [
 
-          # LSP
-          { name = "nvim_lsp"; }
-          { name = "nvim_lsp_signature_help"; }
+        # LSP
+        { name = "nvim_lsp"; }
+        { name = "nvim_lsp_signature_help"; }
 
-          # Filesystem paths
-          { name = "path"; }
+        # Filesystem paths
+        { name = "path"; }
 
-          # Buffer CMP
-          { name = "buffer"; }
+        # Buffer CMP
+        { name = "buffer"; }
 
-          # Snippets
-          { name = "luasnip"; }
+        # Snippets
+        { name = "luasnip"; }
 
-          # Dap
-          { name = "cmp-dap"; }
+        # Dap
+        { name = "cmp-dap"; }
 
-        ];
-        settings.mapping = {
-          "<Tab>" = "cmp.mapping.select_next_item()";
-          "<S-Tab>" = "cmp.mapping.select_prev_item()";
-          "<C-j>" = "cmp.mapping.scroll_docs(4)";
-          "<C-k>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-Space>" = "cmp.mapping.complete()";
-          "<C-Esc>" = "cmp.mapping.close()";
-          "<CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })";
-        };
+      ];
+      settings.mapping = {
+        "<Tab>" = "cmp.mapping.select_next_item()";
+        "<S-Tab>" = "cmp.mapping.select_prev_item()";
+        "<C-j>" = "cmp.mapping.scroll_docs(4)";
+        "<C-k>" = "cmp.mapping.scroll_docs(-4)";
+        "<C-Space>" = "cmp.mapping.complete()";
+        "<C-Esc>" = "cmp.mapping.close()";
+        "<CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })";
       };
-
-      lsp-format.enable = true;
-      none-ls = {
-        enable = true;
-        enableLspFormat = true;
-      };
-
-      luasnip.enable = true;
     };
 
-    # Ability to toggle cmp
-    extraConfigLua = ''
-      	   local cmp_enabled = true
-      	   vim.api.nvim_create_user_command("ToggleAutoComplete", function()
-      		   if cmp_enabled then
-      			   require("cmp").setup.buffer({ enabled = false })
-      			   cmp_enabled = false
-      		   else
-      			   require("cmp").setup.buffer({ enabled = true })
-      			   require("notify")("Enabled Autocomplete")
-      			   cmp_enabled = true
-      		   end
-      	   end, {})
-    '';
+    lsp-format.enable = true;
+    none-ls = {
+      enable = true;
+      enableLspFormat = true;
+    };
 
-    keymaps = [
-      {
-        key = "<Leader>ta";
-        action = "<cmd> ToggleAutoComplete <CR>";
-        mode = "n";
-        options.desc = "Toggle Autocomplete";
-      }
-    ];
+    luasnip.enable = true;
   };
+
+  # Ability to toggle cmp
+  extraConfigLua = ''
+    	   local cmp_enabled = true
+    	   vim.api.nvim_create_user_command("ToggleAutoComplete", function()
+    		   if cmp_enabled then
+    			   require("cmp").setup.buffer({ enabled = false })
+    			   cmp_enabled = false
+    		   else
+    			   require("cmp").setup.buffer({ enabled = true })
+    			   require("notify")("Enabled Autocomplete")
+    			   cmp_enabled = true
+    		   end
+    	   end, {})
+  '';
+
+  keymaps = [
+    {
+      key = "<Leader>ta";
+      action = "<cmd> ToggleAutoComplete <CR>";
+      mode = "n";
+      options.desc = "Toggle Autocomplete";
+    }
+  ];
 }

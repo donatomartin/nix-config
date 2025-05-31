@@ -3,29 +3,16 @@
 }:
 {
 
-  imports = [
-    ./plugins
-    ./general-mappings.nix
-    ./options.nix
-  ];
-
   programs.nixvim = {
 
-    enable = true;
-    enableMan = true;
+    imports = [
+      ./nixvim-config.nix
+    ];
+
     defaultEditor = true;
-    clipboard.register = "unnamedplus,unnamed";
+    enable = true;
     nixpkgs.useGlobalPackages = true;
-    colorschemes.catppuccin.enable = true;
 
-    globals = {
-      mapleader = " ";
-      maplocalleader = " ";
-    };
-
-    extraConfigVim = ''
-      set guicursor=n-v-c:blinkon1,i:ver25
-    '';
   };
 
 }

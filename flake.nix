@@ -27,6 +27,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       nixos-unstable,
       home-manager,
@@ -34,6 +35,7 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      username = "donato";
       pkgs = nixpkgs.legacyPackages.${system};
       unstable = import nixos-unstable {
         system = system;
@@ -46,7 +48,7 @@
       nixosConfigurations.nixos = lib.nixosSystem {
 
         specialArgs = {
-          inherit unstable inputs;
+          inherit unstable inputs username;
         };
 
         modules = [
@@ -55,11 +57,11 @@
 
       };
 
-      homeConfigurations.donato = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         extraSpecialArgs = {
-          inherit unstable inputs;
+          inherit unstable inputs username;
         };
 
         modules = [
@@ -67,9 +69,14 @@
         ];
       };
 
-      packages.${system}.nixvim = pkgs.writeShellScriptBin "nixvim" ''
-        exec ${pkgs.neovim}/bin/nvim "$@"
-      '';
+      packages.${system} = {
+        nixvim = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
+          pkgs = pkgs;
+          module = import ./modules/nvim/nixvim-config.nix;
+        };
+
+        activate-home = self.homeConfigurations.${username}.activationPackage;
+      };
 
     };
 }

@@ -5,6 +5,7 @@ In this repo you will find all my laptop's configuration, all the tools and serv
 You will also find my nixvim configuration as a home-manager module, feel free to use, modify and share any of the resources found in this codebase.
 
 ## Nix single-user installation
+
 ```bash
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 ```
@@ -13,17 +14,15 @@ sh <(curl -L https://nixos.org/nix/install) --no-daemon
 . ~/.nix-profile/etc/profile.d/nix.sh
 ```
 
-```bash
-nix --version
-```
+Enable the required experimental features for it to work (nix-command and flakes)
 
-Enable the -- sadly -- experimental features for it to work
 ```bash
 mkdir -p ~/.config/nix
 echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 ```
 
 Check it's working
+
 ```bash
 nix --version
 ```
@@ -36,12 +35,20 @@ git clone https://github.com/donatomartin/nix-config
 cd nix-config
 ```
 
-Replace donato with your actual username
+Replace the username and system variables with your own in the [flake](./flake.nix) before running the next command.
+
 ```bash
-nix run .#homeConfigurations.donato.activationPackage
+nix run .#activate-home
 ```
 
 Verify it's working
+
 ```bash
 home-manager generations
+```
+
+## Execute NixVim Directly
+
+```bash
+nix run github:donatomartin/nix-config#nixvim
 ```

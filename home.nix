@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  username,
   ...
 }:
 {
@@ -43,8 +44,8 @@
 
   catppuccin.flavor = "mocha";
 
-  home.username = "donato";
-  home.homeDirectory = "/home/donato";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   nixpkgs = {
     config = {
