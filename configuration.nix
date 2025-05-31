@@ -83,6 +83,8 @@
 
       # CLI
       docker
+      git
+      neovim
 
       # GUI
       inputs.zen-browser.packages.${pkgs.system}.twilight
@@ -98,11 +100,12 @@
       vscode
       spotify
     ];
+
+	shell = pkgs.zsh;
   };
 
   # Set Zsh as the default shell
   programs.zsh.enable = true;
-  users.users.${username}.shell = pkgs.zsh;
 
   # Configure Hardware
   hardware = {

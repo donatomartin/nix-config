@@ -79,9 +79,6 @@
     pkgs.ffmpeg # video library
     pkgs.wineWowPackages.full # wine packages for running windows applications
 
-    # Fonts
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-
   ];
 
   # Declare session variables
