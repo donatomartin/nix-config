@@ -23,6 +23,7 @@
       google-java-format
       isort
     ];
+
     plugins.conform-nvim = {
       enable = true;
 

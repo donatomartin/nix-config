@@ -14,9 +14,8 @@
       ];
 
       env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
-        "MOZ_ENABLE_WAYLAND,1"
+        "MOZ_ENABLE_WAYLAND,1" # Enable Wayland support in Firefox
+        "WLR_NO_HARDWARE_CURSORS,1" # Disable hardware cursors
       ];
 
       input = {
@@ -116,15 +115,15 @@
       bind = [
 
         # Lanzadores
-        "$mainMod, B, exec, brave"
+        "$mainMod, B, exec, zen"
         "$mainMod, Q, exec, ghostty"
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, wofi --show drun"
-        "$mainMod, PERIOD, exec, wofi-emoji"
         "$mainMod, V, exec, cliphist list | wofi -dmenu | cliphist decode | wl-copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
         "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
+        "$mainMod SHIFT, C, exec, hyprpicker | wl-copy"
         "CTRL SHIFT, ESC, exec, ghostty -e btop"
 
         # Flotante/pseudotile

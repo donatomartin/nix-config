@@ -2,13 +2,14 @@
   description = "Nixos config flake";
 
   inputs = {
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     catppuccin.url = "github:catppuccin/nix";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -16,6 +17,12 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -23,10 +30,8 @@
       nixpkgs,
       nixos-unstable,
       home-manager,
-      nixvim,
-      catppuccin,
       ...
-    }:
+    }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -39,20 +44,26 @@
     in
     {
       nixosConfigurations.nixos = lib.nixosSystem {
-        modules = [ ./configuration.nix ];
+
+        specialArgs = {
+          inherit unstable inputs;
+        };
+
+        modules = [
+          ./configuration.nix
+        ];
+
       };
 
       homeConfigurations.donato = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         extraSpecialArgs = {
-          inherit unstable;
+          inherit unstable inputs;
         };
 
         modules = [
           ./home.nix
-          nixvim.homeManagerModules.default
-          catppuccin.homeModules.catppuccin
         ];
       };
 

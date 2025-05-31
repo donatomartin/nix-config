@@ -1,11 +1,15 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 {
 
   # Home Manager imports
   imports = [
+
+    inputs.nixvim.homeManagerModules.default
+    inputs.catppuccin.homeModules.catppuccin
 
     # Desktop Environment
     ./modules/de/hyprland.nix
@@ -14,6 +18,7 @@
     ./modules/de/wofi.nix
     ./modules/de/ghostty.nix
     ./modules/de/cursor.nix
+    ./modules/de/gtk.nix
 
     # Programs
     ./modules/programs/zsh.nix
@@ -58,6 +63,7 @@
     pkgs.wl-clipboard # wayland clipboard manager
     pkgs.cliphist # clipboard history
     pkgs.acpi # battery status
+    pkgs.zip # zip files
     pkgs.unzip # unzip files
     pkgs.zoxide # cd improvement
     pkgs.bat # cat improvement
@@ -70,7 +76,7 @@
     pkgs.hyprpicker # pick colors from screen
     pkgs.brightnessctl # control brightness
     pkgs.ffmpeg # video library
-    pkgs.poppler # PDF rendering library
+    pkgs.wineWowPackages.full # wine packages for running windows applications
 
     # Fonts
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -80,7 +86,7 @@
   # Declare session variables
   home.sessionVariables = {
     EDITOR = "nvim";
-    BROWSER = "brave";
+    BROWSER = "zen";
     TERMINAL = "ghostty";
     TERM = "ghostty";
   };

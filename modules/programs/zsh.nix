@@ -1,5 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 {
+
   programs.zsh = {
 
     enable = true;
@@ -26,12 +27,9 @@
         "extract"
         "vi-mode"
         "tmux"
+        "sudo"
       ];
       extraConfig = ''
-        ZSH_TMUX_AUTOSTART=true
-        ZSH_TMUX_AUTOQUIT=true
-        ZSH_TMUX_AUTOCONNECT=false
-
         VI_MODE_CURSOR_NORMAL=1
         VI_MODE_SET_CURSOR=true
         VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=false
@@ -43,4 +41,5 @@
     enable = true;
     enableZshIntegration = true;
   };
+
 }

@@ -5,11 +5,12 @@
 
   imports = [
     ./plugins
-    ./mappings.nix
+    ./general-mappings.nix
     ./options.nix
   ];
 
   programs.nixvim = {
+
     enable = true;
     enableMan = true;
     defaultEditor = true;
@@ -22,14 +23,9 @@
       maplocalleader = " ";
     };
 
-    extraConfigLua = ''
-      vim.filetype.add {
-        extension = {
-          g4 = "antlr4",
-        },
-      }
+    extraConfigVim = ''
+      set guicursor=n-v-c:blinkon1,i:ver25
     '';
   };
 
-  home.file.".config/nvim/syntax/antlr4.vim".source = ./syntax/antlr4.vim;
 }

@@ -40,7 +40,7 @@
       {
         mode = "n";
         key = "<leader>qq";
-        action = "<cmd>lua require('dapui').close()<CR><cmd>Neotree close<CR><cmd>qa<CR>";
+        action = "<cmd>Neotree close<CR><cmd>qa<CR>";
         options = {
           silent = true;
           desc = "Clear highlights";
@@ -63,6 +63,26 @@
           silent = true;
           desc = "Switch to last buffer";
         };
+      }
+      {
+        mode = "i";
+        key = "<C-h>";
+        action = "<Left>";
+      }
+      {
+        mode = "i";
+        key = "<C-l>";
+        action = "<Right>";
+      }
+      {
+        mode = "i";
+        key = "<C-j>";
+        action = "<Down>";
+      }
+      {
+        mode = "i";
+        key = "<C-k>";
+        action = "<Up>";
       }
     ];
   };

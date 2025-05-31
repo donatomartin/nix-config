@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -83,6 +84,7 @@
       docker
 
       # GUI
+      inputs.zen-browser.packages.${pkgs.system}.twilight
       brave
       xfce.thunar
       libreoffice
@@ -92,7 +94,8 @@
       vesktop
       vlc
       anydesk
-
+      vscode
+      spotify
     ];
   };
 

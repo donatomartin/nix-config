@@ -12,7 +12,7 @@
     plugins.neo-tree = {
       enable = true;
 
-      filesystem.hijackNetrwBehavior = "open_current";
+      filesystem.hijackNetrwBehavior = "disabled";
       closeIfLastWindow = true;
       window = {
         width = 30;

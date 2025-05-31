@@ -29,12 +29,6 @@
 
     plugins.flash = {
       enable = true;
-
-      settings = {
-        continue = false;
-
-      };
-
     };
   };
 }
