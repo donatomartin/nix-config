@@ -35,19 +35,19 @@ in
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
-      # Pane navigation (vim style)
+      # Pane navigation
       bind h select-pane -L
       bind j select-pane -D
       bind k select-pane -U
       bind l select-pane -R
 
+      # Swap panes with Ctrl+b + H/L 
+      bind H swap-pane -U
+      bind L swap-pane -D
+
       # Pane borders
       set-option -g pane-active-border-style "fg=${catppuccinMocha.blue}"
       set-option -g pane-border-style "fg=${catppuccinMocha.bg2}"
-
-      # Swap panes with Ctrl+b + h/l 
-      bind h swap-pane -U
-      bind l swap-pane -D
 
       # Start copy mode with C-b v
       unbind [
@@ -88,6 +88,9 @@ in
       {
         plugin = tmuxPlugins.sensible;
       }
+      # {
+      #   plugin = tmuxPlugins.vim-tmux-navigator;
+      # }
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";

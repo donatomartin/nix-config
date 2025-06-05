@@ -1,7 +1,4 @@
 {
-  ...
-}:
-{
 
   programs.nixvim = {
 

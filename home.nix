@@ -1,5 +1,6 @@
 {
   pkgs,
+  unstable,
   inputs,
   username,
   ...
@@ -13,7 +14,7 @@
     inputs.catppuccin.homeModules.catppuccin
 
     # Desktop Environment
-    ./modules/de/hyprland.nix
+    ./modules/de/hyprland
     ./modules/de/hyprpaper.nix
     ./modules/de/waybar.nix
     ./modules/de/wofi.nix
@@ -59,6 +60,7 @@
     # TUI
     pkgs.asciiquarium-transparent # aquarium in terminal
     pkgs.cmatrix # matrix in terminal
+    pkgs.posting # tui web agent
 
     # CLI
     pkgs.wl-clipboard # wayland clipboard manager
@@ -72,12 +74,17 @@
     pkgs.grim # screenshot
     pkgs.ripgrep # search tool
     pkgs.cowsay # make a cow say something
-    pkgs.glib # GNU C library
     pkgs.tldr # tldr pages
     pkgs.hyprpicker # pick colors from screen
+    pkgs.hyprshade # shaders for hyprland
     pkgs.brightnessctl # control brightness
     pkgs.ffmpeg # video library
+    pkgs.imagemagick # image library
     pkgs.wineWowPackages.full # wine packages for running windows applications
+    pkgs.dos2unix # fix carriage return problems
+
+    # Fonts
+    pkgs.nerd-fonts.jetbrains-mono
 
   ];
 

@@ -124,6 +124,7 @@
         "$mainMod CTRL, M, exit,"
         "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
         "$mainMod SHIFT, C, exec, hyprpicker | wl-copy"
+        "$mainMod SHIFT, B, exec, toggle-hyprshade"
         "CTRL SHIFT, ESC, exec, ghostty -e btop"
 
         # Flotante/pseudotile

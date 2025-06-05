@@ -68,6 +68,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     ntfs3g
+    displaylink
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -88,7 +89,6 @@
 
       # GUI
       inputs.zen-browser.packages.${pkgs.system}.twilight
-      brave
       xfce.thunar
       libreoffice
       beeper
@@ -96,12 +96,14 @@
       obs-studio
       vesktop
       vlc
+      inkscape
+      gimp3
       anydesk
       vscode
-      spotify
+
     ];
 
-	shell = pkgs.zsh;
+    shell = pkgs.zsh;
   };
 
   # Set Zsh as the default shell
@@ -119,6 +121,15 @@
     };
 
     bluetooth.enable = true;
+  };
+
+  services.xserver = {
+    enable = true;
+    videoDrivers = [
+      "displaylink"
+      "modesetting"
+    ];
+
   };
 
   # Remap CapsLock to Escape or Ctrl if chorded
@@ -149,6 +160,19 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+  };
+
+  # Enable Printer Support
+  services.printing.enable = true;
+
+  # Si usas una impresora HP (opcional)
+  services.printing.drivers = [ pkgs.hplip ];
+
+  # Para usar CUPS desde la web
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
   };
 
   # Open ports in the firewall.

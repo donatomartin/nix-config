@@ -58,7 +58,7 @@
     {
       mode = "n";
       key = "<M-n>";
-      action = "<cmd>buffer #<CR>";
+      action = "<cmd>b#<CR>";
       options = {
         silent = true;
         desc = "Switch to last buffer";
@@ -67,7 +67,7 @@
     {
       mode = "n";
       key = "<M-h>";
-      action = "<cmd>buffer previous<CR>";
+      action = "<cmd>bp<CR>";
       options = {
         silent = true;
         desc = "Switch to previous buffer";
@@ -76,7 +76,7 @@
     {
       mode = "n";
       key = "<M-l>";
-      action = "<cmd>buffer next<CR>";
+      action = "<cmd>bn<CR>";
       options = {
         silent = true;
         desc = "Switch to next buffer";

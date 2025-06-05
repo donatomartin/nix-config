@@ -15,12 +15,11 @@
       la = "ls -a";
       ll = "ls -l";
       lla = "ls -la";
-      zd = "z d";
     };
 
     oh-my-zsh = {
       enable = true;
-      theme = "agnoster"; # puedes cambiarlo por otro
+      theme = "agnoster";
       plugins = [
         "git"
         "zoxide"

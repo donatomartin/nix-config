@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-
   keymaps = [
     {
       mode = "n";

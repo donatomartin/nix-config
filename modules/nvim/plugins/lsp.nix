@@ -10,11 +10,15 @@
       servers = {
         nixd.enable = true;
         html.enable = true;
+        cssls.enable = true;
         lua_ls.enable = true;
         markdown_oxide.enable = true;
-        yamlls.enable = true;
         pyright.enable = true;
         gopls.enable = true;
+        yamlls.enable = true;
+        jdtls.enable = true;
+        eslint.enable = true;
+        ts-ls.enable = true;
       };
     };
   };
