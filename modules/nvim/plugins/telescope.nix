@@ -14,8 +14,9 @@
       "<leader>fr" = "registers";
       "<leader>fo" = "oldfiles";
       "<leader>fa" = "find_files follow=true no_ignore=true hidden=true";
-      "<leader>fz" = "current_buffer_fuzzy_find";
+      "<leader>fW" = "current_buffer_fuzzy_find";
       "<leader>fg" = "git_status";
+      "<leader>fz" = "zoxide list";
     };
 
     settings.defaults = {
@@ -28,6 +29,13 @@
         "%.ipynb"
       ];
       set_env.COLORTERM = "truecolor";
+      path_display = [ "truncate" ];
+    };
+
+    extensions = {
+      zoxide = {
+        enable = true;
+      };
     };
   };
 }

@@ -88,9 +88,9 @@ in
       {
         plugin = tmuxPlugins.sensible;
       }
-      # {
-      #   plugin = tmuxPlugins.vim-tmux-navigator;
-      # }
+      {
+        plugin = tmuxPlugins.vim-tmux-navigator;
+      }
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";

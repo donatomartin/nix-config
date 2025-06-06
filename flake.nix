@@ -36,19 +36,26 @@
     let
       system = "x86_64-linux";
       username = "donato";
-      pkgs = nixpkgs.legacyPackages.${system};
-      unstable = import nixos-unstable {
-        system = system;
-        config.allowUnfree = true;
-        config.allowUnfreePredicate = _: true;
+
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          (final: prev: {
+            unstable = import nixos-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          })
+        ];
       };
       lib = nixpkgs.lib;
     in
     {
+
       nixosConfigurations.nixos = lib.nixosSystem {
 
         specialArgs = {
-          inherit unstable inputs username;
+          inherit inputs username;
         };
 
         modules = [
@@ -61,18 +68,30 @@
         inherit pkgs;
 
         extraSpecialArgs = {
-          inherit unstable inputs username;
+          inherit
+            inputs
+            username
+            self
+            system
+            ;
         };
 
         modules = [
           ./home.nix
         ];
+
       };
 
       packages.${system} = {
+
         nixvim = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
           pkgs = pkgs;
           module = import ./modules/nvim/nixvim-config.nix;
+        };
+
+        vscodenixvim = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
+          pkgs = pkgs;
+          module = import ./modules/nvim/vscodenixvim-config.nix;
         };
 
         activate-home = self.homeConfigurations.${username}.activationPackage;

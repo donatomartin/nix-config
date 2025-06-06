@@ -1,6 +1,7 @@
 {
   pkgs,
-  unstable,
+  self,
+  system,
   inputs,
   username,
   ...
@@ -82,6 +83,16 @@
     pkgs.imagemagick # image library
     pkgs.wineWowPackages.full # wine packages for running windows applications
     pkgs.dos2unix # fix carriage return problems
+
+    # NixVim for VsCode
+    (pkgs.symlinkJoin {
+      name = "vscodenixvim";
+      paths = [ self.packages.${system}.vscodenixvim ];
+      postBuild = ''
+        mv $out/bin/nvim $out/bin/vscodenixvim
+        mv $out/bin/nixvim-print-init $out/bin/vscodenixvim-print-init
+      '';
+    })
 
     # Fonts
     pkgs.nerd-fonts.jetbrains-mono

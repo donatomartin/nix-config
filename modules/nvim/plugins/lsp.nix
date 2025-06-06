@@ -1,4 +1,12 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  jdtlsPkg = pkgs.jdt-language-server;
+  launcherJar = builtins.head (
+    builtins.filter (name: builtins.match "org.eclipse.equinox.launcher_.*\\.jar" name != null) (
+      builtins.attrNames (builtins.readDir "${jdtlsPkg}/share/java/jdtls/plugins")
+    )
+  );
+in
 {
   plugins = {
     lsp-format = {
@@ -16,9 +24,29 @@
         pyright.enable = true;
         gopls.enable = true;
         yamlls.enable = true;
-        jdtls.enable = true;
         eslint.enable = true;
-        ts-ls.enable = true;
+        ts_ls.enable = true;
+        jdtls = {
+          enable = true;
+          # extraOptions.cmd = [
+          #   "${pkgs.temurin-bin-17}/bin/java"
+          #   "-Declipse.application=org.eclipse.jdt.ls.core.id1"
+          #   "-Dosgi.bundles.defaultStartLevel=4"
+          #   "-Declipse.product=org.eclipse.jdt.ls.core.product"
+          #   "-Dlog.protocol=true"
+          #   "-Dlog.level=ALL"
+          #   "-Xms1g"
+          #   "-Xmx2G"
+          #   "-javaagent=${pkgs.lombok}/share/java/lombok.jar"
+          #   "-jar"
+          #   "${jdtlsPkg}/share/java/jdtls/plugins/${launcherJar}"
+          #   "-configuration"
+          #   "${jdtlsPkg}/share/java/jdtls/config_linux" # adjust to your OS
+          #   "-data"
+          #   "~/.cache/jdtls/workspace"
+          # ];
+
+        };
       };
     };
   };

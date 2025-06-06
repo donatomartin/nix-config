@@ -39,15 +39,6 @@
     }
     {
       mode = "n";
-      key = "<leader>qq";
-      action = "<cmd>Neotree close<CR><cmd>qa<CR>";
-      options = {
-        silent = true;
-        desc = "Clear highlights";
-      };
-    }
-    {
-      mode = "n";
       key = ";";
       action = "<cmd>lua vim.api.nvim_feedkeys(':! ', 'm', true)<CR>";
       options = {
@@ -66,7 +57,7 @@
     }
     {
       mode = "n";
-      key = "<M-h>";
+      key = "<leader>h";
       action = "<cmd>bp<CR>";
       options = {
         silent = true;
@@ -75,7 +66,7 @@
     }
     {
       mode = "n";
-      key = "<M-l>";
+      key = "<leader>l";
       action = "<cmd>bn<CR>";
       options = {
         silent = true;

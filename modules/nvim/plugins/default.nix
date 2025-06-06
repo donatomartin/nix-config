@@ -15,7 +15,6 @@
     ./harpoon.nix
     ./treesitter.nix
     ./copilot.nix
-    ./zoxide.nix
     ./gitsigns.nix
   ];
 
@@ -28,7 +27,7 @@
     zen-mode.enable = true; # Enable zen mode
     vim-suda.enable = true; # Write files with sudo
     oil.enable = true; # Oil file explorer
-    # tmux-navigator.enable = true; # Tmux integration
+    tmux-navigator.enable = true; # Tmux integration
   };
 
 }

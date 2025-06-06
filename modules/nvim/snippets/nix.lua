@@ -11,50 +11,23 @@ return {
 		t("{ "),
 		i(1, "args"),
 		t(" }:"),
+		t({ "", "{" }),
 		t({ "", "  " }),
 		i(2, "body"),
-	}),
-
-	-- Let in
-	s({ desc = "Let expression", trig = "let" }, {
-		t("let"),
-		t({ "", "  " }),
-		i(1, "bindings"),
-		t({ "", "in", "  " }),
-		i(2, "expression"),
-	}),
-
-	-- If then else
-	s({ desc = "If expression", trig = "if" }, {
-		t("if "),
-		i(1, "cond"),
-		t(" then "),
-		i(2, "trueExpr"),
-		t(" else "),
-		i(3, "falseExpr"),
-	}),
-
-	-- Derivation
-	s({ desc = "Derivation", trig = "drv" }, {
-		t("stdenv.mkDerivation {"),
-		t({ "", '  name = "' }),
-		i(1, "name"),
-		t('";'),
-		t({ "", "  src = " }),
-		i(2, "source"),
-		t(";"),
-		t({ "", "  buildInputs = [ " }),
-		i(3, "inputs"),
-		t(" ];"),
 		t({ "", "}" }),
 	}),
 
-	-- Nixvim plugin
-	s({ desc = "NixVim plugin", trig = "nvplugin" }, {
-		t("plugins."),
-		i(1, "pluginName"),
-		t(" = {enable = true;"),
-		i(2, "content"),
-		t("}"),
+	-- VsCode nixvim mappin
+	s({ desc = "NixVim VsCode keymap", trig = "vscode" }, {
+		t("{"),
+		t({ "", '  mode = "n";' }), -- line break and indent
+		t({ "", '  key = "' }),
+		i(1, "key"),
+		t('";'),
+		t({ "", "  action = \"<cmd>call VSCodeNotify('" }),
+		i(2, "action"),
+		t("')<CR>\";"),
+		t({ "", "  options = { silent = true; };" }),
+		t({ "", "}" }),
 	}),
 }
