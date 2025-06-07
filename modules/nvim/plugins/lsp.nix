@@ -6,6 +6,10 @@ let
       builtins.attrNames (builtins.readDir "${jdtlsPkg}/share/java/jdtls/plugins")
     )
   );
+  jdtlsConfigWritable = pkgs.runCommand "jdtls-config" { } ''
+    mkdir -p $out
+    cp -r ${jdtlsPkg}/share/java/jdtls/config_linux/* $out
+  '';
 in
 {
   plugins = {
@@ -28,23 +32,23 @@ in
         ts_ls.enable = true;
         jdtls = {
           enable = true;
-          # extraOptions.cmd = [
-          #   "${pkgs.temurin-bin-17}/bin/java"
-          #   "-Declipse.application=org.eclipse.jdt.ls.core.id1"
-          #   "-Dosgi.bundles.defaultStartLevel=4"
-          #   "-Declipse.product=org.eclipse.jdt.ls.core.product"
-          #   "-Dlog.protocol=true"
-          #   "-Dlog.level=ALL"
-          #   "-Xms1g"
-          #   "-Xmx2G"
-          #   "-javaagent=${pkgs.lombok}/share/java/lombok.jar"
-          #   "-jar"
-          #   "${jdtlsPkg}/share/java/jdtls/plugins/${launcherJar}"
-          #   "-configuration"
-          #   "${jdtlsPkg}/share/java/jdtls/config_linux" # adjust to your OS
-          #   "-data"
-          #   "~/.cache/jdtls/workspace"
-          # ];
+          extraOptions.cmd = [
+            "${pkgs.temurin-bin-21}/bin/java"
+            "-Declipse.application=org.eclipse.jdt.ls.core.id1"
+            "-Dosgi.bundles.defaultStartLevel=4"
+            "-Declipse.product=org.eclipse.jdt.ls.core.product"
+            "-Dlog.protocol=true"
+            "-Dlog.level=ALL"
+            "-Xms1g"
+            "-Xmx2G"
+            "-javaagent:${pkgs.lombok}/share/java/lombok.jar"
+            "-jar"
+            "${jdtlsPkg}/share/java/jdtls/plugins/${launcherJar}"
+            "-configuration"
+            "/home/donato/.cache/jdtls-config/"
+            "-data"
+            "/home/donato/.cache/jdtls/"
+          ];
 
         };
       };
