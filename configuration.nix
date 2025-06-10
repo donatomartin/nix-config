@@ -80,26 +80,26 @@
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [
+    packages = [
 
       # CLI
-      docker
-      git
-      neovim
+      pkgs.docker
+      pkgs.git
+      pkgs.neovim
 
       # GUI
       inputs.zen-browser.packages.${pkgs.system}.twilight
-      xfce.thunar
-      libreoffice
-      beeper
-      prismlauncher
-      obs-studio
-      vesktop
-      vlc
-      inkscape
-      gimp3
-      anydesk
-      vscode
+      pkgs.xfce.thunar
+      pkgs.libreoffice
+      pkgs.beeper
+      pkgs.prismlauncher
+      pkgs.obs-studio
+      pkgs.vesktop
+      pkgs.vlc
+      pkgs.inkscape
+      pkgs.gimp3
+      pkgs.anydesk
+      pkgs.vscode
 
     ];
 

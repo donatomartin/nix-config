@@ -4,17 +4,17 @@
   keymaps = [
     {
       mode = "n";
-      key = "<leader>gd";
-      action = "<cmd>Gitsigns diffthis<CR>";
+      key = "<leader>gD";
+      action = "<cmd>Gitsigns diffthis HEAD<CR>";
       options = {
-        desc = "Gitsigns preview hunk";
+        desc = "Gitsigns diff this";
         silent = true;
       };
     }
     {
       mode = "n";
-      key = "<leader>gD";
-      action = "<cmd>Gitsigns diffthis HEAD<CR>";
+      key = "<leader>gd";
+      action = "<cmd>Gitsigns preview_hunk_inline<CR>";
       options = {
         desc = "Gitsigns preview hunk";
         silent = true;

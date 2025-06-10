@@ -26,8 +26,7 @@ in
     keyMode = "vi";
 
     extraConfig = ''
-
-      set-option -sa terminal-overrides ",xterm*:Tc"
+      set -s escape-time 10 
       set-option -g renumber-windows on
 
       # Copy mode bindings

@@ -69,7 +69,6 @@
     pkgs.acpi # battery status
     pkgs.zip # zip files
     pkgs.unzip # unzip files
-    pkgs.zoxide # cd improvement
     pkgs.bat # cat improvement
     pkgs.slurp # select screen area
     pkgs.grim # screenshot
@@ -83,6 +82,7 @@
     pkgs.imagemagick # image library
     pkgs.wineWowPackages.full # wine packages for running windows applications
     pkgs.dos2unix # fix carriage return problems
+    pkgs.manix # find documentation
 
     # NixVim for VsCode
     (pkgs.symlinkJoin {

@@ -16,6 +16,7 @@
     ./treesitter.nix
     ./copilot.nix
     ./gitsigns.nix
+    ./colorizer.nix
   ];
 
   # Default Configuration Plugins
