@@ -1,4 +1,12 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  toggleHyprshade = pkgs.writeShellScript "toggle-hyprshade" (
+    builtins.readFile ./scripts/toggle-hyprshade.sh
+  );
+  hyprpickerCopypick = pkgs.writeShellScript "hyprpicker-copypick" (
+    builtins.readFile ./scripts/hyprpicker-copypick.sh
+  );
+in
 {
 
   wayland.windowManager.hyprland = {
@@ -123,8 +131,8 @@
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
         "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
-        "$mainMod SHIFT, C, exec, hyprpicker | wl-copy"
-        "$mainMod SHIFT, B, exec, toggle-hyprshade"
+        "$mainMod SHIFT, C, exec, ${hyprpickerCopypick}"
+        "$mainMod SHIFT, B, exec, ${toggleHyprshade}"
         "CTRL SHIFT, ESC, exec, ghostty -e btop"
 
         # Flotante/pseudotile

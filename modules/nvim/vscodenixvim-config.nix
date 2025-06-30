@@ -1,8 +1,15 @@
 {
 
   imports = [
+    ./common-mappings.nix
     ./plugins/treesitter.nix
+    ./plugins/flash.nix
   ];
+
+  plugins = {
+    nvim-autopairs.enable = true;
+    nvim-surround.enable = true;
+  };
 
   clipboard.register = "unnamedplus,unnamed";
 
@@ -28,63 +35,7 @@
 
   };
 
-  plugins = {
-    nvim-autopairs.enable = true;
-    nvim-surround.enable = true;
-    flash.enable = true;
-  };
-
   keymaps = [
-    {
-      mode = "n";
-      key = "<leader>c";
-      action = "<cmd>%y+<CR>";
-      options = {
-        silent = true;
-        desc = "copy whole file";
-      };
-    }
-    {
-      mode = [
-        "n"
-        "x"
-        "o"
-      ];
-      key = "s";
-      action = "<cmd>lua require('flash').jump()<CR>";
-      options = {
-        desc = "Flash";
-      };
-    }
-    {
-      mode = [
-        "o"
-        "x"
-      ];
-      key = "S";
-      action = "<cmd>lua require('flash').treesitter_search()<CR>";
-      options = {
-        desc = "Treesitter Search";
-      };
-    }
-    {
-      mode = "n";
-      key = "<Esc>";
-      action = "<cmd>noh<CR>";
-      options = {
-        silent = true;
-        desc = "Clear highlights";
-      };
-    }
-    {
-      mode = "n";
-      key = ";";
-      action = "<cmd>lua vim.api.nvim_feedkeys(':! ', 'm', true)<CR>";
-      options = {
-        silent = true;
-        desc = "Execute terminal command";
-      };
-    }
     {
       mode = "n";
       key = "<leader>n";
