@@ -15,10 +15,10 @@
     inputs.catppuccin.homeModules.catppuccin
 
     # Desktop Environment
-    ./modules/de/hyprland
-    ./modules/de/hyprpaper.nix
-    ./modules/de/waybar.nix
-    ./modules/de/wofi.nix
+    ./modules/de/hyprland/hyprland.nix
+    ./modules/de/hyprland/hyprpaper.nix
+    ./modules/de/hyprland/waybar.nix
+    ./modules/de/hyprland/wofi.nix
     ./modules/de/ghostty.nix
     ./modules/de/cursor.nix
     ./modules/de/gtk.nix
@@ -58,23 +58,28 @@
 
   home.packages = [
 
-    # TUI
-    pkgs.asciiquarium-transparent # aquarium in terminal
-    pkgs.cmatrix # matrix in terminal
-    pkgs.posting # tui web agent
-
-    # CLI
     pkgs.wl-clipboard # wayland clipboard manager
     pkgs.cliphist # clipboard history
     pkgs.acpi # battery status
     pkgs.zip # zip files
     pkgs.unzip # unzip files
+
     pkgs.bat # cat improvement
+    pkgs.fd # find replacement
+    pkgs.ripgrep # search tool
+    pkgs.tldr # tldr pages
+    pkgs.duf # disk usage
+    pkgs.httpie # HTTP client
+    pkgs.jq # JSON processor
+
     pkgs.slurp # select screen area
     pkgs.grim # screenshot
-    pkgs.ripgrep # search tool
+
+    pkgs.asciinema # session recorder
+    pkgs.asciiquarium-transparent # aquarium in terminal
     pkgs.cowsay # make a cow say something
-    pkgs.tldr # tldr pages
+    pkgs.cmatrix # matrix in terminal
+
     pkgs.hyprpicker # pick colors from screen
     pkgs.hyprshade # shaders for hyprland
     pkgs.brightnessctl # control brightness
@@ -83,6 +88,7 @@
     pkgs.wineWowPackages.full # wine packages for running windows applications
     pkgs.dos2unix # fix carriage return problems
     pkgs.manix # find documentation
+    pkgs.navi # interactive cheat sheets
 
     # NixVim for VsCode
     (pkgs.symlinkJoin {
