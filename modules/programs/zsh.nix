@@ -1,9 +1,9 @@
 { pkgs, ... }:
-
 {
   home.packages = [
     pkgs.powerline
     pkgs.zsh-powerlevel10k
+    pkgs.eza
   ];
 
   programs.zsh = {
@@ -20,10 +20,12 @@
       v = "nvim";
 
       # list
-      l = "ls";
-      la = "ls -a";
-      ll = "ls -l";
-      lla = "ls -la";
+      ls = "eza --icons --group-directories-first --color=always";
+      l = "eza --icons --group-directories-first --color=always";
+      la = "eza --icons --group-directories-first --color=always -a";
+      ll = "eza --icons --group-directories-first --color=always -l";
+      lla = "eza --icons --group-directories-first --color=always -la";
+      lt = "eza --icons --group-directories-first --color=always --tree";
 
       # wayland
       wc = "wl-copy";
@@ -32,12 +34,15 @@
       # git
       g = "git";
       ga = "git add";
-      gaa = "git add -A";
+      gA = "git add -A";
       gs = "git status";
       gd = "git diff";
       gc = "git commit";
+      gcm = "git commit -m";
+      gpsh = "git push";
       gl = "git log --oneline --graph --decorate --all";
       gcl = "git clone";
+      gp = "wl-paste | git apply";
 
     };
 
@@ -85,6 +90,31 @@
           echo "'$1' is not a valid file"
         fi
       }
+
+      # loadenv function to load environment variables from a file
+      loadenv() {
+        if [ -f "$1" ]; then
+          set -a
+          source "$1"
+          set +a
+          echo "Environment variables loaded from $1"
+        else
+          echo "'$1' is not a valid file"
+        fi
+      }
+
+      # zsh completion setup
+      autoload -U compinit && compinit
+      zmodload -i zsh/complist
+
+      # fzf-tab setup (must come AFTER compinit)
+      if [ ! -d "$HOME/.zsh_plugins/fzf-tab" ]; then
+        git clone https://github.com/Aloxaf/fzf-tab "$HOME/.zsh_plugins/fzf-tab"
+      fi
+      source "$HOME/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh"
+
+      # Optional: some basic config
+      zstyle ':completion:*' menu select
     '';
   };
 
