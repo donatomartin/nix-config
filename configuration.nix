@@ -100,6 +100,9 @@
       pkgs.gimp3
       pkgs.anydesk
       pkgs.vscode
+      pkgs.eclipses.eclipse-java
+      pkgs.brave
+      pkgs.virtualbox
 
     ];
 
@@ -171,7 +174,7 @@
   # Para usar CUPS desde la web
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     openFirewall = true;
   };
 
