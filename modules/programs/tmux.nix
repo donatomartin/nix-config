@@ -73,12 +73,12 @@ in
       set -g status-position top
       set-option -g status-style "bg=${catppuccinMocha.bg0},fg=${catppuccinMocha.fg}"
 
-      set -g status-left " #[bg=${catppuccinMocha.bg0},fg=${catppuccinMocha.blue}]#[bg=${catppuccinMocha.blue},fg=${catppuccinMocha.bg0},bold] 󱄅 #S #[fg=${catppuccinMocha.blue},bg=${catppuccinMocha.bg0},nobold]"
+      set -g status-left " #[bg=${catppuccinMocha.bg0},fg=${catppuccinMocha.blue}]#[bg=${catppuccinMocha.blue},fg=${catppuccinMocha.bg0},bold] 󱄅 #S #[fg=${catppuccinMocha.blue},bg=${catppuccinMocha.bg0},nobold]"
 
-      set-window-option -g window-status-format "#[fg=${catppuccinMocha.grey},bg=${catppuccinMocha.bg0}] #I:#W "
-      set-window-option -g window-status-current-format "#[fg=${catppuccinMocha.bg0},bg=${catppuccinMocha.fg}]#[fg=${catppuccinMocha.bg0},bg=${catppuccinMocha.fg},bold] #I:#W #[fg=${catppuccinMocha.fg},bg=${catppuccinMocha.bg0}]"
-      set-window-option -g window-status-current-style bg=${catppuccinMocha.blue},fg=${catppuccinMocha.bg0}
+      set-window-option -g window-status-format "#[fg=${catppuccinMocha.grey},bg=${catppuccinMocha.bg0}]   #I:#W  "
       set-window-option -g window-status-style bg=${catppuccinMocha.bg0},fg=${catppuccinMocha.grey}
+      set-window-option -g window-status-current-format "#[fg=${catppuccinMocha.fg},bg=${catppuccinMocha.bg0}] #[fg=${catppuccinMocha.bg0},bg=${catppuccinMocha.fg},bold] #I:#W #[fg=${catppuccinMocha.fg},bg=${catppuccinMocha.bg0}]"
+      set-window-option -g window-status-current-style bg=${catppuccinMocha.blue},fg=${catppuccinMocha.bg0}
 
       set -g status-right ""
     '';
