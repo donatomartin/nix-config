@@ -1,5 +1,6 @@
 {
   plugins.telescope = {
+
     enable = true;
 
     keymaps = {
@@ -18,28 +19,18 @@
       "<leader>fg" = "git_status";
       "<leader>fz" = "zoxide list";
       "<leader>fu" = "undo";
-      "<leader>fx" = "manix";
-    };
-
-    settings.defaults = {
-      file_ignore_patterns = [
-        "^.git/"
-        "^.mypy_cache/"
-        "^__pycache__/"
-        "^output/"
-        "^data/"
-        "%.ipynb"
-        "^node_modules/"
-      ];
-      set_env.COLORTERM = "truecolor";
-      path_display = [ "truncate" ];
     };
 
     extensions = {
       zoxide.enable = true;
       frecency.enable = true;
-      manix.enable = true;
       undo.enable = true;
     };
+
+    settings.defaults = {
+      set_env.COLORTERM = "truecolor";
+      path_display = [ "truncate" ];
+    };
+
   };
 }

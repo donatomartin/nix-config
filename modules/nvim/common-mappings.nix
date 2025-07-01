@@ -47,30 +47,39 @@
       };
     }
     {
-      mode = "n";
-      key = "<M-n>";
-      action = "<cmd>b#<CR>";
+      mode = "i";
+      key = "<C-h>";
+      action = "<Left>";
       options = {
         silent = true;
-        desc = "Switch to last buffer";
+        desc = "Move cursor left in insert mode";
       };
     }
     {
-      mode = "n";
-      key = "<leader>h";
-      action = "<cmd>bp<CR>";
+      mode = "i";
+      key = "<C-l>";
+      action = "<Right>";
       options = {
         silent = true;
-        desc = "Switch to previous buffer";
+        desc = "Move cursor right in insert mode";
       };
     }
     {
-      mode = "n";
-      key = "<leader>l";
-      action = "<cmd>bn<CR>";
+      mode = "i";
+      key = "<C-j>";
+      action = "<Down>";
       options = {
         silent = true;
-        desc = "Switch to next buffer";
+        desc = "Move cursor down in insert mode";
+      };
+    }
+    {
+      mode = "i";
+      key = "<C-k>";
+      action = "<Up>";
+      options = {
+        silent = true;
+        desc = "Move cursor up in insert mode";
       };
     }
   ];
