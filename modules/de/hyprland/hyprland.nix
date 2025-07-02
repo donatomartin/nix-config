@@ -130,7 +130,8 @@ in
 
         # Lanzadores
         "$mainMod, B, exec, zen"
-        "$mainMod SHIFT, B, exec, brave"
+        "$mainMod CTRL, B, exec, brave"
+        "$mainMod ALT, B, exec, beeper"
         "$mainMod, Q, exec, ghostty"
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, wofi --show drun"
