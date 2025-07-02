@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  wallpaperPath = builtins.toString ./../../../assets/wall1.png;
+  wallpaperPath = builtins.toString ./../../../assets/wall2.png;
 in
 {
   home.packages = with pkgs; [ hyprpaper ];

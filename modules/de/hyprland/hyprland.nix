@@ -17,6 +17,8 @@ in
       "$mainMod" = "SUPER";
 
       exec-once = [
+        "mako"
+        "waybar &"
         "wl-paste --watch cliphist store -max-items 300 &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
       ];
@@ -124,6 +126,7 @@ in
 
         # Lanzadores
         "$mainMod, B, exec, zen"
+        "$mainMod SHIFT, B, exec, brave"
         "$mainMod, Q, exec, ghostty"
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, wofi --show drun"
@@ -133,6 +136,7 @@ in
         "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
         "$mainMod SHIFT, C, exec, ${hyprpickerCopypick}"
         "$mainMod SHIFT, B, exec, ${toggleHyprshade}"
+        "$mainMod, M, exec, makoctl dismiss -a"
         "CTRL SHIFT, ESC, exec, ghostty -e btop"
 
         # Flotante/pseudotile

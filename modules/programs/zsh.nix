@@ -1,9 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.powerline
-    pkgs.zsh-powerlevel10k
     pkgs.eza
+    pkgs.zsh-fzf-tab
   ];
 
   programs.zsh = {
@@ -12,7 +11,6 @@
     autosuggestion.enable = true;
 
     shellAliases = {
-
       # vim
       vim = "nvim";
       nv = "nvim";
@@ -44,17 +42,14 @@
       gcl = "git clone";
       gp = "wl-paste | git apply";
 
+      # tmux
+      t = "tmux";
+      ta = "tmux a";
     };
 
     initContent = ''
       # Enable vi mode
       bindkey -v
-
-      # Powerlevel10k setup
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-
-      # Optional: source user config (p10k will prompt to create this on first launch)
-      [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
       # Custom keybind to prepend sudo
       function prepend-sudo() {
@@ -107,18 +102,13 @@
       autoload -U compinit && compinit
       zmodload -i zsh/complist
 
-      # fzf-tab setup (must come AFTER compinit)
-      if [ ! -d "$HOME/.zsh_plugins/fzf-tab" ]; then
-        git clone https://github.com/Aloxaf/fzf-tab "$HOME/.zsh_plugins/fzf-tab"
-      fi
-      source "$HOME/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh"
+      # Use fzf-tab from nixpkgs
+      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
 
       # Optional: some basic config
       zstyle ':completion:*' menu select
     '';
   };
-
-  home.file.".p10k.zsh".source = ./.p10k.zsh;
 
   programs.fzf = {
     enable = true;
@@ -130,4 +120,11 @@
     enableZshIntegration = true;
   };
 
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = false;
+    };
+  };
 }

@@ -19,6 +19,7 @@
     ./modules/de/hyprland/hyprpaper.nix
     ./modules/de/hyprland/waybar.nix
     ./modules/de/hyprland/wofi.nix
+    ./modules/de/hyprland/mako.nix
     ./modules/de/ghostty.nix
     ./modules/de/cursor.nix
     ./modules/de/gtk.nix
