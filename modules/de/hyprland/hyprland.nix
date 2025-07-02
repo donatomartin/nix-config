@@ -6,6 +6,9 @@ let
   hyprpickerCopypick = pkgs.writeShellScript "hyprpicker-copypick" (
     builtins.readFile ./scripts/hyprpicker-copypick.sh
   );
+  batteryNotify = pkgs.writeShellScript "battery-notify" (
+    builtins.readFile ./scripts/battery-notify.sh
+  );
 in
 {
 
@@ -21,6 +24,7 @@ in
         "waybar &"
         "wl-paste --watch cliphist store -max-items 300 &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
+        "bash ${batteryNotify} &"
       ];
 
       env = [

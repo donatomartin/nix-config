@@ -24,9 +24,8 @@
       margin = 10;
       markup = true;
 
-      # Section example
       "actionable=true" = {
-        anchor = "top-left";
+        border-color = "#FF6F61";
       };
     };
   };
