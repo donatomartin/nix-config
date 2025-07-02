@@ -11,6 +11,14 @@
     autosuggestion.enable = true;
 
     shellAliases = {
+
+      # system
+      c = "clear";
+
+      # nix
+      hs = "home-manager switch --flake ~/nix-config";
+      ns = "sudo nixos-rebuild switch --flake ~/nix-config";
+
       # vim
       vim = "nvim";
       nv = "nvim";
