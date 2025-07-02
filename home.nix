@@ -72,6 +72,8 @@
     pkgs.duf # disk usage
     pkgs.httpie # HTTP client
     pkgs.jq # JSON processor
+    pkgs.atool # archive manager
+    pkgs.dotenvx # dotenv file support
 
     pkgs.slurp # select screen area
     pkgs.grim # screenshot

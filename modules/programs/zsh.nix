@@ -61,43 +61,6 @@
       zle -N prepend-sudo
       bindkey '^[^[' prepend-sudo  # ESC ESC
 
-      # extract function for archive files
-      extract() {
-        if [ -f "$1" ]; then
-          case "$1" in
-            *.tar.bz2)   tar xjf "$1"   ;;
-            *.tar.gz)    tar xzf "$1"   ;;
-            *.tar.xz)    tar xJf "$1"   ;;
-            *.tar.zst)   unzstd -c "$1" | tar xf - ;;
-            *.tar)       tar xf "$1"    ;;
-            *.tbz2)      tar xjf "$1"   ;;
-            *.tgz)       tar xzf "$1"   ;;
-            *.zip)       unzip "$1"     ;;
-            *.rar)       unrar x "$1"   ;;
-            *.gz)        gunzip "$1"    ;;
-            *.bz2)       bunzip2 "$1"   ;;
-            *.xz)        unxz "$1"      ;;
-            *.zst)       unzstd "$1"    ;;
-            *.7z)        7z x "$1"      ;;
-            *)           echo "'$1': unrecognized file extension" ;;
-          esac
-        else
-          echo "'$1' is not a valid file"
-        fi
-      }
-
-      # loadenv function to load environment variables from a file
-      loadenv() {
-        if [ -f "$1" ]; then
-          set -a
-          source "$1"
-          set +a
-          echo "Environment variables loaded from $1"
-        else
-          echo "'$1' is not a valid file"
-        fi
-      }
-
       # zsh completion setup
       autoload -U compinit && compinit
       zmodload -i zsh/complist
@@ -127,4 +90,5 @@
       add_newline = false;
     };
   };
+
 }
