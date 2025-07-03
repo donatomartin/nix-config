@@ -7,8 +7,5 @@
       init.defaultBranch = "master";
       credential.helper = "store";
     };
-    aliases = {
-      lg = "log --oneline --graph --decorate";
-    };
   };
 }
