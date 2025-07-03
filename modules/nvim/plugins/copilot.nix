@@ -14,7 +14,7 @@
     {
       mode = "i";
       action = "copilot#Accept(\"\")";
-      key = "<C-x>l";
+      key = "<C-f>l";
       options = {
         desc = "Accept Copilot Suggestion";
         silent = true;
@@ -25,7 +25,7 @@
     {
       mode = "i";
       action = "<Plug>(copilot-accept-line)";
-      key = "<C-x>j";
+      key = "<C-f>j";
       options = {
         desc = "Accept Copilot Suggestion Line";
         silent = true;
@@ -34,7 +34,7 @@
     {
       mode = "i";
       action = "<Plug>(copilot-suggest)";
-      key = "<C-x>k";
+      key = "<C-f>k";
       options = {
         desc = "Trigger Copilot Suggestion";
         silent = true;
@@ -43,7 +43,7 @@
     {
       mode = "i";
       action = "<Plug>(copilot-dismiss)";
-      key = "<C-x>h";
+      key = "<C-f>h";
       options = {
         desc = "Dismiss Copilot Suggestion";
         silent = true;
