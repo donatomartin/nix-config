@@ -53,6 +53,9 @@
       # tmux
       t = "tmux";
       ta = "tmux a";
+
+      # direnv
+      da = "direnv allow";
     };
 
     initContent = ''
@@ -97,6 +100,11 @@
     settings = {
       add_newline = false;
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
 }
