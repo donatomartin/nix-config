@@ -36,6 +36,9 @@
     ./modules/programs/ranger.nix
     ./modules/nvim/nixvim.nix
 
+    # Services
+    ./modules/services/batsignal.nix
+
     # Programming Languages
     ./modules/programming-languages/python.nix
     ./modules/programming-languages/go.nix
