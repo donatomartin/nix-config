@@ -18,6 +18,7 @@
     ./plugins/copilot.nix
     ./plugins/gitsigns.nix
     ./plugins/colorizer.nix
+    ./plugins/floaterm.nix
   ];
 
   # Default Configuration Plugins
