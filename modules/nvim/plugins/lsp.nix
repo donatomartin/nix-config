@@ -30,6 +30,7 @@ in
         yamlls.enable = true;
         eslint.enable = true;
         ts_ls.enable = true;
+        clangd.enable = true;
         jdtls = {
           enable = true;
           extraOptions.cmd = [

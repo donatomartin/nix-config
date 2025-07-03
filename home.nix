@@ -44,7 +44,6 @@
     ./modules/programming-languages/go.nix
     ./modules/programming-languages/nodejs.nix
     ./modules/programming-languages/java.nix
-    ./modules/programming-languages/c.nix
 
   ];
 
