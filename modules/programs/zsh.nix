@@ -14,6 +14,7 @@
 
       # system
       c = "clear";
+      e = "exit";
 
       # nix
       hs = "home-manager switch --flake ~/nix-config";
