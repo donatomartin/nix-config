@@ -3,6 +3,11 @@
   keymaps = [
     {
       mode = "n";
+      key = "<leader>qq";
+      action = "<cmd>q<CR>";
+    }
+    {
+      mode = "n";
       key = "<leader>rn";
       action = "<cmd>set rnu!<CR>";
       options = {
