@@ -53,11 +53,9 @@
     	   vim.api.nvim_create_user_command("ToggleAutoComplete", function()
     		   if cmp_enabled then
     			   require("cmp").setup.buffer({ enabled = false })
-             require("notify")("Disabled Autocomplete")
     			   cmp_enabled = false
     		   else
     			   require("cmp").setup.buffer({ enabled = true })
-             require("notify").info("Autocomplete enabled")
     			   cmp_enabled = true
     		   end
     	   end, {})

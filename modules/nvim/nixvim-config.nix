@@ -32,7 +32,6 @@
     oil.enable = true; # Oil file explorer
     tmux-navigator.enable = true; # Tmux integration
     fugitive.enable = true; # Git integration
-    notify.enable = true; # Notifications
   };
 
   keymaps = [
