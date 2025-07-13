@@ -3,7 +3,7 @@
     {
       mode = "n";
       key = "<leader>n";
-      action = "<cmd>Neotree toggle current reveal_force_cwd<CR>";
+      action = "<cmd>Neotree toggle right reveal_force_cwd<CR>";
       options.silent = true;
     }
   ];
