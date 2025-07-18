@@ -76,6 +76,7 @@
     pkgs.jq # JSON processor
     pkgs.atool # archive manager
     pkgs.dotenvx # dotenv file support
+    pkgs.manix # nixos manuals
 
     pkgs.slurp # select screen area
     pkgs.grim # screenshot
