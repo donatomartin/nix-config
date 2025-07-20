@@ -1,9 +1,12 @@
 { pkgs, ... }:
 let
-  toggleHyprshade = pkgs.writeShellScript "toggle-hyprshade" (
+  rofi-clipboard = pkgs.writeShellScript "rofi-clipboard" (
+    builtins.readFile ./scripts/rofi-clipboard.sh
+  );
+  toggle-hyprshade = pkgs.writeShellScript "toggle-hyprshade" (
     builtins.readFile ./scripts/toggle-hyprshade.sh
   );
-  hyprpickerCopypick = pkgs.writeShellScript "hyprpicker-copypick" (
+  hyprpicker-copypick = pkgs.writeShellScript "hyprpicker-copypick" (
     builtins.readFile ./scripts/hyprpicker-copypick.sh
   );
 in
@@ -19,7 +22,7 @@ in
       exec-once = [
         "mako"
         "waybar &"
-        "wl-paste --watch cliphist store -max-items 300 &"
+        "wl-paste --watch cliphist store &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
       ];
 
@@ -127,16 +130,16 @@ in
         # Lanzadores
         "$mainMod, B, exec, zen"
         "$mainMod CTRL, B, exec, brave"
-        "$mainMod ALT, B, exec, beeper"
         "$mainMod, Q, exec, ghostty"
         "$mainMod, E, exec, thunar"
-        "$mainMod, W, exec, wofi --show drun"
-        "$mainMod, V, exec, cliphist list | wofi -dmenu | cliphist decode | wl-copy"
+        "$mainMod, W, exec, rofi -show drun"
+        "$mainMod, V, exec, ${rofi-clipboard}"
+        "$mainMod, PERIOD, exec, rofimoji --action copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
         "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
-        "$mainMod SHIFT, C, exec, ${hyprpickerCopypick}"
-        "$mainMod SHIFT, B, exec, ${toggleHyprshade}"
+        "$mainMod SHIFT, C, exec, ${hyprpicker-copypick}"
+        "$mainMod SHIFT, B, exec, ${toggle-hyprshade}"
         "$mainMod, M, exec, makoctl dismiss -a"
         "CTRL SHIFT, ESC, exec, ghostty -e btop"
 
