@@ -1,115 +1,101 @@
+/* MACOS SPOTLIGHT-LIKE THEME FOR ROFI */
+/* Author: Newman Sanchez (https://github.com/newmanls) */
+/* Modified to prevent dynamic resizing */
+
 * {
-  font:   "Iosevka Nerd Font Medium 11";
+    font: "Montserrat 12";
 
-  bg0     : #1a1b26;
-  bg1     : #1f2335;
-  bg2     : #24283b;
-  bg3     : #414868;
-  fg0     : #c0caf5;
-  fg1     : #a9b1d6;
-  fg2     : #737aa2;
-  red     : #f7768e;
-  green   : #9ece6a;
-  yellow  : #e0af68;
-  blue    : #7aa2f7;
-  magenta : #9a7ecc;
-  cyan    : #4abaaf;
+    bg0: #F5F5F5BF;
+    bg1: #7E7E7E80;
+    bg2: #0860F2E6;
 
-  accent: @red;
-  urgent: @yellow;
+    fg0: #242424;
+    fg1: #FFFFFF;
+    fg2: #24242480;
 
-  background-color : transparent;
-  text-color       : @fg0;
+    background-color: transparent;
+    text-color: @fg0;
 
-  margin  : 0;
-  padding : 0;
-  spacing : 0;
-}
-
-element-icon, element-text, scrollbar {
-  cursor: pointer;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
 }
 
 window {
-  location : northwest;
-  width    : 280px;
-  x-offset : 4px;
-  y-offset : 26px;
+    background-color: @bg0;
 
-  background-color: @bg1;
-  border: 1px;
-  border-color: @bg3;
-  border-radius: 6px;
+    location: center;
+    width: 640;
+    border-radius: 8;
+    dynamic: false; /* Prevent window from resizing */
+    padding: 20px 0px; /* Optional: adds consistent spacing */
 }
 
 inputbar {
-  spacing  : 8px;
-  padding  : 4px 8px;
-  children : [ icon-search, entry ];
-
-  background-color: @bg0;
-}
-
-icon-search, entry, element-icon, element-text {
-  vertical-align: 0.5;
+    font: "Montserrat 20";
+    padding: 12px;
+    spacing: 12px;
+    children: [ icon-search, entry ];
 }
 
 icon-search {
-  expand   : false;
-  filename : "search-symbolic";
-  size     : 14px;
+    expand: false;
+    filename: "search";
+    size: 28px;
+}
+
+icon-search, entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+entry {
+    font: inherit;
+    placeholder: "Search";
+    placeholder-color: @fg2;
+}
+
+message {
+    border: 2px 0 0;
+    border-color: @bg1;
+    background-color: @bg1;
 }
 
 textbox {
-  padding          : 4px 8px;
-  background-color : @bg2;
+    padding: 8px 24px;
 }
 
 listview {
-  padding      : 4px 0px;
-  lines        : 12;
-  columns      : 1;
-  scrollbar    : true;
-  fixed-height : false;
-  dynamic      : true;
+    lines: 10;
+    columns: 1;
+    fixed-height: true; /* Prevent resizing based on result count */
+    border: 1px 0 0;
+    border-color: @bg1;
+    spacing: 2px;
 }
 
 element {
-  padding : 4px 8px;
-  spacing : 8px;
-}
-
-element normal urgent {
-  text-color: @urgent;
+    padding: 8px 16px;
+    spacing: 16px;
+    background-color: transparent;
 }
 
 element normal active {
-  text-color: @accent;
+    text-color: @bg2;
 }
 
 element alternate active {
-  text-color: @accent;
+    text-color: @bg2;
 }
 
-element selected {
-  text-color       : @bg1;
-  background-color : @accent;
-}
-
-element selected urgent {
-  background-color: @urgent;
+element selected normal, element selected active {
+    background-color: @bg2;
+    text-color: @fg1;
 }
 
 element-icon {
-  size: 0.8em;
+    size: 1em;
 }
 
 element-text {
-  text-color: inherit;
-}
-
-scrollbar {
-  handle-width : 4px;
-  handle-color : @fg2;
-  padding      : 0 4px;
+    text-color: inherit;
 }
