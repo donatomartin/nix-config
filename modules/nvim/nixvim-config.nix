@@ -19,6 +19,7 @@
     ./plugins/gitsigns.nix
     ./plugins/colorizer.nix
     ./plugins/floaterm.nix
+    ./plugins/harpoon.nix
   ];
 
   # Default Configuration Plugins
