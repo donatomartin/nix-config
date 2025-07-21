@@ -4,4 +4,4 @@ cliphist list | while read -r id rest; do
   else
     echo "$id.    $rest"
   fi
-done | rofi -dmenu -p "Clipboard" | awk '{print $1}' | xargs -r cliphist decode | wl-copy
+done | rofi -dmenu -p "Clipboard" | awk '{print $1}' | sed 's/[^0-9]*//g' | xargs -r cliphist decode | wl-copy
