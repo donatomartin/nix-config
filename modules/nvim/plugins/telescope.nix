@@ -1,11 +1,36 @@
 {
+
+  keymaps = [
+    {
+      mode = "n";
+      key = "<leader>ff";
+      action.__raw = ''
+        function()
+          require("telescope.builtin").find_files({
+            find_command = {
+              "fd",
+              "--type=f",
+              "--hidden",
+              "--no-ignore",
+              "--exclude", ".git",
+              "--exclude", "node_modules",
+              "--exclude", "target"
+            }
+          })
+        end
+      '';
+      options = {
+        desc = "Find files with fd";
+      };
+
+    }
+  ];
+
   plugins.telescope = {
 
     enable = true;
 
     keymaps = {
-      # Find files using Telescope command-line sugar.
-      "<leader>ff" = "find_files";
       "<leader>fw" = "live_grep";
       "<leader>fb" = "buffers";
       "<leader>fh" = "help_tags";
