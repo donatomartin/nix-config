@@ -16,7 +16,7 @@
         "<leader>a" = "function() require'harpoon':list():add() end";
 
         # open menu
-        "<leader>e" = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
+        "<leader>h" = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
 
         # navigation
         "<leader>1" = "function() require'harpoon':list():select(1) end";
