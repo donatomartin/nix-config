@@ -8,33 +8,39 @@
     cmp = {
       enable = true;
       autoEnableSources = true;
-      settings.sources = [
+      settings = {
+        completion = {
+          autocomplete = false;
+        };
 
-        # LSP
-        { name = "nvim_lsp"; }
-        { name = "nvim_lsp_signature_help"; }
+        sources = [
 
-        # Filesystem paths
-        { name = "path"; }
+          # Snippets
+          { name = "luasnip"; }
 
-        # Buffer CMP
-        { name = "buffer"; }
+          # LSP
+          { name = "nvim_lsp"; }
+          { name = "nvim_lsp_signature_help"; }
 
-        # Snippets
-        { name = "luasnip"; }
+          # Filesystem paths
+          { name = "path"; }
 
-        # Dap
-        { name = "cmp-dap"; }
+          # Buffer CMP
+          { name = "buffer"; }
 
-      ];
-      settings.mapping = {
-        "<Tab>" = "cmp.mapping.select_next_item()";
-        "<S-Tab>" = "cmp.mapping.select_prev_item()";
-        "<C-j>" = "cmp.mapping.scroll_docs(4)";
-        "<C-k>" = "cmp.mapping.scroll_docs(-4)";
-        "<C-Space>" = "cmp.mapping.complete()";
-        "<C-Esc>" = "cmp.mapping.close()";
-        "<CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })";
+          # Dap
+          { name = "cmp-dap"; }
+        ];
+
+        mapping = {
+          "<Tab>" = "cmp.mapping.select_next_item()";
+          "<S-Tab>" = "cmp.mapping.select_prev_item()";
+          "<C-j>" = "cmp.mapping.scroll_docs(4)";
+          "<C-k>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-Space>" = "cmp.mapping.complete()";
+          "<C-Esc>" = "cmp.mapping.close()";
+          "<CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })";
+        };
       };
     };
 
