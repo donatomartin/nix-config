@@ -5,6 +5,7 @@
     pkgs.maven
     pkgs.lombok
     pkgs.jdt-language-server
+    pkgs.spring-boot-cli
   ];
 
   home.sessionVariables = {
