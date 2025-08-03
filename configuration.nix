@@ -91,7 +91,6 @@
       inputs.zen-browser.packages.${pkgs.system}.twilight
       pkgs.xfce.thunar
       pkgs.libreoffice
-      pkgs.beeper
       pkgs.prismlauncher
       pkgs.obs-studio
       pkgs.vesktop
@@ -100,9 +99,11 @@
       pkgs.gimp3
       pkgs.anydesk
       pkgs.vscode
+      pkgs.neovide
       pkgs.eclipses.eclipse-java
       pkgs.brave
       pkgs.virtualbox
+      pkgs.android-studio
 
     ];
 
