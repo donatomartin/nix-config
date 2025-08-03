@@ -43,7 +43,7 @@
         };
 
         network = {
-          format-wifi = "  {essid} ";
+          format-wifi = "  {ipaddr} ";
           format-ethernet = "󰈀 {ipaddr} ";
           format-disconnected = " Disconnected ";
         };
