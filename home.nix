@@ -29,9 +29,7 @@
     ./modules/programs/git.nix
     ./modules/programs/gh.nix
     ./modules/programs/tmux.nix
-    ./modules/programs/fastfetch.nix
     ./modules/programs/cava.nix
-    ./modules/programs/peaclock.nix
     ./modules/programs/btop.nix
     ./modules/programs/ranger.nix
     ./modules/nvim/nixvim.nix
