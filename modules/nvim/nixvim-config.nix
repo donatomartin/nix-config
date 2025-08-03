@@ -11,6 +11,7 @@
     ./plugins/cmp.nix
     ./plugins/lsp.nix
     ./plugins/lspsaga.nix
+    ./plugins/dap.nix
     ./plugins/undotree.nix
     ./plugins/mini.nix
     ./plugins/treesitter.nix
