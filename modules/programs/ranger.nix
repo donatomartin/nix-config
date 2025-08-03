@@ -2,6 +2,13 @@
 {
   programs.ranger = {
     enable = true;
+    aliases = {
+      "d" = "delete";
+      "c" = "copy";
+      "x" = "cut";
+      "r" = "rename";
+      "Z" = "z";
+    };
     plugins = [
       {
         name = "zoxide";

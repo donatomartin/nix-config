@@ -14,7 +14,6 @@
 
       # system
       c = "clear";
-      e = "exit";
 
       # nix
       hs = "home-manager switch --flake ~/nix-config";
@@ -57,6 +56,10 @@
 
       # direnv
       da = "direnv allow";
+
+      # dotenvx
+      dx = "dotenvx";
+      e = "dotenvx run --";
     };
 
     initContent = ''
