@@ -6,10 +6,6 @@ let
       builtins.attrNames (builtins.readDir "${jdtlsPkg}/share/java/jdtls/plugins")
     )
   );
-  jdtlsConfigWritable = pkgs.runCommand "jdtls-config" { } ''
-    mkdir -p $out
-    cp -r ${jdtlsPkg}/share/java/jdtls/config_linux/* $out
-  '';
 in
 {
   plugins = {
