@@ -1,4 +1,3 @@
-{ ... }:
 {
   programs.ghostty = {
     enable = true;
@@ -6,9 +5,9 @@
       theme = "catppuccin-mocha";
       confirm-close-surface = false;
       mouse-hide-while-typing = true;
-      background-opacity = 0.8;
-      background-blur = true;
       cursor-color = "#CDD6F4";
+      cursor-opacity = 0.5;
+      font-size = 16;
     };
   };
 }
