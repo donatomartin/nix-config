@@ -62,30 +62,32 @@
       e = "dotenvx run --";
     };
 
-    initContent = ''
-      # Enable vi mode
-      bindkey -v
+    initContent =
+      # sh
+      ''
+        # Enable vi mode
+        bindkey -v
 
-      # Custom keybind to prepend sudo
-      function prepend-sudo() {
-        if [[ -n $BUFFER ]]; then
-          BUFFER="sudo $BUFFER"
-          CURSOR=$#BUFFER
-        fi
-      }
-      zle -N prepend-sudo
-      bindkey '^[^[' prepend-sudo  # ESC ESC
+        # Custom keybind to prepend sudo
+        function prepend-sudo() {
+          if [[ -n $BUFFER ]]; then
+            BUFFER="sudo $BUFFER"
+            CURSOR=$#BUFFER
+          fi
+        }
+        zle -N prepend-sudo
+        bindkey '^[^[' prepend-sudo  # ESC ESC
 
-      # zsh completion setup
-      autoload -U compinit && compinit
-      zmodload -i zsh/complist
+        # zsh completion setup
+        autoload -U compinit && compinit
+        zmodload -i zsh/complist
 
-      # Use fzf-tab from nixpkgs
-      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+        # Use fzf-tab from nixpkgs
+        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
 
-      # Optional: some basic config
-      zstyle ':completion:*' menu select
-    '';
+        # Optional: some basic config
+        zstyle ':completion:*' menu select
+      '';
   };
 
   programs.fzf = {
