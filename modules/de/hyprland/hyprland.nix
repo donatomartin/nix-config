@@ -198,8 +198,8 @@ in
         "$mainMod SHIFT, P, workspace, e-1"
 
         # Screenshot
-        "$mainMod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of the region taken\" -t 1000"
-        "$mainMod, S, exec, grim - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of whole screen taken\" -t 1000"
+        "$mainMod SHIFT, S, exec, hyprshot -z -m region -o ~/screenshots/"
+        "$mainMod, S, exec, hyprshot -z -m output -o ~/screenshots/"
       ];
 
       bindm = [

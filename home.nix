@@ -78,8 +78,7 @@
     pkgs.sqlite-utils # SQLite utilities
     pkgs.sqlite-web # SQLite web interface
 
-    pkgs.slurp # select screen area
-    pkgs.grim # screenshot
+    pkgs.hyprshot # screenshot for hyprland
 
     pkgs.asciinema # session recorder
     pkgs.asciiquarium-transparent # aquarium in terminal
