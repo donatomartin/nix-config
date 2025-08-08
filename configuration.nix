@@ -109,9 +109,6 @@
     shell = pkgs.zsh;
   };
 
-  # Set Zsh as the default shell
-  programs.zsh.enable = true;
-
   # Configure Hardware
   hardware = {
     graphics.enable = true;
@@ -126,57 +123,60 @@
     bluetooth.enable = true;
   };
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = [
-      "displaylink"
-      "modesetting"
-    ];
+  programs = {
+    zsh.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
 
   };
 
-  # Remap CapsLock to Escape or Ctrl if chorded
-  services.interception-tools =
-    let
-      itools = pkgs.interception-tools;
-      itools-caps = pkgs.interception-tools-plugins.caps2esc;
-    in
-    {
+  services = {
+
+    displayManager.ly.enable = true;
+
+    printing = {
       enable = true;
-      plugins = [ itools-caps ];
-      # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
-      udevmonConfig = pkgs.lib.mkDefault ''
-        - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
-          DEVICE:
-            EVENTS:
-              EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-      '';
+      drivers = [ pkgs.hplip ];
     };
+
+    xserver = {
+      enable = true;
+      videoDrivers = [
+        "displaylink"
+        "modesetting"
+      ];
+
+    };
+
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
+    interception-tools =
+      let
+        itools = pkgs.interception-tools;
+        itools-caps = pkgs.interception-tools-plugins.caps2esc;
+      in
+      {
+        enable = true;
+        plugins = [ itools-caps ];
+        # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
+        udevmonConfig = pkgs.lib.mkDefault ''
+          - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
+            DEVICE:
+              EVENTS:
+                EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+        '';
+      };
+
+  };
 
   # Enable docker
   virtualisation.docker.enable = true;
-
-  # Enable Ly display manager
-  services.displayManager.ly.enable = true;
-
-  # Enable Hyprland
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
-  # Enable Printer Support
-  services.printing.enable = true;
-
-  # Si usas una impresora HP (opcional)
-  services.printing.drivers = [ pkgs.hplip ];
-
-  # Para usar CUPS desde la web
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
