@@ -2,7 +2,7 @@
   keymaps = [
     {
       mode = "n";
-      key = "<leader>n";
+      key = "<A-n>";
       action = "<cmd>Neotree toggle right reveal_force_cwd<CR>";
       options.silent = true;
     }
@@ -11,7 +11,14 @@
   plugins.neo-tree = {
     enable = true;
 
-    filesystem.hijackNetrwBehavior = "disabled";
+    filesystem = {
+      hijackNetrwBehavior = "disabled";
+      followCurrentFile = {
+        enabled = true;
+        leaveDirsOpen = false;
+      };
+    };
+
     closeIfLastWindow = true;
     window = {
       width = 30;
