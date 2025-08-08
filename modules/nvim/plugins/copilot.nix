@@ -58,6 +58,29 @@
         silent = true;
       };
     }
+    {
+      mode = "n";
+      key = "<leader>tc";
+      action =
+        # lua
+        ''
+          function()
+            local copilot_enabled = vim.fn["copilot#Enabled"]()
+            if copilot_enabled == 1 then
+              vim.cmd("Copilot disable")
+              print("Copilot disabled")
+            else
+              vim.cmd("Copilot enable")
+              print("Copilot enabled")
+            end
+          end
+        '';
+      lua = true;
+      options = {
+        desc = "Toggle Copilot";
+        silent = true;
+      };
+    }
   ];
 
   plugins = {
@@ -81,5 +104,6 @@
         };
       };
     };
+
   };
 }
