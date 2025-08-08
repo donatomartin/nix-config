@@ -75,6 +75,8 @@
     pkgs.atool # archive manager
     pkgs.dotenvx # dotenv file support
     pkgs.manix # nixos manuals
+    pkgs.sqlite-utils # SQLite utilities
+    pkgs.sqlite-web # SQLite web interface
 
     pkgs.slurp # select screen area
     pkgs.grim # screenshot
