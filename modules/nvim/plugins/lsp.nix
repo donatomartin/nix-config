@@ -23,6 +23,7 @@ in
         nixd.enable = true;
         html.enable = true;
         cssls.enable = true;
+        tailwindcss.enable = true;
         lua_ls.enable = true;
         markdown_oxide.enable = true;
         pyright.enable = true;
@@ -31,6 +32,7 @@ in
         eslint.enable = true;
         ts_ls.enable = true;
         clangd.enable = true;
+
         jdtls = {
           enable = true;
           extraOptions.cmd = [
