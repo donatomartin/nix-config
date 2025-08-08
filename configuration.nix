@@ -96,7 +96,6 @@
       pkgs.vesktop
       pkgs.vlc
       pkgs.inkscape
-      pkgs.gimp3
       pkgs.anydesk
       pkgs.vscode
       pkgs.neovide
