@@ -103,6 +103,7 @@
       pkgs.brave
       pkgs.virtualbox
       pkgs.android-studio
+      pkgs.networkmanagerapplet
 
     ];
 
