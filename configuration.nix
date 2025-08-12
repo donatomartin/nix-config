@@ -79,6 +79,8 @@
       "networkmanager"
       "wheel"
       "docker"
+      "dialout"
+      "uucp"
     ];
     packages = [
 
@@ -95,7 +97,6 @@
       pkgs.obs-studio
       pkgs.vesktop
       pkgs.vlc
-      pkgs.inkscape
       pkgs.anydesk
       pkgs.vscode
       pkgs.neovide
@@ -104,6 +105,9 @@
       pkgs.virtualbox
       pkgs.android-studio
       pkgs.networkmanagerapplet
+
+      pkgs.inkscape
+      pkgs.inkcut
 
     ];
 
@@ -175,6 +179,12 @@
                 EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
         '';
       };
+
+    udev = {
+      extraRules = ''
+        SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5750", MODE="0660", GROUP="dialout", SYMLINK+="secabo"
+      '';
+    };
 
   };
 
