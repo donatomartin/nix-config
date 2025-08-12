@@ -69,14 +69,12 @@
     pkgs.fd # find replacement
     pkgs.ripgrep # search tool
     pkgs.tldr # tldr pages
-    pkgs.duf # disk usage
+    pkgs.dust # disk usage analyzer
     pkgs.httpie # HTTP client
     pkgs.jq # JSON processor
     pkgs.atool # archive manager
     pkgs.dotenvx # dotenv file support
     pkgs.manix # nixos manuals
-    pkgs.sqlite-utils # SQLite utilities
-    pkgs.sqlite-web # SQLite web interface
 
     pkgs.hyprshot # screenshot for hyprland
 
@@ -92,8 +90,14 @@
     pkgs.imagemagick # image library
     pkgs.wineWowPackages.full # wine packages for running windows applications
     pkgs.dos2unix # fix carriage return problems
-    pkgs.manix # find documentation
-    pkgs.navi # interactive cheat sheets
+    pkgs.file # file type detection
+
+    pkgs.ollama # local LLM server
+
+    pkgs.pgcli # PostgreSQL CLI
+    pkgs.mongosh # MongoDB CLI
+    pkgs.sqlite-utils # SQLite utilities
+    pkgs.sqlite-web # SQLite web interface
 
     # NixVim for VsCode
     (pkgs.symlinkJoin {
