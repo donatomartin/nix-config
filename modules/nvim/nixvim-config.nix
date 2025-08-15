@@ -21,6 +21,7 @@
     ./plugins/colorizer.nix
     ./plugins/floaterm.nix
     ./plugins/harpoon.nix
+    ./plugins/menu.nix
   ];
 
   # Default Configuration Plugins
