@@ -43,9 +43,9 @@ in
       };
 
       general = {
-        gaps_in = 5;
-        gaps_out = 20;
-        border_size = 2;
+        gaps_in = 0;
+        gaps_out = 0;
+        border_size = 1;
         "col.active_border" = "rgba(cba6f7ee) rgba(b4befeee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = false;
@@ -54,7 +54,7 @@ in
       };
 
       decoration = {
-        rounding = 10;
+        rounding = 0;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
 
@@ -74,7 +74,7 @@ in
       };
 
       animations = {
-        enabled = true;
+        enabled = false;
         bezier = [
           "easeOutQuint,0.23,1,0.32,1"
           "easeInOutCubic,0.65,0.05,0.36,1"
