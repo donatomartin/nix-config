@@ -33,7 +33,9 @@
         ];
 
         mapping = {
+          "<C-n>" = "cmp.mapping.select_next_item()";
           "<Tab>" = "cmp.mapping.select_next_item()";
+          "<C-p>" = "cmp.mapping.select_prev_item()";
           "<S-Tab>" = "cmp.mapping.select_prev_item()";
           "<C-j>" = "cmp.mapping.scroll_docs(4)";
           "<C-k>" = "cmp.mapping.scroll_docs(-4)";
