@@ -90,7 +90,6 @@
       pkgs.neovim
 
       # GUI
-      inputs.zen-browser.packages.${pkgs.system}.twilight
       pkgs.xfce.thunar
       pkgs.libreoffice
       pkgs.prismlauncher
@@ -100,7 +99,7 @@
       pkgs.anydesk
       pkgs.vscode
       pkgs.eclipses.eclipse-java
-      pkgs.brave
+      pkgs.firefox
       pkgs.virtualbox
       pkgs.android-studio
       pkgs.networkmanagerapplet
