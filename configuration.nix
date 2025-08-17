@@ -99,7 +99,6 @@
       pkgs.vlc
       pkgs.anydesk
       pkgs.vscode
-      pkgs.neovide
       pkgs.eclipses.eclipse-java
       pkgs.brave
       pkgs.virtualbox
