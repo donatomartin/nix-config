@@ -71,15 +71,21 @@
         # Enable vi mode
         bindkey -v
 
-        # Custom keybind to prepend sudo
-        function prepend-sudo() {
-          if [[ -n $BUFFER ]]; then
-            BUFFER="sudo $BUFFER"
-            CURSOR=$#BUFFER
+        # --- vi yank -> system clipboard via OSC52 (works over SSH/tmux) ---
+        _clip() {
+          # If inside tmux, use passthrough so the outer terminal receives OSC52
+          if [[ -n "$TMUX" ]]; then
+            printf '\ePtmux;\e\e]52;c;%s\a\e\\' "$(printf %s "$1" | base64 | tr -d '\n')"
+          else
+            printf '\e]52;c;%s\a' "$(printf %s "$1" | base64 | tr -d '\n')"
           fi
         }
-        zle -N prepend-sudo
-        bindkey '^[^[' prepend-sudo  # ESC ESC
+
+        vi_yank_and_clip() { zle vi-yank; _clip "$CUTBUFFER"; }
+        zle -N vi_yank_and_clip
+        bindkey -M vicmd 'y'  vi_yank_and_clip
+        bindkey -M vicmd 'Y'  vi_yank_and_clip
+        bindkey -M vicmd 'yy' vi_yank_and_clip
 
         # zsh completion setup
         autoload -U compinit && compinit
