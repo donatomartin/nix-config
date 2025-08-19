@@ -3,10 +3,13 @@
   home.packages = [
     pkgs.eza
     pkgs.zsh-fzf-tab
+    pkgs.oscclip
   ];
 
   programs.zsh = {
     enable = true;
+    shellAliases.copy = "osc-copy";
+    shellAliases.paste = "osc-paste";
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
 
