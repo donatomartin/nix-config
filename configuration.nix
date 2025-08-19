@@ -139,6 +139,11 @@
 
     blueman.enable = true;
 
+    # For the file manager
+    udisks2.enable = true; # Managing disks and devices
+    gvfs.enable = true; # Virtual filesystems
+    tumbler.enable = true; # Thumbnails
+
     displayManager.ly.enable = true;
 
     printing = {
