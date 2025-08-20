@@ -44,6 +44,7 @@
           format-wifi = "  {ipaddr}";
           format-ethernet = "󰈀 {ipaddr}";
           format-disconnected = " Disconnected";
+          tooltip-format = "{essid} ({signalStrength}%)";
         };
 
         pulseaudio = {
