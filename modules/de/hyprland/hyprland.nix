@@ -129,8 +129,8 @@ in
       bind = [
 
         # Lanzadores
-        "$mainMod, B, exec, zen"
-        "$mainMod CTRL, B, exec, brave"
+        "$mainMod, B, exec, firefox -p Personal"
+        "$mainMod CTRL, B, exec, firefox -p Hotel"
         "$mainMod, Q, exec, ghostty"
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, rofi -show drun"
