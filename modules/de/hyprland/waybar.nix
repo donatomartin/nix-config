@@ -17,8 +17,9 @@
         ];
 
         clock = {
-          format = "{:%H:%M}";
+          format = "{:%H:%M:%S}";
           tooltip-format = "{:%A, %d %B %Y}";
+          interval = 1;
         };
 
         battery = {
