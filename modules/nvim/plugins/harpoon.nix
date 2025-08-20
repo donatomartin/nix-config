@@ -29,5 +29,9 @@
         "<leader>8" = "function() require'harpoon':list():select(8) end";
         "<leader>9" = "function() require'harpoon':list():select(9) end";
         "<leader>0" = "function() require'harpoon':list():select(10) end";
+
+        # wrapped next/prev
+        "<A-n>" = "function() require'harpoon':list():next({ ui_nav_wrap = true }) end";
+        "<A-p>" = "function() require'harpoon':list():prev({ ui_nav_wrap = true }) end";
       };
 }
