@@ -29,15 +29,17 @@
     enable = true;
 
     settings = {
-      format_on_save = {
-        lspFallback = true;
-        timeoutMs = 500;
+      notify_on_error = false;
+
+      # global default
+      default_format_opts = {
+        stop_after_first = true;
       };
 
-      notify_on_error = true;
-
-      format = {
-        stop_after_first = true;
+      # pre-write, sync formatting
+      format_on_save = {
+        timeout_ms = 1000; # sync
+        lsp_format = "never"; # skip LSP fallback
       };
 
       formatters_by_ft = {
