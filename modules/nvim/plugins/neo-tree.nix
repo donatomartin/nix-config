@@ -2,7 +2,7 @@
   keymaps = [
     {
       mode = "n";
-      key = "<A-n>";
+      key = "<leader>n";
       action = "<cmd>Neotree toggle right reveal_force_cwd<CR>";
       options.silent = true;
     }
