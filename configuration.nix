@@ -89,6 +89,7 @@
       pkgs.neovim
 
       # GUI
+      pkgs.qbittorrent
       pkgs.xfce.thunar
       pkgs.libreoffice
       pkgs.prismlauncher
