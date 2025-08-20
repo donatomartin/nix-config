@@ -21,6 +21,8 @@
     black
     google-java-format
     isort
+    xmlformat
+    biome
   ];
 
   plugins.conform-nvim = {
@@ -40,8 +42,7 @@
 
       formatters_by_ft = {
         html = [
-          "prettierd"
-          "prettier"
+          "biome"
         ];
         css = [
           "prettierd"
@@ -80,6 +81,7 @@
         bash = [ "shfmt" ];
         sh = [ "shfmt" ];
         java = [ "google-java-format" ];
+        xml = [ "xmlformat" ];
       };
     };
   };
