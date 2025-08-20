@@ -36,6 +36,9 @@
       lla = "eza --icons --group-directories-first --color=always -la";
       lt = "eza --icons --group-directories-first --color=always --tree";
 
+      # cat
+      cat = "bat --style=plain --color=always";
+
       # wayland
       wc = "wl-copy";
       wp = "wl-paste";
