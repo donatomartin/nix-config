@@ -118,8 +118,6 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     BROWSER = "zen";
-    TERMINAL = "ghostty";
-    TERM = "ghostty";
   };
 
   # Let Home Manager install and manage itself.
