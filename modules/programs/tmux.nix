@@ -19,7 +19,6 @@ in
   programs.tmux = {
     enable = true;
     mouse = true;
-    terminal = "xterm-256color";
 
     baseIndex = 1;
     clock24 = true;
@@ -29,8 +28,12 @@ in
       # not really python, but this is the best way to highlight the code with tree-sitter
       # python
       ''
+        set -ga terminal-overrides ',xterm-256color:Tc'
         set -s escape-time 10 
         set-option -g renumber-windows on
+
+        set -g set-clipboard on
+        set -g allow-passthrough on
 
         # Copy mode bindings
         bind-key -T copy-mode-vi v send-keys -X begin-selection
@@ -83,9 +86,6 @@ in
     plugins = with pkgs; [
       {
         plugin = tmuxPlugins.sensible;
-      }
-      {
-        plugin = tmuxPlugins.vim-tmux-navigator;
       }
       {
         plugin = tmuxPlugins.resurrect;
