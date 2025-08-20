@@ -53,10 +53,14 @@ in
         bind v copy-mode
 
         # Window navigation
-        bind -n S-Left  previous-window
-        bind -n S-Right next-window
         bind -n M-H previous-window
         bind -n M-L next-window
+
+        # Pane Navigation
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R
 
         # Resize panes with Alt + h/j/k/l
         bind -n M-h resize-pane -L 5
