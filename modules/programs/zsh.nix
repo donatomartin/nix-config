@@ -52,8 +52,8 @@
       gc = "git commit";
       gcm = "git commit -m";
       gpsh = "git push";
+      gpll = "git pull";
       gl = "git log --oneline --graph --decorate --all";
-      gcl = "git clone";
       gp = "wl-paste | git apply";
 
       # tmux
