@@ -3,6 +3,7 @@
   home.packages = [
     pkgs.temurin-bin-21
     pkgs.maven
+    pkgs.gradle
     pkgs.lombok
     pkgs.jdt-language-server
     pkgs.spring-boot-cli
