@@ -93,6 +93,8 @@
     swapfile = false;
     mouse = "a";
     undofile = true;
+    ignorecase = true;
+    wrap = false;
 
     # Indenting
     expandtab = true;
