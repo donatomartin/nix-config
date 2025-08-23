@@ -37,10 +37,7 @@
       };
 
       # pre-write, sync formatting
-      format_on_save = {
-        timeout_ms = 1000; # sync
-        lsp_format = "never"; # skip LSP fallback
-      };
+      format_on_save = null;
 
       formatters_by_ft = {
         html = [
