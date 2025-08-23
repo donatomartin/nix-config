@@ -46,12 +46,6 @@
       };
     };
 
-    lsp-format.enable = true;
-    none-ls = {
-      enable = true;
-      enableLspFormat = true;
-    };
-
     luasnip.enable = true;
   };
 
