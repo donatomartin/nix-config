@@ -41,29 +41,38 @@
   keymaps = [
     {
       mode = "n";
-      key = "<M-n>";
-      action = "<cmd>b#<CR>";
+      key = "<A-h>";
+      action = "<cmd>vertical resize +2<CR>";
       options = {
         silent = true;
-        desc = "Switch to last buffer";
+        desc = "Resize split left";
       };
     }
     {
       mode = "n";
-      key = "<leader>h";
-      action = "<cmd>bp<CR>";
+      key = "<A-l>";
+      action = "<cmd>vertical resize -2<CR>";
       options = {
         silent = true;
-        desc = "Switch to previous buffer";
+        desc = "Resize split right";
       };
     }
     {
       mode = "n";
-      key = "<leader>l";
-      action = "<cmd>bn<CR>";
+      key = "<A-j>";
+      action = "<cmd>resize -2<CR>";
       options = {
         silent = true;
-        desc = "Switch to next buffer";
+        desc = "Resize split down";
+      };
+    }
+    {
+      mode = "n";
+      key = "<A-k>";
+      action = "<cmd>resize +2<CR>";
+      options = {
+        silent = true;
+        desc = "Resize split up";
       };
     }
   ];
