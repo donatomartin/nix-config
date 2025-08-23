@@ -114,12 +114,6 @@
 
   ];
 
-  # Declare session variables
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    BROWSER = "zen";
-  };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
