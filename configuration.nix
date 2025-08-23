@@ -188,10 +188,12 @@
       '';
     };
 
+    flatpak.enable = true;
   };
 
-  # Enable docker
-  virtualisation.docker.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.config.common.default = "gtk";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
