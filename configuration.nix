@@ -100,7 +100,6 @@
       pkgs.vscode
       pkgs.eclipses.eclipse-java
       pkgs.firefox
-      pkgs.virtualbox
       pkgs.android-studio
       pkgs.networkmanagerapplet
 
