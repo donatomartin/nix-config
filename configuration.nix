@@ -85,29 +85,6 @@
     ];
     packages = [
 
-      # CLI
-      pkgs.docker
-      pkgs.git
-      pkgs.neovim
-
-      # GUI
-      pkgs.qbittorrent
-      pkgs.xfce.thunar
-      pkgs.libreoffice
-      pkgs.prismlauncher
-      pkgs.obs-studio
-      pkgs.vesktop
-      pkgs.vlc
-      pkgs.anydesk
-      pkgs.vscode
-      pkgs.eclipses.eclipse-java
-      pkgs.firefox
-      pkgs.android-studio
-      pkgs.networkmanagerapplet
-
-      pkgs.inkscape
-      pkgs.inkcut
-
     ];
 
     shell = pkgs.zsh;
