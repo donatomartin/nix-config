@@ -132,6 +132,10 @@
 
   ];
 
+  home.sessionVariables = {
+  	EDITOR = "nvim";
+  };
+
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
