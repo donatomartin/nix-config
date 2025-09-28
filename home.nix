@@ -11,7 +11,6 @@
   # Home Manager imports
   imports = [
 
-    inputs.nixvim.homeManagerModules.default
     inputs.catppuccin.homeModules.catppuccin
 
     # Desktop Environment
@@ -31,7 +30,8 @@
     ./modules/programs/cava.nix
     ./modules/programs/btop.nix
     ./modules/programs/ranger.nix
-    ./modules/nvim/nixvim.nix
+    ./modules/programs/eclipse.nix
+    # ./modules/nvim/nixvim.nix
 
     # Services
     ./modules/services/batsignal.nix
