@@ -111,6 +111,8 @@
       xwayland.enable = true;
     };
 
+    steam.enable = true;
+
   };
 
   services = {
