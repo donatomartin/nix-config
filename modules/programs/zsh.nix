@@ -47,6 +47,8 @@
       gA = "git add -A";
       gs = "git status";
       gd = "git diff";
+      gds = "git diff --staged";
+      gdh = "git diff HEAD";
       gc = "git commit";
       gcm = "git commit -m";
       gpsh = "git push";
