@@ -60,6 +60,7 @@
 
     pkgs.wl-clipboard # wayland clipboard manager
     pkgs.cliphist # clipboard history
+    pkgs.copyq
     pkgs.acpi # battery status
     pkgs.zip # zip files
     pkgs.unzip # unzip files
@@ -98,21 +99,51 @@
     pkgs.sqlite-utils # SQLite utilities
     pkgs.sqlite-web # SQLite web interface
 
-    # NixVim for VsCode
-    (pkgs.symlinkJoin {
-      name = "vscodenixvim";
-      paths = [ self.packages.${system}.vscodenixvim ];
-      postBuild = ''
-        mv $out/bin/nvim $out/bin/vscodenixvim
-        mv $out/bin/nixvim-print-init $out/bin/vscodenixvim-print-init
-      '';
-    })
+    pkgs.unrar # For unrar
 
     # Fonts
     pkgs.nerd-fonts.jetbrains-mono
 
+    # CLI
+    pkgs.docker
+    pkgs.git
+    pkgs.neovim
+    pkgs.vim
+
+    # GUI
+    pkgs.qbittorrent
+    pkgs.xfce.thunar
+    pkgs.libreoffice
+    pkgs.prismlauncher
+    pkgs.obs-studio
+    pkgs.vesktop
+    pkgs.vlc
+    pkgs.anydesk
+    pkgs.vscode
+    pkgs.firefox
+    pkgs.tor-browser
+    pkgs.android-studio
+    pkgs.networkmanagerapplet
+    pkgs.jetbrains.webstorm
+
+    pkgs.inkscape
+    pkgs.inkcut
+
+    pkgs.phase-cli
+
   ];
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = [ "Thunar.desktop" ];
+      "x-scheme-handler/file" = [ "Thunar.desktop" ];
+    };
+    associations.added = {
+      "inode/directory" = [ "Thunar.desktop" ];
+    };
+  };
+  
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
