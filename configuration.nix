@@ -115,7 +115,10 @@
 
   };
 
+
   services = {
+
+    zerotierone.enable = true;
 
     blueman.enable = true;
 
@@ -186,6 +189,9 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  networking.firewall.allowedUDPPorts = [ 9993 ];
+  networking.firewall.allowedTCPPorts = [ 9993 ];
+  networking.firewall.trustedInterfaces = [ "zt+" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
