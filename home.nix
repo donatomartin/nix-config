@@ -60,7 +60,6 @@
 
     pkgs.wl-clipboard # wayland clipboard manager
     pkgs.cliphist # clipboard history
-    pkgs.copyq
     pkgs.acpi # battery status
     pkgs.zip # zip files
     pkgs.unzip # unzip files
