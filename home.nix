@@ -84,7 +84,7 @@
     pkgs.cmatrix # matrix in terminal
 
     pkgs.hyprpicker # pick colors from screen
-    pkgs.hyprshade # shaders for hyprland
+    pkgs.gammastep # shaders for hyprland
     pkgs.brightnessctl # control brightness
     pkgs.ffmpeg # video library
     pkgs.imagemagick # image library
