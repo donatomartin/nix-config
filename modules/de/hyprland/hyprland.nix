@@ -126,9 +126,6 @@ in
         "maxsize 1 1, class:^(xwaylandvideobridge)$"
         "noblur, class:^(xwaylandvideobridge)$"
         "nofocus, class:^(xwaylandvideobridge)$"
-        "float, class:^(.*copyq)$"
-        "center, class:^(.*copyq)$"
-        "size 900 600, class:^(.*copyq)$"
       ];
 
       bind = [
@@ -140,7 +137,6 @@ in
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, rofi -show drun"
         "$mainMod, V, exec, ${rofi-clipboard}"
-        "$mainMod SHIFT, V, exec, copyq exit || copyq --start-server show"
         "$mainMod, PERIOD, exec, rofimoji --action copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
