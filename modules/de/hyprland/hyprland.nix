@@ -3,8 +3,8 @@ let
   rofi-clipboard = pkgs.writeShellScript "rofi-clipboard" (
     builtins.readFile ./scripts/rofi-clipboard.sh
   );
-  toggle-hyprshade = pkgs.writeShellScript "toggle-hyprshade" (
-    builtins.readFile ./scripts/toggle-hyprshade.sh
+  toggle-bluelight = pkgs.writeShellScript "toggle-bluelight" (
+    builtins.readFile ./scripts/toggle-bluelight.sh
   );
   hyprpicker-copypick = pkgs.writeShellScript "hyprpicker-copypick" (
     builtins.readFile ./scripts/hyprpicker-copypick.sh
@@ -23,6 +23,7 @@ in
         "mako"
         "waybar &"
         "wl-paste --watch cliphist store &"
+	"gammastep -O 4000 &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
       ];
 
@@ -125,6 +126,9 @@ in
         "maxsize 1 1, class:^(xwaylandvideobridge)$"
         "noblur, class:^(xwaylandvideobridge)$"
         "nofocus, class:^(xwaylandvideobridge)$"
+        "float, class:^(.*copyq)$"
+        "center, class:^(.*copyq)$"
+        "size 900 600, class:^(.*copyq)$"
       ];
 
       bind = [
@@ -136,12 +140,13 @@ in
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, rofi -show drun"
         "$mainMod, V, exec, ${rofi-clipboard}"
+        "$mainMod SHIFT, V, exec, copyq exit || copyq --start-server show"
         "$mainMod, PERIOD, exec, rofimoji --action copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
         "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
         "$mainMod SHIFT, C, exec, ${hyprpicker-copypick}"
-        "$mainMod SHIFT, B, exec, ${toggle-hyprshade}"
+        "$mainMod SHIFT, B, exec, ${toggle-bluelight}"
         "$mainMod, M, exec, makoctl dismiss -a"
         "CTRL SHIFT, ESC, exec, ghostty -e btop"
 
