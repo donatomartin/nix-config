@@ -31,7 +31,6 @@
     let
       system = "x86_64-linux";
       username = "donato";
-
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
@@ -50,46 +49,23 @@
       nixosConfigurations.nixos = lib.nixosSystem {
 
         specialArgs = {
-          inherit inputs username;
-        };
-
-        modules = [
-          ./configuration.nix
-        ];
-
-      };
-
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        extraSpecialArgs = {
           inherit
             inputs
             username
-            self
             system
             ;
         };
 
         modules = [
-          ./home.nix
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {  # HM wiring
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs username self system; }; # if your home.nix needs inputs
+            home-manager.users.${username} = import ./home.nix;     # <- reuse your same file
+          }
         ];
 
-      };
-
-      packages.${system} = {
-
-        nixvim = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
-          pkgs = pkgs;
-          module = import ./modules/nvim/nixvim-config.nix;
-        };
-
-        vscodenixvim = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
-          pkgs = pkgs;
-          module = import ./modules/nvim/vscodenixvim-config.nix;
-        };
-
-        activate-home = self.homeConfigurations.${username}.activationPackage;
       };
 
     };
