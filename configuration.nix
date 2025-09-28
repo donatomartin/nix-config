@@ -139,6 +139,7 @@
       videoDrivers = [
         "displaylink"
         "modesetting"
+        "nvidia"
       ];
 
     };
@@ -181,7 +182,10 @@
   };
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [ 
+    pkgs.xdg-desktop-portal-gtk 
+    pkgs.xdg-desktop-portal-hyprland
+  ];
   xdg.portal.config.common.default = "gtk";
 
   # Open ports in the firewall.
