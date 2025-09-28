@@ -23,10 +23,8 @@
       ns = "sudo nixos-rebuild switch --flake ~/nix-config";
 
       # vim
-      vim = "nvim";
       nv = "nvim";
-      vi = "nvim";
-      v = "nvim";
+      v = "vim";
 
       # list
       ls = "eza --icons --group-directories-first --color=always";
@@ -37,7 +35,7 @@
       lt = "eza --icons --group-directories-first --color=always --tree";
 
       # cat
-      cat = "bat --style=plain --color=always";
+      cat = "bat";
 
       # wayland
       wc = "wl-copy";
