@@ -15,6 +15,6 @@
       icon-theme = "Papirus";
       drun-display-format = "{icon} {name}";
     };
-    theme = ./theme.rasi;
+    theme = ../../assets/rofi-themes/theme.rasi;
   };
 }

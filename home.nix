@@ -14,14 +14,14 @@
     inputs.catppuccin.homeModules.catppuccin
 
     # Desktop Environment
-    ./modules/de/hyprland/hyprland.nix
-    ./modules/de/hyprland/hyprpaper.nix
-    ./modules/de/hyprland/waybar.nix
-    ./modules/de/hyprland/rofi.nix
-    ./modules/de/hyprland/mako.nix
-    ./modules/de/ghostty.nix
-    ./modules/de/cursor.nix
-    ./modules/de/gtk.nix
+    ./modules/programs/hyprland.nix
+    ./modules/programs/hyprpaper.nix
+    ./modules/programs/waybar.nix
+    ./modules/programs/rofi.nix
+    ./modules/programs/mako.nix
+    ./modules/programs/ghostty.nix
+    ./modules/programs/cursor.nix
+    ./modules/programs/gtk.nix
 
     # Programs
     ./modules/programs/zsh.nix
@@ -31,12 +31,11 @@
     ./modules/programs/btop.nix
     ./modules/programs/ranger.nix
     ./modules/programs/eclipse.nix
-    # ./modules/nvim/nixvim.nix
 
     # Services
     ./modules/services/batsignal.nix
 
-    # Programming Languages
+    # System Programming Languages
     ./modules/programming-languages/python.nix
     ./modules/programming-languages/go.nix
     ./modules/programming-languages/nodejs.nix
