@@ -13,7 +13,7 @@
       anchor = "top-right";
       background-color = "#1A1A2E";
       border-color = "#BF9FEE";
-      border-radius = 0;
+      border-radius = 5;
       default-timeout = 0;
       font = "monospace 10";
       height = 100;

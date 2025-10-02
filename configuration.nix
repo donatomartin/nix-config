@@ -22,10 +22,12 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Enable flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
   # Define hostname
   networking.hostName = "nixos"; # Define your hostname.

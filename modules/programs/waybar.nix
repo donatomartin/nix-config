@@ -8,8 +8,8 @@
         position = "top";
         height = 30;
 
+
         modules-left = [ 
-          "hyprland/window"
           "hyprland/workspaces"
         ];
         modules-center = [ "clock" ];
@@ -34,21 +34,40 @@
           format-charging = " {capacity}%";
           format-plugged = " {capacity}%";
           format-alt = "{icon}{time}";
-          format-full = " {capacity}%";
+          format-full = "  {capacity}%";
           format-icons = [
-            "  "
-            "  "
-            "  "
-            "  "
+            "󰂎 "
+            "󰁻 "
+            "󰁼 "
+            "󰁽 "
+            "󰁾 "
+            "󰁿 "
+            "󰂀 "
+            "󰂁 "
+            "󰂂 "
+            "󰁹 "
           ];
+          events = {
+            "on-discharging-warning" = "notify-send 'Low Battery' '{capacity}% battery remaining'";
+			      "on-discharging-critical" = "notify-send 'Low Battery' '{capacity}% battery remaining' -u critical";
+			      "on-charging-100" = "notify-send 'Battery full' 'Battery is at {capacity}%'";
+          };
+
         };
 
         network = {
-          format-wifi = "  {signalStrength}%";
+          format-wifi = "󰤨  {signalStrength}%";
           format-ethernet = "󰈀 ";
           format-disconnected = "  ";
+          format-disabled = "󰤮 ";
           tooltip-format = "{essid} ({ipaddr})";
           on-click = "nm-connection-editor";
+          format-icons = [
+            "󰤟 "
+            "󰤢 "
+            "󰤥 "
+            "󰤨 "
+          ];
         };
 
         pulseaudio = {
