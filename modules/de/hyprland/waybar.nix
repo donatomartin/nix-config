@@ -6,9 +6,12 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30; # fixed height for a crisp bar
+        height = 30;
 
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [ 
+          "hyprland/window"
+          "hyprland/workspaces"
+        ];
         modules-center = [ "clock" ];
         modules-right = [
           "network"
@@ -33,18 +36,19 @@
           format-alt = "{icon}{time}";
           format-full = " {capacity}%";
           format-icons = [
-            " "
-            " "
-            " "
-            " "
+            "  "
+            "  "
+            "  "
+            "  "
           ];
         };
 
         network = {
-          format-wifi = "  {ipaddr}";
-          format-ethernet = "󰈀 {ipaddr}";
-          format-disconnected = " Disconnected";
-          tooltip-format = "{essid} ({signalStrength}%)";
+          format-wifi = "  {signalStrength}%";
+          format-ethernet = "󰈀 ";
+          format-disconnected = "  ";
+          tooltip-format = "{essid} ({ipaddr})";
+          on-click = "nm-connection-editor";
         };
 
         pulseaudio = {
@@ -56,16 +60,41 @@
               "  "
               "  "
             ];
-            headphone = "";
+            headphone = " ";
           };
           on-click = "pavucontrol";
         };
 
         "hyprland/workspaces" = {
-          format = "{name}";
-          on-click = "activate";
+           all-outputs = false;
+           format = "{icon}";
+           format-icons = {
+             "1" = "";
+             "2" = "";
+             "3" = "";
+             "4" = "󰊖";
+             "5" = "";
+             "6" = "󱄅6";
+             "7" = "󱄅7";
+             "8" = "󱄅8";
+             "9" = "󱄅9";
+             "10" = "󱄅0";
+           };
+          };
+
+          "hyprland/window" = {
+            format = "{title}";
+
+            # icon = true;
+            # icon-size = 12;
+            # format = "";
+
+            rewrite = {
+              "^(.{20}).*$" = "$1...";
+              "^(.{1,20})$" = "$1";
+            };
+          };      
         };
-      };
     };
 
     style = ''
@@ -103,58 +132,42 @@
         min-height: 0;
       }
 
-      /* Solid bar, no gaps */
       window#waybar {
-        background-color: @base;   /* no transparency */
+        background-color: transparent;
         color: @text;
         border: none;
         min-height: 30px;
-        padding: 0;                /* no outer padding */
+        padding: 0;
       }
 
-      /* No margins or rounded corners anywhere */
+      #window {
+        background: @base;
+        border: 1px solid @surface1;
+        border-radius: 5px;
+        padding: 0 5px;
+        margin: 5px 5px 5px 10px;
+        min-width: 200px;
+      }
+
       #workspaces button,
       #clock, #battery, #pulseaudio, #network {
         margin: 0;
         border-radius: 0;
-        background: transparent;   /* modules inherit bar background */
+        background: transparent;
         padding: 0 10px;
       }
 
-      /* Subtle bottom hairline for modern feel */
-      window#waybar {
-        border-bottom: 1px solid @surface1;
-      }
-
-      /* Compact, professional workspaces */
-      #workspaces {
-        padding: 0;
-      }
       #workspaces button {
         color: @subtext1;
       }
       #workspaces button.active {
-        color: @text;
-        background: @surface0;
+        color: @flamingo;
       }
       #workspaces button:hover {
-        color: @text;
-        background: @surface1;
+        box-shadow: none;
+        color: @lavender;
       }
 
-      /* Section separators without gaps */
-      .modules-left > widget:not(:first-child),
-      .modules-center > widget:not(:first-child),
-      .modules-right > widget:not(:first-child) {
-        border-left: 1px solid @surface1;
-      }
-      .modules-left > widget,
-      .modules-center > widget,
-      .modules-right > widget {
-        padding: 0 10px;
-      }
-
-      /* Tooltips: solid theme */
       tooltip {
         background: @mantle;
         color: @text;
