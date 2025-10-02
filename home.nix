@@ -129,6 +129,7 @@
     pkgs.inkcut
 
     pkgs.phase-cli
+    pkgs.pavucontrol
 
   ];
 
