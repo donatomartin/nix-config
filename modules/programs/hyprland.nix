@@ -1,13 +1,13 @@
 { pkgs, ... }:
 let
   rofi-clipboard = pkgs.writeShellScript "rofi-clipboard" (
-    builtins.readFile ./scripts/rofi-clipboard.sh
+    builtins.readFile ../../assets/hyprland-scripts/rofi-clipboard.sh
   );
   toggle-bluelight = pkgs.writeShellScript "toggle-bluelight" (
-    builtins.readFile ./scripts/toggle-bluelight.sh
+    builtins.readFile ../../assets/hyprland-scripts/toggle-bluelight.sh
   );
   hyprpicker-copypick = pkgs.writeShellScript "hyprpicker-copypick" (
-    builtins.readFile ./scripts/hyprpicker-copypick.sh
+    builtins.readFile ../../assets/hyprland-scripts/hyprpicker-copypick.sh
   );
 in
 {
