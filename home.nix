@@ -139,14 +139,14 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "inode/directory" = [ "Thunar.desktop" ];
-      "x-scheme-handler/file" = [ "Thunar.desktop" ];
+      "inode/directory" = [ "thunar.desktop" ];
+      "x-scheme-handler/file" = [ "thunar.desktop" ];
     };
     associations.added = {
-      "inode/directory" = [ "Thunar.desktop" ];
+      "inode/directory" = [ "thunar.desktop" ];
     };
   };
-  
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
