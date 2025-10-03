@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
-  rofi-clipboard = pkgs.writeShellScript "rofi-clipboard" (
-    builtins.readFile ../../assets/hyprland-scripts/rofi-clipboard.sh
+  copyq-toggle = pkgs.writeShellScript "copyq-toggle" (
+    builtins.readFile ../../assets/hyprland-scripts/copyq-toggle.sh
   );
   toggle-bluelight = pkgs.writeShellScript "toggle-bluelight" (
     builtins.readFile ../../assets/hyprland-scripts/toggle-bluelight.sh
@@ -22,8 +22,8 @@ in
       exec-once = [
         "mako"
         "waybar &"
-        "wl-paste --watch cliphist store &"
-	"gammastep -O 4000 &"
+        "copyq --start-server"
+      	"gammastep -O 4000 &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
       ];
 
@@ -138,7 +138,7 @@ in
         "$mainMod, Q, exec, ghostty"
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, rofi -show drun"
-        "$mainMod, V, exec, ${rofi-clipboard}"
+        "$mainMod, V, exec, ${copyq-toggle}"
         "$mainMod, PERIOD, exec, rofimoji --action copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
