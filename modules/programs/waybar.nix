@@ -23,6 +23,7 @@
           format = "{:%H:%M:%S}";
           tooltip-format = "{:%A, %d %B %Y}";
           interval = 1;
+          on-click = "firefox --new-window calendar.google.com";
         };
 
         battery = {
