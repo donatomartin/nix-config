@@ -138,7 +138,7 @@ in
         "$mainMod, Q, exec, ghostty"
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, rofi -show drun"
-        "$mainMod, V, exec, ${rofi-clipboard}"
+        "$mainMod, V, exec, ${rofi-clipboard} | rofi -dmenu -display-columns 2 | wl-copy"
         "$mainMod, PERIOD, exec, rofimoji --action copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
