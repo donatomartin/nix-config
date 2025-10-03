@@ -26,9 +26,10 @@ window {
 
     location: center;
     width: 640;
+    height: 550;
     border-radius: 8;
     dynamic: false; /* Prevent window from resizing */
-    padding: 20px 0px; /* Optional: adds consistent spacing */
+    padding: 20px 0px 0px 0px; /* Optional: adds consistent spacing */
 }
 
 inputbar {
@@ -93,7 +94,7 @@ element selected normal, element selected active {
 }
 
 element-icon {
-    size: 1em;
+    size: 2.5em;
 }
 
 element-text {
