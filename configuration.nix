@@ -16,7 +16,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.blacklistedKernelModules = [ "kvm" "kvm_intel" "kvm_amd" ];
+  #boot.blacklistedKernelModules = [ "kvm" "kvm_intel" "kvm_amd" ];
 
   # Disable connecting to the network before the system is up
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -180,7 +180,11 @@
 
   virtualisation = {
     docker.enable = true;
-    virtualbox.host.enable = true;
+    virtualbox.host = {
+      enable = true;
+      enableKvm = true;
+      addNetworkInterface = false;
+    };
   };
 
   xdg.portal.enable = true;
