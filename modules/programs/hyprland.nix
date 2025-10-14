@@ -25,6 +25,7 @@ in
         "copyq --start-server"
       	"gammastep -O 4000 &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
+        "hyprpaper"
       ];
 
       env = [
@@ -69,8 +70,7 @@ in
 
         blur = {
           enabled = true;
-          size = 3;
-          passes = 1;
+          size = 5;
           vibrancy = 0.1696;
         };
       };
@@ -126,8 +126,12 @@ in
         "maxsize 1 1, class:^(xwaylandvideobridge)$"
         "noblur, class:^(xwaylandvideobridge)$"
         "nofocus, class:^(xwaylandvideobridge)$"
-        "opacity 0.6 0.6 override, class:^(com.mitchellh.ghostty)$"
-        "opacity 0.6 0.6 override, class:^(Thunar)$"
+
+        "tile, title:^(Chromium-browser)$"
+
+        "opacity 0.7 0.7 override, class:^(com.mitchellh.ghostty)$"
+        "opacity 0.7 0.7 override, class:^(thunar)$"
+        "opacity 0.7 0.7 override, class:^(com.github.hluk.copyq)$"
       ];
 
       bind = [
@@ -147,6 +151,8 @@ in
         "$mainMod SHIFT, B, exec, ${toggle-bluelight}"
         "$mainMod, M, exec, makoctl dismiss -a"
         "CTRL SHIFT, ESC, exec, ghostty -e btop"
+        ", XF86Calculator, exec, libreoffice --calc"
+        ", 149, exec, firefox"
 
         # Flotante/pseudotile
         "$mainMod, O, togglefloating,"

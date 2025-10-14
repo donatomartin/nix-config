@@ -12,7 +12,7 @@ in
       splash = false;
 
       preload = [ wallpaper ];
-      wallpaper = [ "eDP-1, ${wallpaper}" ];
+      wallpaper = [ ", ${wallpaper}" ];
     };
   };
 }

@@ -4,26 +4,51 @@
 
     settings = {
       mainBar = {
+
         layer = "top";
         position = "top";
         height = 30;
-
 
         modules-left = [ 
           "hyprland/workspaces"
         ];
         modules-center = [ "clock" ];
         modules-right = [
+          "keyboard-state"
+          "bluetooth"
           "network"
           "battery"
           "pulseaudio"
         ];
 
+        keyboard-state = {
+          numlock = true;
+          format = {
+            numlock = "{icon}";
+          };
+          format-icons = {
+                "locked" = " ";
+                "unlocked" = " ";
+          };
+        };
+
+        bluetooth = {
+          # "controller": "controller1"; # specify the alias of the controller if there are more than 1 on the system
+          format = " ";
+          format-disabled = ""; # an empty format will hide the module
+          format-connected = "  {num_connections}";
+          tooltip-format = "{controller_alias}\t{controller_address}";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          on-click = "blueman-manager";
+          interval = 1;
+        };
+
         clock = {
           format = "{:%H:%M:%S}";
           tooltip-format = "{:%A, %d %B %Y}";
           interval = 1;
-          on-click = "firefox --new-window calendar.google.com";
+          on-click = "brave --app=https://calendar.google.com --ozone-platform-hint=wayland";
         };
 
         battery = {
@@ -48,11 +73,7 @@
             "󰂂 "
             "󰁹 "
           ];
-          events = {
-            "on-discharging-warning" = "notify-send 'Low Battery' '{capacity}% battery remaining'";
-			      "on-discharging-critical" = "notify-send 'Low Battery' '{capacity}% battery remaining' -u critical";
-			      "on-charging-100" = "notify-send 'Battery full' 'Battery is at {capacity}%'";
-          };
+          interval = 1;
 
         };
 
@@ -89,31 +110,19 @@
            all-outputs = false;
            format = "{icon}";
            format-icons = {
-             "1" = "";
+             "1" = "󰈹";
              "2" = "";
              "3" = "";
-             "4" = "󰊖";
-             "5" = "";
-             "6" = "󱄅6";
-             "7" = "󱄅7";
-             "8" = "󱄅8";
-             "9" = "󱄅9";
-             "10" = "󱄅0";
+             "4" = "";
+             "5" = "";
+             "6" = "";
+             "7" = "󰕮";
+             "8" = "";
+             "9" = "";
+             "10" = "󰊖";
            };
           };
 
-          "hyprland/window" = {
-            format = "{title}";
-
-            # icon = true;
-            # icon-size = 12;
-            # format = "";
-
-            rewrite = {
-              "^(.{20}).*$" = "$1...";
-              "^(.{1,20})$" = "$1";
-            };
-          };      
         };
     };
 
@@ -153,7 +162,7 @@
       }
 
       window#waybar {
-        background-color: transparent;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0));
         color: @text;
         border: none;
         min-height: 30px;
@@ -181,11 +190,11 @@
         color: @subtext1;
       }
       #workspaces button.active {
-        color: @flamingo;
+        color: @blue;
       }
       #workspaces button:hover {
         box-shadow: none;
-        color: @lavender;
+        color: @blue;
       }
 
       tooltip {
