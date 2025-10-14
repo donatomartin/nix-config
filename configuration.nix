@@ -90,6 +90,7 @@
       "dialout"
       "uucp"
       "vboxusers"
+      "input"
     ];
     packages = [
 
