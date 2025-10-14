@@ -61,6 +61,7 @@
           home-manager.nixosModules.home-manager
           {  # HM wiring
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = { inherit inputs username self system; }; # if your home.nix needs inputs
             home-manager.users.${username} = import ./home.nix;     # <- reuse your same file
           }
