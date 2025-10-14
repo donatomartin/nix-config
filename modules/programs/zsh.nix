@@ -18,9 +18,6 @@
       # system
       c = "clear";
 
-      # nix
-      ns = "sudo nixos-rebuild switch --flake ~/nix-config";
-
       # vim
       nv = "nvim";
       v = "vim";
@@ -43,6 +40,7 @@
       # git
       g = "git";
       ga = "git add";
+      gap = "git add -p";
       gA = "git add -A";
       gs = "git status";
       gd = "git diff";
@@ -52,8 +50,14 @@
       gcm = "git commit -m";
       gpsh = "git push";
       gpll = "git pull";
-      gl = "git log --oneline --graph --decorate --all";
+      gl = "git log --oneline --graph --decorate --all --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(auto)%h%d %s %C(brightblack)(%an, %ad) [%cd]'";
       gp = "wl-paste | git apply";
+
+      # nix
+      ns = "sudo nixos-rebuild switch --flake ~/nix-config";
+      nt = "sudo nixos-rebuild test --flake ~/nix-config";
+      ngc = "sudo nix-collect-garbage -d";
+      ndg = "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old && nix-env --delete-generations old";
 
       # tmux
       t = "tmux";
@@ -72,6 +76,9 @@
       ''
         # Enable vi mode
         bindkey -v
+
+        setopt menucomplete
+        setopt autolist
 
         # --- vi yank -> system clipboard via OSC52 (works over SSH/tmux) ---
         _clip() {
