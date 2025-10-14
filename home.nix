@@ -31,6 +31,8 @@
     ./modules/programs/btop.nix
     ./modules/programs/ranger.nix
     ./modules/programs/eclipse.nix
+    ./modules/programs/webapps.nix
+
 
     # Services
     ./modules/services/batsignal.nix
@@ -56,6 +58,9 @@
   };
 
   home.packages = [
+
+    pkgs.dialog
+    pkgs.freerdp
 
     pkgs.wl-clipboard # wayland clipboard manager
     pkgs.copyq # clipboard history with integrated ui
