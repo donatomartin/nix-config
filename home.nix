@@ -82,6 +82,8 @@
 
     pkgs.hyprshot # screenshot for hyprland
 
+    pkgs.appimage-run
+
     pkgs.asciinema # session recorder
     pkgs.asciiquarium-transparent # aquarium in terminal
     pkgs.cowsay # make a cow say something
@@ -125,10 +127,11 @@
     pkgs.anydesk
     pkgs.vscode
     pkgs.firefox
-    pkgs.tor-browser
+    pkgs.brave
     pkgs.android-studio
     pkgs.networkmanagerapplet
     pkgs.jetbrains.webstorm
+    pkgs.audacity
 
     pkgs.inkscape
     pkgs.inkcut
@@ -145,11 +148,30 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
+      # File Manager
       "inode/directory" = [ "thunar.desktop" ];
       "x-scheme-handler/file" = [ "thunar.desktop" ];
+
+      # Web-related defaults → Firefox only
+
+      "text/html" = [ "firefox.desktop" ];
+      "application/xhtml+xml" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/ftp" = [ "firefox.desktop" ];
+      "x-scheme-handler/chrome" = [ "firefox.desktop" ]; # Prevents Chrome/Brave takeover
     };
     associations.added = {
+      # Reinforce file manager association
       "inode/directory" = [ "thunar.desktop" ];
+      
+      # Explicitly associate all web content types with Firefox
+      "text/html" = [ "firefox.desktop" ];
+      "application/xhtml+xml" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/ftp" = [ "firefox.desktop" ];
+      "x-scheme-handler/chrome" = [ "firefox.desktop" ];
     };
   };
 
