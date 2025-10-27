@@ -26,7 +26,6 @@
     # Programs
     ./modules/programs/zsh.nix
     ./modules/programs/gh.nix
-    ./modules/programs/tmux.nix
     ./modules/programs/cava.nix
     ./modules/programs/btop.nix
     ./modules/programs/ranger.nix
