@@ -58,6 +58,8 @@
 
   home.packages = [
 
+    pkgs.gcc
+
     pkgs.dialog
     pkgs.freerdp
 
@@ -113,9 +115,11 @@
     pkgs.docker
     pkgs.git
     pkgs.neovim
-    pkgs.vim
+    pkgs.tmux
+    pkgs.stow
 
     # GUI
+    pkgs.jetbrains.idea-ultimate
     pkgs.qbittorrent
     pkgs.xfce.thunar
     pkgs.libreoffice
