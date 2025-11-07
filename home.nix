@@ -57,10 +57,15 @@
 
   home.packages = [
 
-    pkgs.gcc
+    pkgs.gcc # gnu compiler collection
+    pkgs.cargo # rust package manager and build tool
+    pkgs.seahorse # secret manager
+    pkgs.glib # core library for gnome and gtk
 
-    pkgs.dialog
-    pkgs.freerdp
+    pkgs.nixd # nix language server
+
+    pkgs.dialog # show dialogs in terminal
+    pkgs.freerdp # rdp client
 
     pkgs.wl-clipboard # wayland clipboard manager
     pkgs.copyq # clipboard history with integrated ui
@@ -120,7 +125,9 @@
     # GUI
     pkgs.jetbrains.idea-ultimate
     pkgs.qbittorrent
+    pkgs.xfce.xfconf
     pkgs.xfce.thunar
+    pkgs.file-roller
     pkgs.libreoffice
     pkgs.prismlauncher
     pkgs.obs-studio
@@ -147,6 +154,7 @@
   	EDITOR = "nvim";
   };
 
+  
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -154,28 +162,42 @@
       "inode/directory" = [ "thunar.desktop" ];
       "x-scheme-handler/file" = [ "thunar.desktop" ];
 
-      # Web-related defaults → Firefox only
-
-      "text/html" = [ "firefox.desktop" ];
-      "application/xhtml+xml" = [ "firefox.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "x-scheme-handler/ftp" = [ "firefox.desktop" ];
-      "x-scheme-handler/chrome" = [ "firefox.desktop" ]; # Prevents Chrome/Brave takeover
-    };
-    associations.added = {
-      # Reinforce file manager association
-      "inode/directory" = [ "thunar.desktop" ];
-      
-      # Explicitly associate all web content types with Firefox
+      # Web
       "text/html" = [ "firefox.desktop" ];
       "application/xhtml+xml" = [ "firefox.desktop" ];
       "x-scheme-handler/http" = [ "firefox.desktop" ];
       "x-scheme-handler/https" = [ "firefox.desktop" ];
       "x-scheme-handler/ftp" = [ "firefox.desktop" ];
       "x-scheme-handler/chrome" = [ "firefox.desktop" ];
+
+      # Archives → File Roller
+      "application/zip" = [ "file-roller.desktop" ];
+      "application/x-tar" = [ "file-roller.desktop" ];
+      "application/x-bzip2" = [ "file-roller.desktop" ];
+      "application/x-gzip" = [ "file-roller.desktop" ];
+      "application/x-7z-compressed" = [ "file-roller.desktop" ];
+      "application/x-rar" = [ "file-roller.desktop" ];
+    };
+
+    associations.added = {
+      "inode/directory" = [ "thunar.desktop" ];
+      "text/html" = [ "firefox.desktop" ];
+      "application/xhtml+xml" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/ftp" = [ "firefox.desktop" ];
+      "x-scheme-handler/chrome" = [ "firefox.desktop" ];
+
+      # Reinforce File Roller for archives
+      "application/zip" = [ "file-roller.desktop" ];
+      "application/x-tar" = [ "file-roller.desktop" ];
+      "application/x-bzip2" = [ "file-roller.desktop" ];
+      "application/x-gzip" = [ "file-roller.desktop" ];
+      "application/x-7z-compressed" = [ "file-roller.desktop" ];
+      "application/x-rar" = [ "file-roller.desktop" ];
     };
   };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
