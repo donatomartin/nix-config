@@ -48,7 +48,6 @@
           format = "{:%H:%M:%S}";
           tooltip-format = "{:%A, %d %B %Y}";
           interval = 1;
-          on-click = "brave --app=https://calendar.google.com --ozone-platform-hint=wayland";
         };
 
         battery = {
@@ -164,7 +163,7 @@
       }
 
       window#waybar {
-        background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0));
+        background: transparent;
         color: @text;
         border: none;
         min-height: 30px;

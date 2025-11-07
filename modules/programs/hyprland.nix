@@ -29,6 +29,7 @@ in
       	"gammastep -O 4000 &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
         "hyprpaper"
+        "exec-once = bash -c 'eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg); export SSH_AUTH_SOCK'"
       ];
 
       env = [
@@ -118,6 +119,7 @@ in
 
       misc = {
         disable_hyprland_logo = true;
+        background_color = "rgb(30,30,46)";
       };
 
       windowrule = [
@@ -132,9 +134,6 @@ in
 
         "tile, title:^(Chromium-browser)$"
 
-        "opacity 0.7 0.7 override, class:^(com.mitchellh.ghostty)$"
-        "opacity 0.7 0.7 override, class:^(thunar)$"
-        "opacity 0.7 0.7 override, class:^(com.github.hluk.copyq)$"
       ];
 
       bind = [
@@ -142,7 +141,7 @@ in
         # Lanzadores
         "$mainMod, B, exec, firefox -p Personal"
         "$mainMod CTRL, B, exec, firefox -p Hotel"
-        "$mainMod, Q, exec, ghostty"
+        "$mainMod, Q, exec, kitty"
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, rofi -show drun"
         "$mainMod, V, exec, ${copyq-toggle}"
@@ -153,8 +152,8 @@ in
         "$mainMod SHIFT, C, exec, ${hyprpicker-copypick}"
         "$mainMod SHIFT, B, exec, ${toggle-bluelight}"
         "$mainMod, M, exec, makoctl dismiss -a"
-        "CTRL SHIFT, ESC, exec, ghostty -e btop"
         ", XF86Calculator, exec, libreoffice --calc"
+        ", XF86Launch2, exec, brave --app=https://calendar.google.com --ozone-platform-hint=wayland"
         ", 149, exec, firefox"
 
         # Flotante/pseudotile
@@ -212,8 +211,8 @@ in
         "$mainMod SHIFT, P, workspace, e-1"
 
         # Screenshot
-        "$mainMod SHIFT, S, exec, hyprshot -z -m region -o ~/screenshots/"
-        "$mainMod, S, exec, hyprshot -z -m output -o ~/screenshots/"
+        "$mainMod SHIFT, S, exec, hyprshot -z -m region -o ~/Documents/screenshots/"
+        "$mainMod, S, exec, hyprshot -z -m output -o ~/Documents/screenshots/"
       ];
 
       bindm = [

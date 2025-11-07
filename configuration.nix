@@ -92,10 +92,6 @@
       "vboxusers"
       "input"
     ];
-    packages = [
-
-    ];
-
     shell = pkgs.zsh;
   };
 
