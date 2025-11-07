@@ -35,7 +35,7 @@
         bluetooth = {
           # "controller": "controller1"; # specify the alias of the controller if there are more than 1 on the system
           format = " ";
-          format-disabled = ""; # an empty format will hide the module
+          format-disabled = " 󰂲";
           format-connected = "  {num_connections}";
           tooltip-format = "{controller_alias}\t{controller_address}";
           tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
@@ -74,22 +74,24 @@
             "󰁹 "
           ];
           interval = 1;
-
         };
 
         network = {
-          format-wifi = "󰤨  {signalStrength}%";
-          format-ethernet = "󰈀 ";
-          format-disconnected = "  ";
-          format-disabled = "󰤮 ";
-          tooltip-format = "{essid} ({ipaddr})";
+          format = "{icon}";
+          format-ethernet = "󰈀";
+          format-disconnected = "󰤫";
+          format-disabled = "󰤮";
+          tooltip-format = "{essid} [{ipaddr}] ({signalStrength}%)";
+          format-icons = {
+            default = [
+              "󰤟"
+              "󰤢"
+              "󰤥"
+              "󰤨"
+            ];
+          };
           on-click = "nm-connection-editor";
-          format-icons = [
-            "󰤟 "
-            "󰤢 "
-            "󰤥 "
-            "󰤨 "
-          ];
+          interval = 1;
         };
 
         pulseaudio = {

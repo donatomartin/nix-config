@@ -9,6 +9,9 @@ let
   hyprpicker-copypick = pkgs.writeShellScript "hyprpicker-copypick" (
     builtins.readFile ../../assets/hyprland-scripts/hyprpicker-copypick.sh
   );
+  toggle-waybar = pkgs.writeShellScript "toggle-waybar" (
+    builtins.readFile ../../assets/hyprland-scripts/toggle-waybar.sh
+  );
 in
 {
 
@@ -76,7 +79,7 @@ in
       };
 
       animations = {
-        enabled = false;
+        enabled = true;
         bezier = [
           "easeOutQuint,0.23,1,0.32,1"
           "easeInOutCubic,0.65,0.05,0.36,1"
@@ -146,7 +149,7 @@ in
         "$mainMod, PERIOD, exec, rofimoji --action copy"
         "$mainMod, C, killactive,"
         "$mainMod CTRL, M, exit,"
-        "$mainMod, U, exec, pkill waybar --signal=9 || waybar &"
+        "$mainMod, U, exec, ${toggle-waybar}"
         "$mainMod SHIFT, C, exec, ${hyprpicker-copypick}"
         "$mainMod SHIFT, B, exec, ${toggle-bluelight}"
         "$mainMod, M, exec, makoctl dismiss -a"
