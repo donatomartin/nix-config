@@ -15,11 +15,10 @@
 
     # Desktop Environment
     ./modules/programs/hyprland.nix
-    ./modules/programs/hyprpaper.nix
     ./modules/programs/waybar.nix
     ./modules/programs/rofi.nix
     ./modules/programs/mako.nix
-    ./modules/programs/ghostty.nix
+    ./modules/programs/kitty.nix
     ./modules/programs/cursor.nix
     ./modules/programs/gtk.nix
 
