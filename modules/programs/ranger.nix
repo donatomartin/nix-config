@@ -9,6 +9,10 @@
       "r" = "rename";
       "Z" = "z";
     };
+    settings = {
+      preview_images = true;
+      preview_images_method = "kitty";  # Set image rendering protocol to Kitty
+    };
     plugins = [
       {
         name = "zoxide";
