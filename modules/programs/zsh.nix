@@ -76,6 +76,9 @@
       ''
         # Enable vi mode
         bindkey -v
+        bindkey -M viins '^?' backward-delete-char
+        bindkey -M vicmd '^?' backward-delete-char
+        bindkey -M viins '^W' backward-kill-word
 
         setopt menucomplete
         setopt autolist
@@ -105,6 +108,8 @@
 
         # Optional: some basic config
         zstyle ':completion:*' menu select
+
+        export MANPAGER="nvim +Man!"
       '';
   };
 
