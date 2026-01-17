@@ -1,12 +1,4 @@
-{
-  pkgs,
-  self,
-  system,
-  inputs,
-  username,
-  ...
-}:
-{
+{ pkgs, self, system, inputs, username, ... }: {
 
   # Home Manager imports
   imports = [
@@ -31,7 +23,6 @@
     ./modules/programs/eclipse.nix
     ./modules/programs/webapps.nix
 
-
     # Services
     ./modules/services/batsignal.nix
 
@@ -55,149 +46,84 @@
     };
   };
 
-  home.packages = [
-
-    pkgs.gcc # gnu compiler collection
-    pkgs.cargo # rust package manager and build tool
-    pkgs.seahorse # secret manager
-    pkgs.glib # core library for gnome and gtk
-
-    pkgs.nixd # nix language server
-
-    pkgs.dialog # show dialogs in terminal
-    pkgs.freerdp # rdp client
-
-    pkgs.wl-clipboard # wayland clipboard manager
-    pkgs.copyq # clipboard history with integrated ui
-
-    pkgs.acpi # battery status
-    pkgs.zip # zip files
-    pkgs.unzip # unzip files
-
-    pkgs.bat # cat improvement
-    pkgs.fd # find replacement
-    pkgs.ripgrep # search tool
-    pkgs.tldr # tldr pages
-    pkgs.dust # disk usage analyzer
-    pkgs.httpie # HTTP client
-    pkgs.jq # JSON processor
-    pkgs.atool # archive manager
-    pkgs.dotenvx # dotenv file support
-    pkgs.manix # nixos manuals
-
-    pkgs.hyprshot # screenshot for hyprland
-
-    pkgs.appimage-run
-
-    pkgs.asciinema # session recorder
-    pkgs.asciiquarium-transparent # aquarium in terminal
-    pkgs.cowsay # make a cow say something
-    pkgs.cmatrix # matrix in terminal
-
-    pkgs.hyprpicker # pick colors from screen
-    pkgs.gammastep # shaders for hyprland
-    pkgs.brightnessctl # control brightness
-    pkgs.ffmpeg # video library
-    pkgs.imagemagick # image library
-    pkgs.wineWowPackages.full # wine packages for running windows applications
-    pkgs.dos2unix # fix carriage return problems
-    pkgs.file # file type detection
-
-    pkgs.ollama # local LLM server
-
-    pkgs.pgcli # PostgreSQL CLI
-    pkgs.mongosh # MongoDB CLI
-    pkgs.sqlite-utils # SQLite utilities
-    pkgs.sqlite-web # SQLite web interface
-
-    pkgs.unrar # For unrar
+  home.packages = with pkgs; [
 
     # Fonts
-    pkgs.nerd-fonts.jetbrains-mono
+    nerd-fonts.jetbrains-mono
 
-    # CLI
-    pkgs.docker
-    pkgs.git
-    pkgs.neovim
-    pkgs.tmux
-    pkgs.stow
+    # CLI Tools
+    docker # containerization sw
+    git # version control system
+    neovim # text editor
+    tmux # terminal multiplexor
+    stow # dotfiles manager
+    file # file type detection
 
-    # GUI
-    pkgs.jetbrains.idea-ultimate
-    pkgs.qbittorrent
-    pkgs.xfce.xfconf
-    pkgs.xfce.thunar
-    pkgs.file-roller
-    pkgs.libreoffice
-    pkgs.prismlauncher
-    pkgs.obs-studio
-    pkgs.vesktop
-    pkgs.vlc
-    pkgs.anydesk
-    pkgs.vscode
-    pkgs.firefox
-    pkgs.brave
-    pkgs.android-studio
-    pkgs.networkmanagerapplet
-    pkgs.jetbrains.webstorm
-    pkgs.audacity
+    pgcli # PostgreSQL CLI
+    mongosh # MongoDB CLI
+    tldr # tldr pages
+    dust # disk usage analyzer
+    httpie # HTTP client
+    jq # JSON processor
+    bat # cat improvement
+    fd # find replacement
+    ripgrep # search tool
+    phase-cli # secrets manager CLI
+    sqlite-utils # SQLite utilities
+    dos2unix # fix carriage return problems
+    wineWowPackages.full # wine packages for running windows applications
+    imagemagick # image library
+    ffmpeg # video library
+    brightnessctl # control brightness
+    hyprpicker # pick colors from screen
+    gammastep # shaders for hyprland
+    appimage-run # run appimages in nixos
+    hyprshot # screenshot for hyprland
+    acpi # battery status
+    zip # zip files
+    unzip # unzip files
+    unrar # For unrar
+    dialog # show dialogs in terminal
+    freerdp # rdp client
+    gcc # gnu compiler collection
+    cargo # rust package manager and build tool
+    wl-clipboard # wayland clipboard manager
 
-    pkgs.inkscape
-    pkgs.inkcut
+    ollama # local LLM server
 
-    pkgs.phase-cli
-    pkgs.pavucontrol
+    asciinema # session recorder
+    asciiquarium-transparent # aquarium in terminal
+    cowsay # make a cow say something
+    cmatrix # matrix in terminal
+
+    # GUI Apps
+    heroic # games launcher
+    qbittorrent # torrent client
+    file-roller # archive manager
+    libreoffice # office suite
+    prismlauncher # minecraft launcher
+    obs-studio # video recording sw
+    vesktop # discord client
+    vlc # media player
+    anydesk # remote support tool
+    vscode # IDE
+    firefox # browser 1
+    brave # browser 2
+    inkscape # vector graphic design
+    pavucontrol # audio GUI manager
+    neovide # neovim frontend
+    sqlite-web # SQLite web interface
+    seahorse # secret manager
+    copyq # clipboard history with integrated ui
+
+    # Important Dependencies
+    xfce.xfconf # Xfce config manager
+    inkcut # Plotter communication sw
+    glib # core library for gnome and gtk
 
   ];
 
-  home.sessionVariables = {
-  	EDITOR = "nvim";
-  };
-
-  
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      # File Manager
-      "inode/directory" = [ "thunar.desktop" ];
-      "x-scheme-handler/file" = [ "thunar.desktop" ];
-
-      # Web
-      "text/html" = [ "firefox.desktop" ];
-      "application/xhtml+xml" = [ "firefox.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "x-scheme-handler/ftp" = [ "firefox.desktop" ];
-      "x-scheme-handler/chrome" = [ "firefox.desktop" ];
-
-      # Archives → File Roller
-      "application/zip" = [ "file-roller.desktop" ];
-      "application/x-tar" = [ "file-roller.desktop" ];
-      "application/x-bzip2" = [ "file-roller.desktop" ];
-      "application/x-gzip" = [ "file-roller.desktop" ];
-      "application/x-7z-compressed" = [ "file-roller.desktop" ];
-      "application/x-rar" = [ "file-roller.desktop" ];
-    };
-
-    associations.added = {
-      "inode/directory" = [ "thunar.desktop" ];
-      "text/html" = [ "firefox.desktop" ];
-      "application/xhtml+xml" = [ "firefox.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "x-scheme-handler/ftp" = [ "firefox.desktop" ];
-      "x-scheme-handler/chrome" = [ "firefox.desktop" ];
-
-      # Reinforce File Roller for archives
-      "application/zip" = [ "file-roller.desktop" ];
-      "application/x-tar" = [ "file-roller.desktop" ];
-      "application/x-bzip2" = [ "file-roller.desktop" ];
-      "application/x-gzip" = [ "file-roller.desktop" ];
-      "application/x-7z-compressed" = [ "file-roller.desktop" ];
-      "application/x-rar" = [ "file-roller.desktop" ];
-    };
-  };
-
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
