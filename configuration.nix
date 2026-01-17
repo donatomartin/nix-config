@@ -118,6 +118,13 @@
     nix-ld.enable = true;
     steam.enable = true;
 
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+      ];
+    };
+
   };
 
 
