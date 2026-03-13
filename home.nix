@@ -1,4 +1,4 @@
-{ pkgs, self, system, inputs, username, ... }: {
+{ pkgs, inputs, username, ... }: {
 
   # Home Manager imports
   imports = [
@@ -25,12 +25,7 @@
 
     # Services
     ./modules/services/batsignal.nix
-
-    # System Programming Languages
-    ./modules/programming-languages/python.nix
-    ./modules/programming-languages/go.nix
-    ./modules/programming-languages/nodejs.nix
-    ./modules/programming-languages/java.nix
+    ./modules/services/hypridle.nix
 
   ];
 
@@ -56,7 +51,6 @@
     git # version control system
     neovim # text editor
     tmux # terminal multiplexor
-    stow # dotfiles manager
     file # file type detection
 
     pgcli # PostgreSQL CLI
@@ -95,15 +89,16 @@
     asciiquarium-transparent # aquarium in terminal
     cowsay # make a cow say something
     cmatrix # matrix in terminal
+    fastfetch # system display
 
     # GUI Apps
     heroic # games launcher
     qbittorrent # torrent client
     file-roller # archive manager
     libreoffice # office suite
+    onlyoffice-bin # alt office suite
     prismlauncher # minecraft launcher
     obs-studio # video recording sw
-    vesktop # discord client
     vlc # media player
     anydesk # remote support tool
     vscode # IDE
@@ -115,11 +110,25 @@
     sqlite-web # SQLite web interface
     seahorse # secret manager
     copyq # clipboard history with integrated ui
+    kdePackages.kdeconnect-kde # smartphone connection
+    obsidian # note taking app
+    bruno # http client
+    dbeaver-bin # database UI
+    texpresso # latex UI
 
     # Important Dependencies
     xfce.xfconf # Xfce config manager
     inkcut # Plotter communication sw
     glib # core library for gnome and gtk
+
+    nixd # for nvim lsps 
+    python3 # for nvim lsps
+    tree-sitter # for nvim tree-sitter
+    go # for nvim lsps
+    nodejs_24 # for nvim lsps
+    pnpm # for tooling
+    temurin-bin-21 # for tooling
+    maven # for tooling
 
   ];
 

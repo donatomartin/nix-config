@@ -39,7 +39,7 @@
       ga = "git add";
       gap = "git add -p";
       gA = "git add -A";
-      gs = "git status";
+      gs = "git status -s";
       gd = "git diff";
       gds = "git diff --staged";
       gdh = "git diff HEAD";
@@ -60,12 +60,9 @@
       t = "tmux";
       ta = "tmux a";
 
-      # direnv
-      da = "direnv allow";
+      # neofetch
+      neofetch = "fastfetch";
 
-      # dotenvx
-      dx = "dotenvx";
-      e = "dotenvx run --";
     };
 
     initContent =
