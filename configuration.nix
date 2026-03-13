@@ -1,19 +1,10 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  pkgs,
-  username,
-  inputs,
-  system,
-  ...
-}:
-{
+{ pkgs, username, inputs, system, ... }: {
 
   # Import hardware-configuration
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -24,12 +15,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Enable flakes
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-  };
+  nix.settings = { experimental-features = [ "nix-command" "flakes" ]; };
 
   # Define hostname
   networking.hostName = "nixos"; # Define your hostname.
@@ -40,7 +26,6 @@
   #   "except:type:gsm"
   # ];
   # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -71,13 +56,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    ntfs3g
-    displaylink
-
-    inputs.winapps.packages.${system}.winapps
-    inputs.winapps.packages.${system}.winapps-launcher
-  ];
+  environment.systemPackages = with pkgs; [ ntfs3g displaylink ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
@@ -102,7 +81,8 @@
     nvidia = {
       modesetting.enable = true;
       powerManagement.enable = true;
-      open = false; # Puedes poner true si quieres usar los drivers abiertos (beta)
+      open =
+        false; # Puedes poner true si quieres usar los drivers abiertos (beta)
       nvidiaSettings = true;
     };
 
@@ -120,65 +100,68 @@
 
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-      ];
+      plugins = with pkgs.xfce; [ thunar-archive-plugin ];
     };
 
   };
 
-
   services = {
 
-    tailscale.enable = true;
+    envfs.enable = true;
 
     gnome.gnome-keyring.enable = true;
 
     blueman.enable = true;
 
-    # For the file manager
-    udisks2.enable = true; # Managing disks and devices
-    gvfs.enable = true; # Virtual filesystems
-    tumbler.enable = true; # Thumbnails
-
-    displayManager.ly.enable = true;
+    udisks2.enable = true;
+    gvfs.enable = true;
+    tumbler.enable = true;
 
     printing = {
       enable = true;
       drivers = [ pkgs.hplip ];
     };
 
-    # Battery saving
+    udev = {
+      extraRules = ''
+        SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5750", MODE="0660", GROUP="dialout", SYMLINK+="secabo"
+      '';
+    };
+
     tlp = {
       enable = true;
       settings = {
-          CPU_SCALING_GOVERNOR_ON_AC  = "performance";
-          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-          CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
-          PLATFORM_PROFILE_ON_AC = "performance";
-          PLATFORM_PROFILE_ON_BAT = "low-power";
+        PLATFORM_PROFILE_ON_AC = "performance";
+        PLATFORM_PROFILE_ON_BAT = "quiet";
 
-          CPU_BOOST_ON_AC=1;
-          CPU_BOOST_ON_BAT=0;
+        CPU_BOOST_ON_AC = 1;
+        CPU_BOOST_ON_BAT = 0;
 
-          CPU_HWP_DYN_BOOST_ON_AC=1;
-          CPU_HWP_DYN_BOOST_ON_BAT=0;
-
-          START_CHARGE_THRESH_BAT0 = 60;
-          STOP_CHARGE_THRESH_BAT0 = 95;
+        CPU_HWP_DYN_BOOST_ON_AC = 1;
+        CPU_HWP_DYN_BOOST_ON_BAT = 0;
       };
     };
 
+    upower = {
+      enable = true;
+      usePercentageForPolicy = true;
+      percentageLow = 20;
+      percentageCritical = 10;
+      percentageAction = 7;
+      criticalPowerAction = "PowerOff";
+    };
+
+    displayManager.ly.enable = true;
+
     xserver = {
       enable = true;
-      videoDrivers = [
-        "displaylink"
-        "modesetting"
-        "nvidia"
-      ];
+      videoDrivers = [ "displaylink" "modesetting" "nvidia" ];
     };
 
     avahi = {
@@ -187,30 +170,21 @@
       openFirewall = true;
     };
 
-    interception-tools =
-      let
-        itools = pkgs.interception-tools;
-        itools-caps = pkgs.interception-tools-plugins.caps2esc;
-      in
-      {
-        enable = true;
-        plugins = [ itools-caps ];
-        # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
-        udevmonConfig = pkgs.lib.mkDefault ''
-          - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
-            DEVICE:
-              EVENTS:
-                EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-        '';
-      };
-
-    udev = {
-      extraRules = ''
-        SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5750", MODE="0660", GROUP="dialout", SYMLINK+="secabo"
+    interception-tools = let
+      itools = pkgs.interception-tools;
+      itools-caps = pkgs.interception-tools-plugins.caps2esc;
+    in {
+      enable = true;
+      plugins = [ itools-caps ];
+      # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
+      udevmonConfig = pkgs.lib.mkDefault ''
+        - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
+          DEVICE:
+            EVENTS:
+              EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
       '';
     };
 
-    flatpak.enable = true;
   };
 
   virtualisation = {
@@ -223,20 +197,22 @@
   };
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ 
-    pkgs.xdg-desktop-portal-gtk 
-    pkgs.xdg-desktop-portal-hyprland
-  ];
+  xdg.portal.extraPortals =
+    [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
   xdg.portal.config.common.default = "gtk";
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
   networking.firewall.allowedUDPPorts = [ 9993 ];
   networking.firewall.allowedTCPPorts = [ 9993 ];
   networking.firewall.trustedInterfaces = [ "zt+" ];
+  networking.firewall.allowedTCPPortRanges = [{
+    from = 1714;
+    to = 1764;
+  }];
+  networking.firewall.allowedUDPPortRanges = [{
+    from = 1714;
+    to = 1764;
+  }];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
