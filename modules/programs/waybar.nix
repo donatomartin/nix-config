@@ -21,17 +21,6 @@
           "pulseaudio"
         ];
 
-        keyboard-state = {
-          numlock = true;
-          format = {
-            numlock = "{icon}";
-          };
-          format-icons = {
-                "locked" = " ";
-                "unlocked" = " ";
-          };
-        };
-
         bluetooth = {
           # "controller": "controller1"; # specify the alias of the controller if there are more than 1 on the system
           format = " ";
@@ -109,19 +98,6 @@
 
         "hyprland/workspaces" = {
            all-outputs = false;
-           format = "{icon}";
-           format-icons = {
-             "1" = "󰈹";
-             "2" = "";
-             "3" = "";
-             "4" = "";
-             "5" = "";
-             "6" = "";
-             "7" = "󰕮";
-             "8" = "";
-             "9" = "";
-             "10" = "󰊖";
-           };
           };
 
         };

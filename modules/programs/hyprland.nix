@@ -1,19 +1,22 @@
 { pkgs, ... }:
 let
-  copyq-toggle = pkgs.writeShellScript "copyq-toggle" (
-    builtins.readFile ../../assets/hyprland-scripts/copyq-toggle.sh
-  );
-  toggle-bluelight = pkgs.writeShellScript "toggle-bluelight" (
-    builtins.readFile ../../assets/hyprland-scripts/toggle-bluelight.sh
-  );
-  hyprpicker-copypick = pkgs.writeShellScript "hyprpicker-copypick" (
-    builtins.readFile ../../assets/hyprland-scripts/hyprpicker-copypick.sh
-  );
-  toggle-waybar = pkgs.writeShellScript "toggle-waybar" (
-    builtins.readFile ../../assets/hyprland-scripts/toggle-waybar.sh
-  );
-in
-{
+  copyq-toggle = pkgs.writeShellScript "copyq-toggle"
+    (builtins.readFile ../../assets/hyprland-scripts/copyq-toggle.sh);
+  toggle-bluelight = pkgs.writeShellScript "toggle-bluelight"
+    (builtins.readFile ../../assets/hyprland-scripts/toggle-bluelight.sh);
+  hyprpicker-copypick = pkgs.writeShellScript "hyprpicker-copypick"
+    (builtins.readFile ../../assets/hyprland-scripts/hyprpicker-copypick.sh);
+  toggle-waybar = pkgs.writeShellScript "toggle-waybar"
+    (builtins.readFile ../../assets/hyprland-scripts/toggle-waybar.sh);
+  catppuccin-power-menu-theme =
+    builtins.toString ../../assets/rofi-themes/catppuccin-power-menu.rasi;
+  catppuccin-power-menu-script =
+    builtins.replaceStrings [ "@CATPPUCCIN_POWER_MENU_THEME@" ]
+    [ catppuccin-power-menu-theme ]
+    (builtins.readFile ../../assets/hyprland-scripts/catppuccin-power-menu.sh);
+  hyprland-power-menu =
+    pkgs.writeShellScript "hyprland-power-menu" catppuccin-power-menu-script;
+in {
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -22,13 +25,16 @@ in
     settings = {
       "$mainMod" = "SUPER";
 
+      monitor = [ "eDP-1,1920x1080@60,0x0,1" "HDMI-A-2,1920x1080@60,1920x0,1" ];
+      cursor.no_hardware_cursors = true;
+      #"debug:overlay" = true;
+
       exec-once = [
         "mako"
         "waybar &"
         "copyq --start-server"
-      	"gammastep -O 4000 &"
+        "gammastep -O 4000 &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
-        "hyprpaper"
         "exec-once = bash -c 'eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg); export SSH_AUTH_SOCK'"
       ];
 
@@ -56,7 +62,7 @@ in
         "col.active_border" = "rgba(cba6f7ee) rgba(b4befeee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = false;
-        allow_tearing = false;
+        allow_tearing = true;
         layout = "dwindle";
       };
 
@@ -66,14 +72,14 @@ in
         inactive_opacity = 1.0;
 
         shadow = {
-          enabled = true;
+          enabled = false;
           range = 4;
           render_power = 3;
           color = "rgba(1a1a1aee)";
         };
 
         blur = {
-          enabled = true;
+          enabled = false;
           size = 5;
           vibrancy = 0.1696;
         };
@@ -113,13 +119,11 @@ in
         preserve_split = true;
       };
 
-      gestures = {
-        workspace_swipe = false;
-      };
+      gestures = { workspace_swipe = false; };
 
       misc = {
         disable_hyprland_logo = true;
-        background_color = "rgb(30,30,46)";
+        background_color = "rgb(17,18,27)";
       };
 
       windowrule = [
@@ -152,6 +156,7 @@ in
         "$mainMod SHIFT, C, exec, ${hyprpicker-copypick}"
         "$mainMod SHIFT, B, exec, ${toggle-bluelight}"
         "$mainMod, M, exec, makoctl dismiss -a"
+        "$mainMod, z, exec, ${hyprland-power-menu}"
         ", XF86Calculator, exec, libreoffice --calc"
         ", XF86Launch2, exec, brave --app=https://calendar.google.com --ozone-platform-hint=wayland"
         ", 149, exec, firefox"

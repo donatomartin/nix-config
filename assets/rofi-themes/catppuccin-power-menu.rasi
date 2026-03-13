@@ -1,0 +1,95 @@
+* {
+    font: "JetBrainsMono Nerd Font 13";
+    background-color: transparent;
+    text-color: #cdd6f4;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+    transition: 180;
+}
+
+window {
+    width: 520;
+    height: 500;
+    border-radius: 26px;
+    location: center;
+    background-color: rgba(15, 11, 31, 0.95);
+    border: 2px;
+    border-color: rgba(245, 194, 231, 0.45);
+    padding: 20px 0px 0px 0px;
+    dynamic: true;
+    peek: 0;
+}
+
+message {
+    padding: 20px;
+    margin: 20px;
+    text-color: #f5c2e7;
+    font: "JetBrainsMono Nerd Font 11";
+    spacing: 4;
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background-color: rgba(31, 27, 47, 0.75);
+}
+
+inputbar {
+    padding: 0px 20px 10px 20px;
+    spacing: 12px;
+    children: [
+        icon-search,
+        entry
+    ];
+}
+
+icon-search {
+    expand: false;
+    filename: "search";
+    size: 28px;
+}
+
+entry {
+    font: inherit;
+    placeholder: "Search";
+    placeholder-color: @text-color;
+}
+
+icon-search, entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+listview {
+    lines: 3;
+  columns: 1;
+  fixed-height: true;
+    padding: 12px 28px 22px 28px;
+    spacing: 12px;
+    border: 0;
+    transparency: 0;
+}
+
+element {
+    padding: 18px 28px;
+    spacing: 20px;
+    border-radius: 20px;
+    background-color: rgba(182, 160, 223, 0.1);
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.08);
+    text-color: #e0def4;
+}
+
+element selected normal,
+element selected active {
+    background-color: rgba(157, 124, 216, 0.55);
+    border-color: rgba(255, 255, 255, 0.18);
+    text-color: #0f0b1f;
+}
+
+element-icon {
+    size: 1.5em;
+}
+
+element-text {
+    font: "JetBrainsMono Nerd Font 14";
+    text-color: inherit;
+}
