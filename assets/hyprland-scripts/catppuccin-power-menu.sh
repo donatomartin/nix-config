@@ -3,6 +3,9 @@ set -euo pipefail
 
 readonly ROFI_THEME="@CATPPUCCIN_POWER_MENU_THEME@"
 readonly ROFI_PIDFILE="${XDG_RUNTIME_DIR:-/tmp}/catppuccin-power-menu.pid"
+readonly ROFI_MODEFILE="${XDG_RUNTIME_DIR:-/tmp}/catppuccin-power-menu.mode"
+readonly ROFI_ACTIONS_SCRIPT="@CATPPUCCIN_ACTIONS_MODE_SCRIPT@"
+readonly ROFI_ACTIONS_MODE_NAME=">_"
 
 format_datetime() {
   date '+%A, %B %d • %I:%M %p'
@@ -48,10 +51,9 @@ get_battery_summary() {
     return
   fi
 
-  local status
+  local status percentage
   status=${acpi_line%%,*}
   status=${status#Battery *: }
-  local percentage
   percentage=$(printf '%s' "$acpi_line" | grep -oE '[0-9]+%' | head -n1)
 
   if [[ -n "$percentage" && -n "$status" ]]; then
@@ -106,56 +108,121 @@ cleanup_pidfile() {
   rm -f "$ROFI_PIDFILE"
 }
 
+is_valid_mode() {
+  case "$1" in
+    drun | window | actions) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+read_last_mode() {
+  if [[ -f "$ROFI_MODEFILE" ]]; then
+    local mode
+    mode=$(<"$ROFI_MODEFILE")
+    if is_valid_mode "$mode"; then
+      printf '%s' "$mode"
+      return
+    fi
+  fi
+  printf 'drun'
+}
+
+escape_for_theme_string() {
+  local input="$1"
+  input=${input//\\/\\\\}
+  input=${input//\"/\\\"}
+  input=${input//$'\n'/\\n}
+  printf '%s' "$input"
+}
+
 toggle_existing_menu() {
+  local target_mode="$1"
+  local current_mode="$2"
+
   if [[ -f "$ROFI_PIDFILE" ]]; then
     local pid
     pid=$(<"$ROFI_PIDFILE")
     if [[ -n "$pid" && -e "/proc/$pid" ]]; then
       kill "$pid" >/dev/null 2>&1 || true
       cleanup_pidfile
-      exit 0
+
+      if [[ "$target_mode" == "$current_mode" ]]; then
+        exit 0
+      fi
+
+      sleep 0.05
+    else
+      cleanup_pidfile
     fi
-    cleanup_pidfile
   fi
 }
 
 main() {
   trap cleanup_pidfile EXIT
-  toggle_existing_menu
 
   if [[ ! -f "$ROFI_THEME" ]]; then
     echo "missing theme: $ROFI_THEME" >&2
     exit 1
   fi
+  if [[ ! -f "$ROFI_ACTIONS_SCRIPT" ]]; then
+    echo "missing actions script: $ROFI_ACTIONS_SCRIPT" >&2
+    exit 1
+  fi
 
-  local datetime battery volume info_line choice
+  local requested_mode="" arg
+  for arg in "$@"; do
+    case "$arg" in
+      drun | window | actions) requested_mode="$arg" ;;
+    esac
+  done
+
+  local current_mode target_mode
+  current_mode=$(read_last_mode)
+  target_mode="${requested_mode:-$current_mode}"
+  if ! is_valid_mode "$target_mode"; then
+    target_mode="drun"
+  fi
+
+  toggle_existing_menu "$target_mode" "$current_mode"
+
+  printf '%s' "$target_mode" >"$ROFI_MODEFILE"
+
+  local datetime battery volume info_line info_theme_str rofi_mode
   datetime=$(format_datetime)
   battery=$(get_battery_summary)
   volume=$(get_volume_summary)
-  info_line="󰁹 ${battery} •   ${volume}
- ${datetime}"
+  info_line="System Monitor
 
-  mapfile -t options <<'OPTION_LIST'
-󰗽  Logout
-  Reboot
-󰐥  Poweroff
-OPTION_LIST
+Battery: ${battery}
+Volume: ${volume}
+Date: ${datetime}"
+  info_theme_str=$(escape_for_theme_string "$info_line")
+  case "$target_mode" in
+    actions) rofi_mode="$ROFI_ACTIONS_MODE_NAME" ;;
+    *) rofi_mode="$target_mode" ;;
+  esac
 
-  choice=$(printf '%s\n' "${options[@]}" | rofi \
+  set +e
+  rofi \
     -theme "$ROFI_THEME" \
-    -dmenu -i -lines 3 \
-    -no-custom -mesg "$info_line" -p '' \
+    -theme-str "textbox-system-info { str: \"${info_theme_str}\"; }" \
+    -show "$rofi_mode" \
+    -modi "drun,window,${ROFI_ACTIONS_MODE_NAME}:${ROFI_ACTIONS_SCRIPT}" \
+    -drun-display-format "{icon}  {name}" \
+    -show-icons \
+    -kb-accept-entry "Return,KP_Enter" \
+    -kb-remove-to-eol "Control+Shift+k" \
+    -kb-mode-next "Control+k" \
+    -kb-mode-previous "Control+j" \
+    -kb-custom-1 "" \
+    -kb-custom-2 "" \
+    -kb-custom-3 "" \
+    -i \
+    -p "Search" \
     -name catppuccin-power-menu \
     -pid "$ROFI_PIDFILE" \
-    -kb-custom-1 '' 2>/dev/null)
-
-  [[ -z "$choice" ]] && exit 0
-
-  case "$choice" in
-    *Logout*) hyprctl dispatch exit ;; 
-    *Reboot*) shutdown --reboot now ;;
-    *Poweroff*) shutdown now ;;
-  esac
+    2>/dev/null
+  set -e
 }
 
 main "$@"

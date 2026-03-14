@@ -10,9 +10,16 @@ let
     (builtins.readFile ../../assets/hyprland-scripts/toggle-waybar.sh);
   catppuccin-power-menu-theme =
     builtins.toString ../../assets/rofi-themes/catppuccin-power-menu.rasi;
+  catppuccin-actions-mode-script =
+    builtins.toString ../../assets/hyprland-scripts/rofi-actions.sh;
   catppuccin-power-menu-script =
-    builtins.replaceStrings [ "@CATPPUCCIN_POWER_MENU_THEME@" ]
-    [ catppuccin-power-menu-theme ]
+    builtins.replaceStrings [
+      "@CATPPUCCIN_POWER_MENU_THEME@"
+      "@CATPPUCCIN_ACTIONS_MODE_SCRIPT@"
+    ] [
+      catppuccin-power-menu-theme
+      catppuccin-actions-mode-script
+    ]
     (builtins.readFile ../../assets/hyprland-scripts/catppuccin-power-menu.sh);
   hyprland-power-menu =
     pkgs.writeShellScript "hyprland-power-menu" catppuccin-power-menu-script;
@@ -147,7 +154,9 @@ in {
         "$mainMod CTRL, B, exec, firefox -p Hotel"
         "$mainMod, Q, exec, kitty"
         "$mainMod, E, exec, thunar"
-        "$mainMod, W, exec, rofi -show drun"
+        "$mainMod, W, exec, ${hyprland-power-menu} drun"
+        "$mainMod, Z, exec, ${hyprland-power-menu} window"
+        "$mainMod, X, exec, ${hyprland-power-menu} actions"
         "$mainMod, V, exec, ${copyq-toggle}"
         "$mainMod, PERIOD, exec, rofimoji --action copy"
         "$mainMod, C, killactive,"
@@ -156,7 +165,6 @@ in {
         "$mainMod SHIFT, C, exec, ${hyprpicker-copypick}"
         "$mainMod SHIFT, B, exec, ${toggle-bluelight}"
         "$mainMod, M, exec, makoctl dismiss -a"
-        "$mainMod, z, exec, ${hyprland-power-menu}"
         ", XF86Calculator, exec, libreoffice --calc"
         ", XF86Launch2, exec, brave --app=https://calendar.google.com --ozone-platform-hint=wayland"
         ", 149, exec, firefox"

@@ -1,95 +1,139 @@
 * {
     font: "JetBrainsMono Nerd Font 13";
+    text-color: #d9e0ee;
     background-color: transparent;
-    text-color: #cdd6f4;
-    margin: 0;
-    padding: 0;
+    border-color: #7f5af0;
+    border-radius: 0px;
     spacing: 0;
-    transition: 180;
 }
 
 window {
-    width: 520;
-    height: 500;
-    border-radius: 26px;
+    width: 920px;
+    height: 520px;
     location: center;
-    background-color: rgba(15, 11, 31, 0.95);
     border: 2px;
-    border-color: rgba(245, 194, 231, 0.45);
-    padding: 20px 0px 0px 0px;
-    dynamic: true;
-    peek: 0;
+    border-color: rgba(127, 90, 240, 0.45);
+    border-radius: 20px;
+    background-color: rgba(17, 17, 27, 0.97);
+    padding: 12px;
 }
 
-message {
-    padding: 20px;
-    margin: 20px;
-    text-color: #f5c2e7;
-    font: "JetBrainsMono Nerd Font 11";
-    spacing: 4;
+mainbox {
+    orientation: horizontal;
+    spacing: 12px;
+    children: [ "left-pane", "right-pane" ];
+}
+
+left-pane {
+    width: 42%;
+    spacing: 10px;
+    orientation: vertical;
+    children: [ "inputbar", "mode-switcher", "textbox-system-info" ];
+    background-color: rgba(36, 32, 64, 0.85);
     border: 1px;
-    border-color: rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    background-color: rgba(31, 27, 47, 0.75);
+    border-color: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 12px;
+}
+
+right-pane {
+    width: 58%;
+    spacing: 0px;
+    orientation: vertical;
+    children: [ "listview" ];
+    background-color: rgba(29, 27, 52, 0.88);
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 8px;
 }
 
 inputbar {
-    padding: 0px 20px 10px 20px;
-    spacing: 12px;
-    children: [
-        icon-search,
-        entry
-    ];
+    children: [ "prompt", "entry" ];
+    spacing: 10px;
+    padding: 8px 10px;
+    background-color: rgba(50, 43, 95, 0.95);
+    border-radius: 10px;
 }
 
-icon-search {
-    expand: false;
-    filename: "search";
-    size: 28px;
+prompt {
+    text-color: #f5c2e7;
 }
 
 entry {
-    font: inherit;
     placeholder: "Search";
-    placeholder-color: @text-color;
+    placeholder-color: rgba(217, 224, 238, 0.72);
 }
 
-icon-search, entry, element-icon, element-text {
-    vertical-align: 0.5;
+textbox-system-info {
+    vertical-align: 0.0;
+    horizontal-align: 0.0;
+    expand: true;
+    padding: 12px;
+    margin: 0px;
+    border-radius: 12px;
+    border: 1px;
+    border-color: rgba(127, 90, 240, 0.35);
+    background-color: rgba(24, 22, 42, 0.92);
+    text-color: #f2cdcd;
+    font: "JetBrainsMono Nerd Font 11";
+    str: "System Monitor\n\nBattery: unavailable\nVolume: unavailable\nDate: unavailable";
+}
+
+mode-switcher {
+    spacing: 6px;
+}
+
+button shell {
+    str: ">_";
+}
+
+button {
+    font: "JetBrainsMono Nerd Font 18";
+    border-radius: 10px;
+    padding: 6px 0px;
+    width: 84px;
+    horizontal-align: 0.5;
+    background-color: rgba(64, 56, 121, 0.85);
+    text-color: #d9e0ee;
+}
+
+button selected {
+    background-color: #f02fd8;
+    text-color: #11111b;
 }
 
 listview {
-    lines: 3;
-  columns: 1;
-  fixed-height: true;
-    padding: 12px 28px 22px 28px;
-    spacing: 12px;
-    border: 0;
-    transparency: 0;
+    lines: 8;
+    columns: 1;
+    dynamic: true;
+    fixed-height: false;
+    spacing: 6px;
+    padding: 4px;
+    cycle: false;
 }
 
 element {
-    padding: 18px 28px;
-    spacing: 20px;
-    border-radius: 20px;
-    background-color: rgba(182, 160, 223, 0.1);
+    orientation: horizontal;
+    border-radius: 12px;
+    padding: 8px 10px;
+    spacing: 14px;
+    background-color: rgba(84, 70, 156, 0.18);
     border: 1px;
-    border-color: rgba(255, 255, 255, 0.08);
-    text-color: #e0def4;
+    border-color: rgba(255, 255, 255, 0.05);
 }
 
-element selected normal,
-element selected active {
-    background-color: rgba(157, 124, 216, 0.55);
-    border-color: rgba(255, 255, 255, 0.18);
-    text-color: #0f0b1f;
+element selected {
+    background-color: #f02fd8;
+    text-color: #11111b;
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 element-icon {
-    size: 1.5em;
+    size: 1.8em;
 }
 
 element-text {
-    font: "JetBrainsMono Nerd Font 14";
-    text-color: inherit;
+    horizontal-align: 0.0;
+    vertical-align: 0.5;
 }
