@@ -115,8 +115,6 @@
     bruno # http client
     dbeaver-bin # database UI
     texpresso # latex UI
-    openfortivpn
-    openfortivpn-webview
 
     # Important Dependencies
     xfce.xfconf # Xfce config manager
