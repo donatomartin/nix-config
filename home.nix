@@ -96,7 +96,7 @@
     qbittorrent # torrent client
     file-roller # archive manager
     libreoffice # office suite
-    onlyoffice-bin # alt office suite
+    onlyoffice-desktopeditors # alt office suite
     prismlauncher # minecraft launcher
     obs-studio # video recording sw
     vlc # media player
@@ -115,6 +115,8 @@
     bruno # http client
     dbeaver-bin # database UI
     texpresso # latex UI
+    openfortivpn
+    openfortivpn-webview
 
     # Important Dependencies
     xfce.xfconf # Xfce config manager
