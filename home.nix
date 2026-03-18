@@ -34,13 +34,6 @@
   home.username = username;
   home.homeDirectory = "/home/${username}";
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-    };
-  };
-
   home.packages = with pkgs; [
 
     # Fonts

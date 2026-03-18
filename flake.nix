@@ -4,7 +4,7 @@
   inputs = {
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     catppuccin = {
       url = "github:catppuccin/nix";
@@ -22,23 +22,25 @@
     {
       self,
       nixpkgs,
-      nixos-unstable,
+      nixpkgs-unstable,
       home-manager,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
       username = "donato";
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
           (final: prev: {
-            unstable = import nixos-unstable {
-              inherit system;
-              config.allowUnfree = true;
-            };
+            inherit unstable;
           })
         ];
+        config.allowUnfree = true;
       };
       lib = nixpkgs.lib;
     in
@@ -46,21 +48,21 @@
 
       nixosConfigurations.nixos = lib.nixosSystem {
 
-        specialArgs = {
-          inherit
-            inputs
-            username
-            ;
-        };
+        specialArgs = { inherit inputs username self ; };
 
         modules = [
           ./configuration.nix
+          {
+            nixpkgs.pkgs = pkgs;
+          }
           home-manager.nixosModules.home-manager
-          {  # HM wiring
+          {
+            # HM wiring
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = { inherit inputs username self system; }; # if your home.nix needs inputs
-            home-manager.users.${username} = import ./home.nix;     # <- reuse your same file
+            home-manager.extraSpecialArgs = { inherit inputs username self; };
+            home-manager.useGlobalPkgs = true;
+            home-manager.users.${username} = import ./home.nix;
           }
         ];
 
