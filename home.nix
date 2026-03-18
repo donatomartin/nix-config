@@ -123,6 +123,7 @@
     temurin-bin-21 # for tooling
     maven # for tooling
 
+    unstable.codex
   ];
 
   home.sessionVariables = { EDITOR = "nvim"; };
