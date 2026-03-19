@@ -126,8 +126,6 @@ in {
         preserve_split = true;
       };
 
-      gestures = { workspace_swipe = false; };
-
       misc = {
         disable_hyprland_logo = true;
         background_color = "rgb(17,18,27)";
