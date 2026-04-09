@@ -148,8 +148,7 @@ in {
       bind = [
 
         # Lanzadores
-        "$mainMod, B, exec, firefox -p Personal"
-        "$mainMod CTRL, B, exec, firefox -p Hotel"
+        "$mainMod, B, exec, brave"
         "$mainMod, Q, exec, kitty"
         "$mainMod, E, exec, thunar"
         "$mainMod, W, exec, ${hyprland-power-menu} drun"
@@ -164,8 +163,6 @@ in {
         "$mainMod SHIFT, B, exec, ${toggle-bluelight}"
         "$mainMod, M, exec, makoctl dismiss -a"
         ", XF86Calculator, exec, libreoffice --calc"
-        ", XF86Launch2, exec, brave --app=https://calendar.google.com --ozone-platform-hint=wayland"
-        ", 149, exec, firefox"
 
         # Flotante/pseudotile
         "$mainMod, O, togglefloating,"
