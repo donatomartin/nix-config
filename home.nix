@@ -27,6 +27,8 @@
     ./modules/services/batsignal.nix
     ./modules/services/hypridle.nix
 
+    ./modules/programming-languages/java.nix
+
   ];
 
   catppuccin.flavor = "mocha";
@@ -85,6 +87,7 @@
     fastfetch # system display
 
     # GUI Apps
+    vesktop # discord client
     heroic # games launcher
     qbittorrent # torrent client
     file-roller # archive manager
@@ -95,9 +98,8 @@
     vlc # media player
     anydesk # remote support tool
     vscode # IDE
-    firefox # browser 1
-    brave # browser 2
-    inkscape # vector graphic design
+    brave # browser 1
+    firefox # browser 2
     pavucontrol # audio GUI manager
     neovide # neovim frontend
     sqlite-web # SQLite web interface
@@ -108,6 +110,7 @@
     bruno # http client
     dbeaver-bin # database UI
     texpresso # latex UI
+    texliveFull # latex environment
 
     # Important Dependencies
     xfce.xfconf # Xfce config manager
@@ -116,17 +119,17 @@
 
     nixd # for nvim lsps 
     python3 # for nvim lsps
-    tree-sitter # for nvim tree-sitter
     go # for nvim lsps
     nodejs_24 # for nvim lsps
     pnpm # for tooling
-    temurin-bin-21 # for tooling
     maven # for tooling
 
     unstable.codex
   ];
 
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = { 
+    EDITOR = "nvim";
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
