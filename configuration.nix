@@ -186,11 +186,11 @@
 
   virtualisation = {
     docker.enable = true;
-    virtualbox.host = {
-      enable = true;
-      enableKvm = true;
-      addNetworkInterface = false;
-    };
+    # virtualbox.host = {
+    #   enable = true;
+    #   enableKvm = true;
+    #   addNetworkInterface = false;
+    # };
   };
 
   xdg.portal.enable = true;
