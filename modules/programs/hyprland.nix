@@ -42,7 +42,6 @@ in {
         "copyq --start-server"
         "gammastep -O 4000 &"
         "gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic"
-        "exec-once = bash -c 'eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg); export SSH_AUTH_SOCK'"
       ];
 
       env = [
