@@ -1,4 +1,8 @@
 { pkgs, ... }:
+let
+  notificationSound =
+    "${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/message.oga";
+in
 {
 
   home.packages = [
@@ -23,6 +27,7 @@
       layer = "top";
       margin = 10;
       markup = true;
+      "on-notify" = "exec ${pkgs.pipewire}/bin/pw-play ${notificationSound}";
 
       "actionable=true" = {
         border-color = "#FF6F61";
