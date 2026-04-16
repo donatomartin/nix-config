@@ -48,6 +48,8 @@
     tmux # terminal multiplexor
     file # file type detection
 
+    mermaid-cli # Mermaid CLI
+    openssl # OpenSSL
     pgcli # PostgreSQL CLI
     mongosh # MongoDB CLI
     tldr # tldr pages
@@ -125,6 +127,9 @@
     maven # for tooling
 
     unstable.codex
+    sox
+
+    unstable.claude-code
   ];
 
   home.sessionVariables = { 
