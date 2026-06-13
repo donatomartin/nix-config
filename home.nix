@@ -15,13 +15,11 @@
     ./modules/programs/gtk.nix
 
     # Programs
-    ./modules/programs/zsh.nix
     ./modules/programs/gh.nix
     ./modules/programs/cava.nix
     ./modules/programs/btop.nix
     ./modules/programs/ranger.nix
     ./modules/programs/eclipse.nix
-    ./modules/programs/webapps.nix
 
     # Services
     ./modules/services/batsignal.nix
@@ -42,11 +40,15 @@
     nerd-fonts.jetbrains-mono
 
     # CLI Tools
+    yazi # terminal file manager
     docker # containerization sw
     git # version control system
-    neovim # text editor
+    unstable.neovim # text editor
     tmux # terminal multiplexor
     file # file type detection
+    wireguard-tools # wireguard
+    age # encryption tool
+    sops # secret manager
 
     mermaid-cli # Mermaid CLI
     openssl # OpenSSL
@@ -58,6 +60,9 @@
     jq # JSON processor
     bat # cat improvement
     fd # find replacement
+    fzf # fuzzy finder
+    zoxide # fast cd command
+    starship # customizable prompt
     ripgrep # search tool
     phase-cli # secrets manager CLI
     sqlite-utils # SQLite utilities
@@ -89,6 +94,7 @@
     fastfetch # system display
 
     # GUI Apps
+    zotero # reference manager
     vesktop # discord client
     heroic # games launcher
     qbittorrent # torrent client
@@ -126,15 +132,11 @@
     pnpm # for tooling
     maven # for tooling
 
-    unstable.codex
-    sox
+    unstable.codex # openai's coding agent
+    unstable.claude-code # anthropic's coding agent
+    sox # audio converter
 
-    unstable.claude-code
   ];
-
-  home.sessionVariables = { 
-    EDITOR = "nvim";
-  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
