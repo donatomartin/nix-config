@@ -187,19 +187,25 @@ main() {
 
   printf '%s' "$target_mode" >"$ROFI_MODEFILE"
 
-  local datetime battery volume info_line info_theme_str rofi_mode
+  local datetime battery volume info_line info_theme_str rofi_mode prompt_label
   datetime=$(format_datetime)
   battery=$(get_battery_summary)
   volume=$(get_volume_summary)
-  info_line="System Monitor
+  info_line="<b>System Monitor</b>
 
-Battery: ${battery}
-Volume: ${volume}
-Date: ${datetime}"
+<span foreground=\"#6bd77b\"></span> Battery: ${battery}
+<span foreground=\"#cba6f7\"></span> Volume: ${volume}
+<span foreground=\"#d8d3e7\"></span> ${datetime}"
   info_theme_str=$(escape_for_theme_string "$info_line")
   case "$target_mode" in
-    actions) rofi_mode="$ROFI_ACTIONS_MODE_NAME" ;;
-    *) rofi_mode="$target_mode" ;;
+    actions)
+      rofi_mode="$ROFI_ACTIONS_MODE_NAME"
+      prompt_label="$ROFI_ACTIONS_MODE_NAME"
+      ;;
+    *)
+      rofi_mode="$target_mode"
+      prompt_label="$target_mode"
+      ;;
   esac
 
   set +e
@@ -218,7 +224,7 @@ Date: ${datetime}"
     -kb-custom-2 "" \
     -kb-custom-3 "" \
     -i \
-    -p "Search" \
+    -p "$prompt_label" \
     -name catppuccin-power-menu \
     -pid "$ROFI_PIDFILE" \
     2>/dev/null
