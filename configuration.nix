@@ -1,35 +1,38 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ pkgs, username, inputs, system, ... }: {
-
+{
+  pkgs,
+  username,
+  ...
+}:
+{
   # Import hardware-configuration
   imports = [ ./hardware-configuration.nix ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  #boot.blacklistedKernelModules = [ "kvm" "kvm_intel" "kvm_amd" ];
 
   # Disable connecting to the network before the system is up
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  # Enable flakes
-  nix.settings = { experimental-features = [ "nix-command" "flakes" ]; };
+  # Enable experimental
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
-  # Define hostname
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true; # Enable Networking
-  # networking.networkmanager.unmanaged = [
-  #   "*"
-  #   "except:type:wwan"
-  #   "except:type:gsm"
-  # ];
-  # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
+  networking.firewall.enable = true;
+  networking.firewall.trustedInterfaces = [ "zt+" ];
+  networking.firewall.allowedUDPPorts = [];
+  networking.firewall.allowedTCPPorts = [];
+  networking.firewall.allowedTCPPortRanges = [];
+  networking.firewall.allowedUDPPortRanges = [];
 
   # Set your time zone.
   time.timeZone = "Europe/Madrid";
@@ -51,9 +54,9 @@
 
   console.keyMap = "es";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [ ntfs3g ];
+  environment.systemPackages = with pkgs; [
+    ntfs3g
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
@@ -67,6 +70,7 @@
       "uucp"
       "vboxusers"
       "input"
+      "wireshark"
     ];
     shell = pkgs.zsh;
   };
@@ -78,8 +82,7 @@
     nvidia = {
       modesetting.enable = true;
       powerManagement.enable = true;
-      open =
-        false; # Puedes poner true si quieres usar los drivers abiertos (beta)
+      open = false; # Puedes poner true si quieres usar los drivers abiertos (beta)
       nvidiaSettings = true;
     };
 
@@ -94,12 +97,15 @@
     };
     nix-ld.enable = true;
     steam.enable = true;
-
     thunar = {
       enable = true;
       plugins = with pkgs.xfce; [ thunar-archive-plugin ];
     };
-
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+      dumpcap.enable = true;
+    };
   };
 
   services = {
@@ -158,7 +164,10 @@
 
     xserver = {
       enable = true;
-      videoDrivers = [ "modesetting" "nvidia" ];
+      videoDrivers = [
+        "modesetting"
+        "nvidia"
+      ];
     };
 
     avahi = {
@@ -167,20 +176,23 @@
       openFirewall = true;
     };
 
-    interception-tools = let
-      itools = pkgs.interception-tools;
-      itools-caps = pkgs.interception-tools-plugins.caps2esc;
-    in {
-      enable = true;
-      plugins = [ itools-caps ];
-      # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
-      udevmonConfig = pkgs.lib.mkDefault ''
-        - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
-          DEVICE:
-            EVENTS:
-              EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-      '';
-    };
+    # Map CapsLock to Escape or Ctrl when chording
+    interception-tools =
+      let
+        itools = pkgs.interception-tools;
+        itools-caps = pkgs.interception-tools-plugins.caps2esc;
+      in
+      {
+        enable = true;
+        plugins = [ itools-caps ];
+        # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
+        udevmonConfig = pkgs.lib.mkDefault ''
+          - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
+            DEVICE:
+              EVENTS:
+                EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+        '';
+      };
 
   };
 
@@ -194,22 +206,11 @@
   };
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals =
-    [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-hyprland
+  ];
   xdg.portal.config.common.default = "gtk";
-
-  networking.firewall.enable = true;
-  networking.firewall.allowedUDPPorts = [ 9993 ];
-  networking.firewall.allowedTCPPorts = [ 9993 ];
-  networking.firewall.trustedInterfaces = [ "zt+" ];
-  networking.firewall.allowedTCPPortRanges = [{
-    from = 1714;
-    to = 1764;
-  }];
-  networking.firewall.allowedUDPPortRanges = [{
-    from = 1714;
-    to = 1764;
-  }];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
