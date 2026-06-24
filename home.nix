@@ -1,4 +1,4 @@
-{ pkgs, inputs, username, ... }: {
+{ pkgs, username, ... }: {
 
   # Home Manager imports
   imports = [
@@ -6,7 +6,6 @@
     inputs.catppuccin.homeModules.catppuccin
 
     # Desktop Environment
-    ./modules/programs/hyprland.nix
     ./modules/programs/waybar.nix
     ./modules/programs/rofi.nix
     ./modules/programs/mako.nix
@@ -23,7 +22,6 @@
 
     # Services
     ./modules/services/batsignal.nix
-    ./modules/services/hypridle.nix
 
     ./modules/programming-languages/java.nix
 
