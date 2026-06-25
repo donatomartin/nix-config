@@ -3,31 +3,21 @@
   # Home Manager imports
   imports = [
 
-    inputs.catppuccin.homeModules.catppuccin
-
     # Desktop Environment
     ./modules/programs/waybar.nix
-    ./modules/programs/rofi.nix
-    ./modules/programs/mako.nix
     ./modules/programs/kitty.nix
     ./modules/programs/cursor.nix
     ./modules/programs/gtk.nix
 
     # Programs
     ./modules/programs/gh.nix
-    ./modules/programs/cava.nix
-    ./modules/programs/btop.nix
     ./modules/programs/ranger.nix
-    ./modules/programs/eclipse.nix
 
     # Services
     ./modules/services/batsignal.nix
-
-    ./modules/programming-languages/java.nix
+    ./modules/services/mako.nix
 
   ];
-
-  catppuccin.flavor = "mocha";
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -35,23 +25,21 @@
   home.packages = with pkgs; [
 
     # Fonts
+    nerd-fonts.lilex
+    nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
 
     # CLI Tools
-    yazi # terminal file manager
-    docker # containerization sw
     git # version control system
-    unstable.neovim # text editor
     tmux # terminal multiplexor
     file # file type detection
     wireguard-tools # wireguard
     age # encryption tool
     sops # secret manager
-
+    lsof # list open files
+    nmap # network discovery
     mermaid-cli # Mermaid CLI
     openssl # OpenSSL
-    pgcli # PostgreSQL CLI
-    mongosh # MongoDB CLI
     tldr # tldr pages
     dust # disk usage analyzer
     httpie # HTTP client
@@ -62,12 +50,8 @@
     zoxide # fast cd command
     starship # customizable prompt
     ripgrep # search tool
-    phase-cli # secrets manager CLI
-    sqlite-utils # SQLite utilities
     dos2unix # fix carriage return problems
-    wineWowPackages.full # wine packages for running windows applications
-    imagemagick # image library
-    ffmpeg # video library
+    wineWow64Packages.full # wine packages for running windows applications
     brightnessctl # control brightness
     hyprpicker # pick colors from screen
     gammastep # shaders for hyprland
@@ -78,21 +62,25 @@
     unzip # unzip files
     unrar # For unrar
     dialog # show dialogs in terminal
-    freerdp # rdp client
-    gcc # gnu compiler collection
-    cargo # rust package manager and build tool
     wl-clipboard # wayland clipboard manager
-
     ollama # local LLM server
-
-    asciinema # session recorder
-    asciiquarium-transparent # aquarium in terminal
-    cowsay # make a cow say something
-    cmatrix # matrix in terminal
+    sox # audio converter
     fastfetch # system display
 
+    # TUI Apps
+    unstable.opencode # code agent
+    unstable.claude-code # anthropic's code agent
+    unstable.neovim # text editor
+    lazysql # DB management tool
+    lazygit # UI for git
+    lazydocker # UI for docker
+    cmatrix # matrix in terminal
+    cowsay # make a cow say something
+    asciinema # session recorder
+    asciiquarium-transparent # aquarium in terminal
+
     # GUI Apps
-    zotero # reference manager
+    rofi # GUI menu
     vesktop # discord client
     heroic # games launcher
     qbittorrent # torrent client
@@ -111,7 +99,6 @@
     sqlite-web # SQLite web interface
     seahorse # secret manager
     copyq # clipboard history with integrated ui
-    kdePackages.kdeconnect-kde # smartphone connection
     obsidian # note taking app
     bruno # http client
     dbeaver-bin # database UI
@@ -119,22 +106,35 @@
     texliveFull # latex environment
 
     # Important Dependencies
-    xfce.xfconf # Xfce config manager
+    xfconf # Xfce config manager
     inkcut # Plotter communication sw
     glib # core library for gnome and gtk
 
-    nixd # for nvim lsps 
-    python3 # for nvim lsps
-    go # for nvim lsps
-    nodejs_24 # for nvim lsps
-    pnpm # for tooling
-    maven # for tooling
+    # Programming Basics
+    go # golang
+    air # live reload for go
+    delve # debugger for go
 
-    unstable.codex # openai's coding agent
-    unstable.claude-code # anthropic's coding agent
-    sox # audio converter
+    nodejs # typescript, javascript
+    pnpm # efficient package manager for javascript
+
+    temurin-bin-21 # java
+    maven # java projects build automation tool
+
+    python313 # python
+    python313Packages.debugpy # debugger for python
+
+    rustc # rust compiler
+    cargo # rust package manager and build tool
+
+    gcc # gnu compiler collection
+
+    nixd # nix language server 
+    nixfmt # nix formatter
 
   ];
+
+  home.file.".jdks/temurin-25".source = pkgs.temurin-bin-25;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -1,3 +1,4 @@
+
 { pkgs, ... }:
 let
   notificationSound =
@@ -14,7 +15,7 @@ in
     package = pkgs.mako;
     settings = {
       actions = true;
-      anchor = "top-right";
+      anchor = "bottom-right";
       background-color = "#1A1A2E";
       border-color = "#BF9FEE";
       border-radius = 5;
