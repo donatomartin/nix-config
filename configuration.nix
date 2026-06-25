@@ -52,10 +52,24 @@
     LC_TIME = "es_ES.UTF-8";
   };
 
+  documentation = {
+    enable = true;
+    man.enable = true;
+    man.cache.enable = true;
+    man.cache.generateAtRuntime = true;
+    dev.enable = true;
+    nixos.enable = true;
+  };
+
   console.keyMap = "es";
 
   environment.systemPackages = with pkgs; [
+    hyprpaper
     ntfs3g
+    man-pages
+    man-pages-posix
+    linux-manual
+    wikiman
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -111,6 +125,7 @@
   services = {
 
     envfs.enable = true;
+    tailscale.enable = true;
 
     gnome.gnome-keyring.enable = true;
 
