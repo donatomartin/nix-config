@@ -29,6 +29,9 @@
 
   # Disable connecting to the network before the system is up
   systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services."home-manager-donato".serviceConfig = {
+    TimeOutStartSec = "25min";
+  };
 
   # Enable experimental
   nix.settings = {
@@ -111,6 +114,15 @@
       powerManagement.enable = true;
       open = false; # Puedes poner true si quieres usar los drivers abiertos (beta)
       nvidiaSettings = true;
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
 
     bluetooth.enable = true;
