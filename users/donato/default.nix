@@ -16,6 +16,7 @@
     # Services
     ../../modules/home/services/batsignal.nix
     ../../modules/home/services/mako.nix
+    ../../modules/home/services/pueue.nix
 
   ];
 
@@ -33,6 +34,8 @@
     papirus-icon-theme
 
     # CLI Tools
+    just # project commands manager
+    pueue # shell command manager
     git # version control system
     tmux # terminal multiplexor
     file # file type detection
@@ -72,7 +75,9 @@
 
     # TUI Apps
     unstable.opencode # code agent
+    opencode-claude-auth # opencode plugin
     unstable.claude-code # anthropic's code agent
+    unstable.codex # openai's code agent
     unstable.neovim # text editor
     lazysql # DB management tool
     lazygit # UI for git

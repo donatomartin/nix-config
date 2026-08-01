@@ -1,0 +1,3 @@
+{
+  services.pueue.enable = true;
+}
