@@ -5,11 +5,11 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs =
@@ -46,21 +46,19 @@
 
       nixosConfigurations.nixos = lib.nixosSystem {
 
-        specialArgs = { inherit inputs username self ; };
+        specialArgs = { inherit inputs username self; };
 
         modules = [
-          ./configuration.nix
-          {
-            nixpkgs.pkgs = pkgs;
-          }
+          ./hosts/nixos
+          { nixpkgs.pkgs = pkgs; }
           home-manager.nixosModules.home-manager
           {
             # HM wiring
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = { inherit inputs username self; };
+            home-manager.useUserPackages = true;
             home-manager.useGlobalPkgs = true;
-            home-manager.users.${username} = import ./home.nix;
+            home-manager.backupFileExtension = "backup";
+            home-manager.users.${username} = import ./users/donato;
           }
         ];
 

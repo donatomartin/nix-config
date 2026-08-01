@@ -4,18 +4,18 @@
   imports = [
 
     # Desktop Environment
-    ./modules/programs/waybar.nix
-    ./modules/programs/kitty.nix
-    ./modules/programs/cursor.nix
-    ./modules/programs/gtk.nix
+    ../../modules/home/programs/waybar.nix
+    ../../modules/home/programs/kitty.nix
+    ../../modules/home/programs/cursor.nix
+    ../../modules/home/programs/gtk.nix
 
     # Programs
-    ./modules/programs/gh.nix
-    ./modules/programs/ranger.nix
+    ../../modules/home/programs/gh.nix
+    ../../modules/home/programs/ranger.nix
 
     # Services
-    ./modules/services/batsignal.nix
-    ./modules/services/mako.nix
+    ../../modules/home/services/batsignal.nix
+    ../../modules/home/services/mako.nix
 
   ];
 

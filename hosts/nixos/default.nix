@@ -7,8 +7,14 @@
   ...
 }:
 {
-  # Import hardware-configuration
-  imports = [ ./hardware-configuration.nix ];
+
+  # Nixos imports
+  imports = [
+
+    # Import hardware-configuration
+    ./hardware-configuration.nix
+
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -29,10 +35,10 @@
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
   networking.firewall.trustedInterfaces = [ "zt+" ];
-  networking.firewall.allowedUDPPorts = [];
-  networking.firewall.allowedTCPPorts = [];
-  networking.firewall.allowedTCPPortRanges = [];
-  networking.firewall.allowedUDPPortRanges = [];
+  networking.firewall.allowedUDPPorts = [ ];
+  networking.firewall.allowedTCPPorts = [ ];
+  networking.firewall.allowedTCPPortRanges = [ ];
+  networking.firewall.allowedUDPPortRanges = [ ];
 
   # Set your time zone.
   time.timeZone = "Europe/Madrid";
@@ -140,12 +146,6 @@
       drivers = [ pkgs.hplip ];
     };
 
-    udev = {
-      extraRules = ''
-        SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5750", MODE="0660", GROUP="dialout", SYMLINK+="secabo"
-      '';
-    };
-
     tlp = {
       enable = true;
       settings = {
@@ -234,4 +234,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
+
 }
