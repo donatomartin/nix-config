@@ -10,6 +10,9 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
   };
 
   outputs =
@@ -18,6 +21,7 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
+      affinity-nix,
       ...
     }@inputs:
     let
@@ -30,6 +34,7 @@
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
+          affinity-nix.overlays.default
           (final: prev: {
             inherit unstable;
           })

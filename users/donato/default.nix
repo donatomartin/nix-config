@@ -29,6 +29,9 @@
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
 
+    # Icons
+    papirus-icon-theme
+
     # CLI Tools
     git # version control system
     tmux # terminal multiplexor
@@ -80,6 +83,9 @@
     asciiquarium-transparent # aquarium in terminal
 
     # GUI Apps
+    freecad # 3D Modeler
+    affinity-v3 # Graphic Design Tool Suite
+    davinci-resolve # Video Editor 
     rofi # GUI menu
     vesktop # discord client
     heroic # games launcher
@@ -107,7 +113,6 @@
 
     # Important Dependencies
     xfconf # Xfce config manager
-    inkcut # Plotter communication sw
     glib # core library for gnome and gtk
 
     # Programming Basics

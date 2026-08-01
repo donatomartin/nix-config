@@ -4,6 +4,7 @@
 {
   pkgs,
   username,
+  inputs,
   ...
 }:
 {
@@ -13,6 +14,12 @@
 
     # Import hardware-configuration
     ./hardware-configuration.nix
+
+    inputs.nix-flatpak.nixosModules.nix-flatpak
+
+    # Modules
+    ../../modules/nixos/inkcut.nix
+    ../../modules/nixos/flatpak.nix
 
   ];
 
