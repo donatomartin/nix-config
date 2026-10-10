@@ -49,10 +49,12 @@
         cp -r ${pkgs.kdePackages.breeze-grub}/grub/themes/breeze $out
         chmod -R u+w $out
 
-        # Give generation names much more horizontal room.
-        substituteInPlace $out/theme.txt \
-          --replace-fail "left = 20%" "left = 5%" \
-          --replace-fail "width = 60%" "width = 90%"
+        sed -i \
+          -e '/+ boot_menu {/,/}/ s/^[[:space:]]*left[[:space:]]*=.*/  left = 5%/' \
+          -e '/+ boot_menu {/,/}/ s/^[[:space:]]*width[[:space:]]*=.*/  width = 90%/' \
+          -e '/+ boot_menu {/,/}/ s/^\([[:space:]]*item_font[[:space:]]*=[[:space:]]*"[^"]* \)[0-9][0-9]*"/\126"/' \
+          -e '/+ boot_menu {/,/}/ s/^\([[:space:]]*selected_item_font[[:space:]]*=[[:space:]]*"[^"]* \)[0-9][0-9]*"/\126"/' \
+          $out/theme.txt
       '';
     };
 
