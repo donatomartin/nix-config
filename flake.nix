@@ -30,6 +30,8 @@
       gitRev =
         if self ? rev then
           self.rev
+        else if builtins.getEnv "ALLOW_DIRTY" == "1" then
+          self.dirtyRev or "dirty"
         else
           throw ''
             Refusing to build NixOS from a dirty Git tree.
