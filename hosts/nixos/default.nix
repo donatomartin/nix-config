@@ -24,48 +24,56 @@
   ];
 
   # Bootloader
-  boot.loader = {
-    systemd-boot.enable = false;
+  boot = {
+    loader = {
+      systemd-boot.enable = false;
 
-    efi.canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = true;
 
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
+      grub = {
+        enable = true;
+        efiSupport = true;
+        device = "nodev";
 
-      # Keep the graphical menu visible.
-      timeoutStyle = "menu";
+        # Keep the graphical menu visible.
+        timeoutStyle = "menu";
 
-      # Nice high-resolution menu.
-      gfxmodeEfi = "auto";
-      gfxpayloadEfi = "keep";
+        # Nice high-resolution menu.
+        gfxmodeEfi = "auto";
+        gfxpayloadEfi = "keep";
 
-      # Don't clutter the menu with hundreds of old generations.
-      configurationLimit = 20;
+        # Don't clutter the menu with hundreds of old generations.
+        configurationLimit = 20;
 
-      # KDE Breeze GRUB theme.
-      theme = pkgs.runCommand "breeze-grub-wide" { } ''
-        cp -r ${pkgs.kdePackages.breeze-grub}/grub/themes/breeze $out
-        chmod -R u+w $out
+        # KDE Breeze GRUB theme.
+        theme = pkgs.runCommand "breeze-grub-wide" { } ''
+          cp -r ${pkgs.kdePackages.breeze-grub}/grub/themes/breeze $out
+          chmod -R u+w $out
 
-        sed -i \
-          -e '/+ boot_menu {/,/}/ s/^[[:space:]]*left[[:space:]]*=.*/  left = 5%/' \
-          -e '/+ boot_menu {/,/}/ s/^[[:space:]]*width[[:space:]]*=.*/  width = 90%/' \
-          -e '/+ boot_menu {/,/}/ s/^\([[:space:]]*item_font[[:space:]]*=[[:space:]]*"[^"]* \)[0-9][0-9]*"/\126"/' \
-          -e '/+ boot_menu {/,/}/ s/^\([[:space:]]*selected_item_font[[:space:]]*=[[:space:]]*"[^"]* \)[0-9][0-9]*"/\126"/' \
-          $out/theme.txt
-      '';
+          sed -i \
+            -e '/+ boot_menu {/,/}/ s/^[[:space:]]*left[[:space:]]*=.*/  left = 5%/' \
+            -e '/+ boot_menu {/,/}/ s/^[[:space:]]*width[[:space:]]*=.*/  width = 90%/' \
+            -e '/+ boot_menu {/,/}/ s/^\([[:space:]]*item_font[[:space:]]*=[[:space:]]*"[^"]* \)[0-9][0-9]*"/\126"/' \
+            -e '/+ boot_menu {/,/}/ s/^\([[:space:]]*selected_item_font[[:space:]]*=[[:space:]]*"[^"]* \)[0-9][0-9]*"/\126"/' \
+            $out/theme.txt
+        '';
+      };
+
+      # Give you time to select a generation.
+      timeout = 10;
     };
+    plymouth.enable = true;
 
-    # Give you time to select a generation.
-    timeout = 10;
+    # Reduce kernel/systemd noise behind Plymouth
+    consoleLogLevel = 3;
+    initrd.verbose = false;
   };
 
   # Show systemd service status while booting.
   boot.kernelParams = [
-    "systemd.show_status=1"
-    "rd.systemd.show_status=1"
+    "quiet"
+    "rd.udev.log_level=3"
+    "rd.systemd.show_status=auto"
   ];
 
   # Disable connecting to the network before the system is up
