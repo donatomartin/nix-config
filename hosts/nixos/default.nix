@@ -23,40 +23,40 @@
 
   ];
 
-# Bootloader
-boot.loader = {
-  systemd-boot.enable = false;
+  # Bootloader
+  boot.loader = {
+    systemd-boot.enable = false;
 
-  efi.canTouchEfiVariables = true;
+    efi.canTouchEfiVariables = true;
 
-  grub = {
-    enable = true;
-    efiSupport = true;
-    device = "nodev";
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
 
-    # Keep the graphical menu visible.
-    timeoutStyle = "menu";
+      # Keep the graphical menu visible.
+      timeoutStyle = "menu";
 
-    # Nice high-resolution menu.
-    gfxmodeEfi = "auto";
-    gfxpayloadEfi = "keep";
+      # Nice high-resolution menu.
+      gfxmodeEfi = "auto";
+      gfxpayloadEfi = "keep";
 
-    # Don't clutter the menu with hundreds of old generations.
-    configurationLimit = 20;
+      # Don't clutter the menu with hundreds of old generations.
+      configurationLimit = 20;
 
-    # KDE Breeze GRUB theme.
-    theme = "${pkgs.kdePackages.breeze-grub}/grub/themes/breeze";
+      # KDE Breeze GRUB theme.
+      theme = "${pkgs.kdePackages.breeze-grub}/grub/themes/breeze";
+    };
+
+    # Give you time to select a generation.
+    timeout = 10;
   };
 
-  # Give you time to select a generation.
-  timeout = 10;
-};
-
-# Show systemd service status while booting.
-boot.kernelParams = [
-  "systemd.show_status=1"
-  "rd.systemd.show_status=1"
-];
+  # Show systemd service status while booting.
+  boot.kernelParams = [
+    "systemd.show_status=1"
+    "rd.systemd.show_status=1"
+  ];
 
   # Disable connecting to the network before the system is up
   systemd.services.NetworkManager-wait-online.enable = false;
