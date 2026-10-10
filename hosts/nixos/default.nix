@@ -151,6 +151,43 @@
 
     envfs.enable = true;
     tailscale.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+
+      extraConfig.pipewire."90-echo-cancel" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-echo-cancel";
+
+            args = {
+              "library.name" = "aec/libspa-aec-webrtc";
+
+              # Important: use whatever is playing through the real
+              # default output as the AEC reference signal.
+              "monitor.mode" = true;
+
+              "audio.rate" = 48000;
+
+              "capture.props" = {
+                "node.name" = "echo_cancel.capture";
+                "node.passive" = true;
+              };
+
+              "source.props" = {
+                "node.name" = "echo_cancel.source";
+                "node.description" = "Microphone (Echo Cancelled)";
+
+                # Make applications prefer this source over the raw mic.
+                "priority.session" = 2000;
+                "priority.driver" = 2000;
+              };
+            };
+          }
+        ];
+      };
+    };
 
     gnome.gnome-keyring.enable = true;
 
