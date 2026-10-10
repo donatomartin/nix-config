@@ -88,8 +88,9 @@
     asciiquarium-transparent # aquarium in terminal
 
     # GUI Apps
+    nwg-displays
     freecad # 3D Modeler
-    affinity-v3 # Graphic Design Tool Suite
+    inkscape # Vector graphics editor
     davinci-resolve # Video Editor 
     rofi # GUI menu
     vesktop # discord client
