@@ -286,6 +286,11 @@
       package = pkgs.kdePackages.sddm;
       wayland.enable = true;
       theme = "sddm-astronaut-theme";
+      extraPackages = with pkgs; [
+        kdePackages.qtmultimedia
+        kdePackages.qtsvg
+        kdePackages.qtvirtualkeyboard
+      ];
     };
 
     xserver = {
