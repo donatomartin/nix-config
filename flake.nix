@@ -25,6 +25,20 @@
     let
       system = "x86_64-linux";
       username = "donato";
+
+      # Refuse to evaluate this system from a dirty Git tree.
+      gitRev =
+        if self ? rev then
+          self.rev
+        else
+          throw ''
+            Refusing to build NixOS from a dirty Git tree.
+
+            Commit or stash your changes first.
+          '';
+
+      shortGitRev = builtins.substring 0 8 gitRev;
+
       unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
@@ -52,11 +66,22 @@
 
         modules = [
           ./hosts/nixos
-          { nixpkgs.pkgs = pkgs; }
+
+          ({ config, ... }: {
+            nixpkgs.pkgs = pkgs;
+
+            system.configurationRevision = gitRev;
+
+            system.nixos.label = "${config.system.nixos.release}-git-${shortGitRev}";
+          })
+
           home-manager.nixosModules.home-manager
+
           {
-            # HM wiring
-            home-manager.extraSpecialArgs = { inherit inputs username self; };
+            home-manager.extraSpecialArgs = {
+              inherit inputs username self;
+            };
+
             home-manager.useUserPackages = true;
             home-manager.useGlobalPkgs = true;
             home-manager.backupFileExtension = "backup";
