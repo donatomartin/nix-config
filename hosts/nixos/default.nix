@@ -45,7 +45,15 @@
       configurationLimit = 20;
 
       # KDE Breeze GRUB theme.
-      theme = "${pkgs.kdePackages.breeze-grub}/grub/themes/breeze";
+      theme = pkgs.runCommand "breeze-grub-wide" { } ''
+        cp -r ${pkgs.kdePackages.breeze-grub}/grub/themes/breeze $out
+        chmod -R u+w $out
+
+        # Give generation names much more horizontal room.
+        substituteInPlace $out/theme.txt \
+          --replace-fail "left = 20%" "left = 5%" \
+          --replace-fail "width = 60%" "width = 90%"
+      '';
     };
 
     # Give you time to select a generation.
