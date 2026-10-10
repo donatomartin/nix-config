@@ -23,9 +23,40 @@
 
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+# Bootloader
+boot.loader = {
+  systemd-boot.enable = false;
+
+  efi.canTouchEfiVariables = true;
+
+  grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+
+    # Keep the graphical menu visible.
+    timeoutStyle = "menu";
+
+    # Nice high-resolution menu.
+    gfxmodeEfi = "auto";
+    gfxpayloadEfi = "keep";
+
+    # Don't clutter the menu with hundreds of old generations.
+    configurationLimit = 20;
+
+    # KDE Breeze GRUB theme.
+    theme = "${pkgs.kdePackages.breeze-grub}/grub/themes/breeze";
+  };
+
+  # Give you time to select a generation.
+  timeout = 10;
+};
+
+# Show systemd service status while booting.
+boot.kernelParams = [
+  "systemd.show_status=1"
+  "rd.systemd.show_status=1"
+];
 
   # Disable connecting to the network before the system is up
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -133,6 +164,7 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
+      withUWSM = true;
     };
     nix-ld.enable = true;
     steam.enable = true;
@@ -230,7 +262,10 @@
       criticalPowerAction = "PowerOff";
     };
 
-    displayManager.ly.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
 
     xserver = {
       enable = true;
