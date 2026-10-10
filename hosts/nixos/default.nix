@@ -281,10 +281,19 @@
 
       theme = "sddm-astronaut-theme";
 
+      settings = {
+        Theme = {
+          CursorTheme = "Adwaita";
+          CursorSize = 24;
+        };
+      };
+
       extraPackages = with pkgs; [
         kdePackages.qtmultimedia
         kdePackages.qtsvg
         kdePackages.qtvirtualkeyboard
+
+        adwaita-icon-theme
       ];
     };
 
