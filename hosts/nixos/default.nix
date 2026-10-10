@@ -150,7 +150,6 @@
   services = {
 
     envfs.enable = true;
-    tailscale.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
