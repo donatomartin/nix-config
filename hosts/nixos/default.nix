@@ -274,9 +274,17 @@
 
     displayManager.sddm = {
       enable = true;
+
+      package = pkgs.kdePackages.sddm;
+
       wayland.enable = true;
+
       theme = "sddm-astronaut-theme";
-      extraPackages = [ pkgs.sddm-astronaut ];
+
+      extraPackages = with pkgs; [
+        sddm-astronaut
+        kdePackages.qtmultimedia
+      ];
     };
 
     xserver = {
