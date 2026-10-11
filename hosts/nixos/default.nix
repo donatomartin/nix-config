@@ -122,6 +122,7 @@
   console.keyMap = "es";
 
   environment.systemPackages = with pkgs; [
+    sdl3.lib
     hyprpaper
     ntfs3g
     man-pages
