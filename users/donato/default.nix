@@ -88,7 +88,8 @@
     asciiquarium-transparent # aquarium in terminal
 
     # GUI Apps
-    nwg-displays
+    bruno # API Graphic Client
+    nwg-displays # Hyprland display manager
     freecad # 3D Modeler
     inkscape # Vector graphics editor
     davinci-resolve # Video Editor 
