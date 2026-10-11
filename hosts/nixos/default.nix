@@ -36,7 +36,7 @@
         device = "nodev";
 
         splashImage = ../../assets/splash-screen/catppucin.png;
-        splashMode = "normal";
+        splashMode = "stretch";
 
         # Keep the graphical menu visible.
         timeoutStyle = "menu";
