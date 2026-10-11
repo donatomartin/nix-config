@@ -35,6 +35,9 @@
         efiSupport = true;
         device = "nodev";
 
+        splashImage = ../../assets/splash-screen/catppucin.png;
+        splashMode = "normal";
+
         # Keep the graphical menu visible.
         timeoutStyle = "menu";
 
