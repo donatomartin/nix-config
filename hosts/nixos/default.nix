@@ -129,7 +129,6 @@
   console.keyMap = "es";
 
   environment.systemPackages = with pkgs; [
-    sddm-astronaut
     hyprpaper
     ntfs3g
     man-pages
@@ -183,7 +182,6 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
-      withUWSM = true;
     };
     nix-ld.enable = true;
     steam.enable = true;
@@ -281,17 +279,7 @@
       criticalPowerAction = "PowerOff";
     };
 
-    displayManager.sddm = {
-      enable = true;
-      package = pkgs.kdePackages.sddm;
-      wayland.enable = true;
-      theme = "sddm-astronaut-theme";
-      extraPackages = with pkgs; [
-        kdePackages.qtmultimedia
-        kdePackages.qtsvg
-        kdePackages.qtvirtualkeyboard
-      ];
-    };
+    displayManager.ly.enable = true;
 
     xserver = {
       enable = true;
