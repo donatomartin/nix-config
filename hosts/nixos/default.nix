@@ -74,11 +74,6 @@
     "quiet"
     "rd.udev.log_level=3"
     "rd.systemd.show_status=auto"
-    "video=eDP-1:e"
-    "video=DP-1:e"
-    "video=DP-2:e"
-    "video=HDMI-A-1:e"
-    "video=HDMI-A-2:e"
   ];
 
   # Disable connecting to the network before the system is up
