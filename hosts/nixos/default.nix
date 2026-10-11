@@ -46,7 +46,7 @@
         configurationLimit = 20;
 
         # KDE Breeze GRUB theme.
-        theme = pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "nixos"; };
+        theme = ../../fallout-grub-theme;
       };
 
       # Give you time to select a generation.
