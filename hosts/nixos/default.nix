@@ -46,22 +46,17 @@
         configurationLimit = 20;
 
         # KDE Breeze GRUB theme.
-        theme = pkgs.runCommand "breeze-grub-wide" { } ''
-          cp -r ${pkgs.kdePackages.breeze-grub}/grub/themes/breeze $out
-          chmod -R u+w $out
-
-          sed -i \
-            -e '/+ boot_menu {/,/}/ s/^[[:space:]]*left[[:space:]]*=.*/  left = 5%/' \
-            -e '/+ boot_menu {/,/}/ s/^[[:space:]]*width[[:space:]]*=.*/  width = 90%/' \
-            -e '/+ boot_menu {/,/}/ s/^\([[:space:]]*item_font[[:space:]]*=[[:space:]]*"[^"]* \)[0-9][0-9]*"/\126"/' \
-            -e '/+ boot_menu {/,/}/ s/^\([[:space:]]*selected_item_font[[:space:]]*=[[:space:]]*"[^"]* \)[0-9][0-9]*"/\126"/' \
-            $out/theme.txt
-        '';
+        theme = pkgs.sleek-grub-theme.override { withStyle = "dark"; withBanner = "nixos"; };
       };
 
       # Give you time to select a generation.
       timeout = 3;
     };
+    plymouth.enable = true;
+
+    # Reduce kernel/systemd noise behind Plymouth
+    consoleLogLevel = 3;
+    initrd.verbose = false;
   };
 
   # Show systemd service status while booting.
