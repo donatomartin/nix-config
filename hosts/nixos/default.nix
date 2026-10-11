@@ -62,11 +62,6 @@
       # Give you time to select a generation.
       timeout = 3;
     };
-    plymouth.enable = true;
-
-    # Reduce kernel/systemd noise behind Plymouth
-    consoleLogLevel = 3;
-    initrd.verbose = false;
   };
 
   # Show systemd service status while booting.
