@@ -60,7 +60,7 @@
       };
 
       # Give you time to select a generation.
-      timeout = 10;
+      timeout = 3;
     };
     plymouth.enable = true;
 
