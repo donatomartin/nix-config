@@ -46,7 +46,7 @@
         configurationLimit = 20;
 
         # KDE Breeze GRUB theme.
-        theme = ../../fallout-grub-theme;
+        theme = ../../assets/fallout-grub-theme;
       };
 
       # Give you time to select a generation.
