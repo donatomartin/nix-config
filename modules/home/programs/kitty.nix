@@ -15,8 +15,8 @@
       "ctrl+plus" = "change_font_size all +2.0";
       "ctrl+minus" = "change_font_size all -2.0";
       "shift+enter" = "send_text all \\x1b[13;2u";
-      "ctrl+u" = "scroll_page_up";
-      "ctrl+d" = "scroll_page_down";
+      "ctrl+shift+u" = "scroll_page_up";
+      "ctrl+shift+d" = "scroll_page_down";
     };
   };
 }
