@@ -110,15 +110,6 @@
     LC_TIME = "es_ES.UTF-8";
   };
 
-  documentation = {
-    enable = true;
-    man.enable = true;
-    man.cache.enable = true;
-    man.cache.generateAtRuntime = true;
-    dev.enable = true;
-    nixos.enable = true;
-  };
-
   console.keyMap = "es";
 
   environment.systemPackages = with pkgs; [
