@@ -88,6 +88,7 @@
     asciiquarium-transparent # aquarium in terminal
 
     # GUI Apps
+    mission-center # GUI ctrl center
     obsidian # Note taking app
     bruno # API Graphic Client
     nwg-displays # Hyprland display manager
@@ -95,7 +96,7 @@
     inkscape # Vector graphics editor
     davinci-resolve # Video Editor 
     rofi # GUI menu
-    vesktop # discord client
+    discord # discord client
     heroic # games launcher
     qbittorrent # torrent client
     file-roller # archive manager
@@ -132,7 +133,6 @@
     pnpm # efficient package manager for javascript
 
     temurin-bin-21 # java
-    temurin-bin-25 # more java
     maven # java projects build automation tool
 
     python313 # python
@@ -147,6 +147,8 @@
     nixfmt # nix formatter
 
   ];
+
+  home.file.".jdks/temurin-25".source = pkgs.temurin-bin-25;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

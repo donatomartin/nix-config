@@ -27,17 +27,7 @@
       username = "donato";
 
       # Refuse to evaluate this system from a dirty Git tree.
-      gitRev =
-        if self ? rev then
-          self.rev
-        else if builtins.getEnv "ALLOW_DIRTY" == "1" then
-          self.dirtyRev or "dirty"
-        else
-          throw ''
-            Refusing to build NixOS from a dirty Git tree.
-
-            Commit or stash your changes first.
-          '';
+      gitRev = if self ? rev then self.rev else self.dirtyRev or "dirty";
 
       shortGitRev = builtins.substring 0 8 gitRev;
 

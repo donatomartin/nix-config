@@ -118,7 +118,6 @@
     ntfs3g
     man-pages
     man-pages-posix
-    linux-manual
     wikiman
   ];
 
