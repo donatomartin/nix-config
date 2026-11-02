@@ -1,6 +1,8 @@
-{ pkgs, username, ... }: {
+{ pkgs, ... }: {
 
-  # Home Manager imports
+  home.username = "donato";
+  home.homeDirectory = "/home/donato";
+
   imports = [
 
     # Desktop Environment
@@ -18,10 +20,14 @@
     ../../modules/home/services/mako.nix
     ../../modules/home/services/pueue.nix
 
+    # Other
+    (import ../../modules/home/development/nvimdeps.nix {
+      inherit pkgs;
+      javahome = pkgs.temurin-bin-25;
+      jdtlshome = pkgs.temurin-bin-25;
+    })
   ];
 
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
 
   home.packages = with pkgs; [
 
@@ -132,7 +138,6 @@
     nodejs # typescript, javascript
     pnpm # efficient package manager for javascript
 
-    temurin-bin-21 # java
     maven # java projects build automation tool
 
     python313 # python
@@ -143,12 +148,7 @@
 
     gcc # gnu compiler collection
 
-    nixd # nix language server 
-    nixfmt # nix formatter
-
   ];
-
-  home.file.".jdks/temurin-25".source = pkgs.temurin-bin-25;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

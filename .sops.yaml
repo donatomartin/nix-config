@@ -1,0 +1,20 @@
+keys:
+  - &personal age1ppzsj9jx4t3g788erkytrl80th035ng45z3rmkdq04wz6xw2dvsseyuyfl
+  - &work age1vhyz0cysxpj94ku3vnzravc9vaqpk8qetxfnlrv8nd2t2hvruvlq4ltsuq
+
+creation_rules:
+  - path_regex: secrets/personal\.ya?ml$
+    key_groups:
+      - age:
+          - *personal
+
+  - path_regex: secrets/work\.ya?ml$
+    key_groups:
+      - age:
+          - *work
+
+  - path_regex: secrets/shared\.ya?ml$
+    key_groups:
+      - age:
+          - *personal
+          - *work

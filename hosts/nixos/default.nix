@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
-  username,
   inputs,
   ...
 }:
@@ -122,9 +121,9 @@
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${username} = {
+  users.users.donato = {
     isNormalUser = true;
-    description = username;
+    description = "donato";
     extraGroups = [
       "networkmanager"
       "wheel"
