@@ -34,6 +34,11 @@ in
     fzf # fuzzy finder
     sops # secret operations
     age # dev encryption
+    python3 # python 3
+    xdg-utils # xdg-utils
+    bruno-cli # bruno cli
+    zip # zip
+    unzip # unzip
   ];
 
   programs.zsh.enable = true;
