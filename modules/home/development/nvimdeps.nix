@@ -8,7 +8,7 @@ let
   finalLsJavaHome = if (lsjavahome != null) then lsjavahome else pkgs.temurin-bin-21;
   lombok = pkgs.lombok;
   jdtls = pkgs.jdt-language-server;
-  java-debug = (import ./java-debug.nix) pkgs;
+  java-debug = pkgs.vscode-extensions.vscjava.vscode-java-debug;
 in
 {
 

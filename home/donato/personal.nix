@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, lib, config, inputs, ... }:
+let
+  profileInput = "personal";
+in
+{
 
   home.username = "donato";
   home.homeDirectory = "/home/donato";
@@ -21,10 +25,20 @@
     ../../modules/home/services/pueue.nix
 
     # Other
+    inputs.sops-nix.homeManagerModules.sops
+    (import ../../modules/home/development/secrets.nix {
+      inherit profileInput config lib;
+    })
     (import ../../modules/home/development/nvimdeps.nix {
       inherit pkgs;
-      javahome = pkgs.temurin-bin-25;
-      jdtlshome = pkgs.temurin-bin-25;
+      javahome = pkgs.temurin-bin-17;
+      lsjavahome = pkgs.temurin-bin-25;
+    })
+    (import ../../modules/home/programs/git.nix {
+      inherit profileInput config lib;
+    })
+    (import ../../modules/home/programs/zsh.nix {
+      inherit pkgs;
     })
   ];
 
@@ -40,6 +54,9 @@
     papirus-icon-theme
 
     # CLI Tools
+    bruno-cli # API web client
+    sops # secrets manager
+    age # encryption
     just # project commands manager
     pueue # shell command manager
     git # version control system
@@ -94,6 +111,9 @@
     asciiquarium-transparent # aquarium in terminal
 
     # GUI Apps
+    thunderbird # email client
+    external-editor-revived # host for thunderbird extension
+    spotify # music
     mission-center # GUI ctrl center
     obsidian # Note taking app
     bruno # API Graphic Client
@@ -115,6 +135,7 @@
     vscode # IDE
     brave # browser 1
     firefox # browser 2
+    tor-browser  # tor browser
     pavucontrol # audio GUI manager
     neovide # neovim frontend
     sqlite-web # SQLite web interface

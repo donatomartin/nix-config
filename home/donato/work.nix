@@ -13,8 +13,12 @@ in
   home.homeDirectory = "/home/donato";
 
   imports = [
-    inputs.sops-nix.homeManagerModules.sops
+
+    # Services
     ../../modules/home/services/pueue.nix
+
+    # Other
+    inputs.sops-nix.homeManagerModules.sops
     (import ../../modules/home/development/secrets.nix {
       inherit profileInput config lib;
     })
@@ -25,6 +29,12 @@ in
     })
     (import ../../modules/home/programs/git.nix {
       inherit profileInput config lib;
+    })
+    (import ../../modules/home/programs/zsh.nix {
+      inherit pkgs;
+    })
+    (import ../../modules/home/programs/zsh.nix {
+      inherit pkgs;
     })
   ];
 
@@ -40,11 +50,6 @@ in
     zip # zip
     unzip # unzip
   ];
-
-  programs.zsh.enable = true;
-  programs.zsh.initContent = pkgs.lib.mkOrder 1200 ''
-    source ~/.config/zsh/init.zsh
-  '';
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
