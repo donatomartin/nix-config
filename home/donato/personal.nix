@@ -142,7 +142,6 @@ in
     seahorse # secret manager
     copyq # clipboard history with integrated ui
     obsidian # note taking app
-    bruno # http client
     dbeaver-bin # database UI
     texpresso # latex UI
     texliveFull # latex environment
