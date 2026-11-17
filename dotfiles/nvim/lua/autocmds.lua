@@ -14,16 +14,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- Load LSP-related mappings when a file buffer is created, rather than when
--- its language server attaches.
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+-- Load LSP-related mappings when entering a buffer, rather than when its
+-- language server attaches. This includes non-file buffers such as the one
+-- opened by vim.pack.update().
+vim.api.nvim_create_autocmd("BufEnter", {
   group = vim.api.nvim_create_augroup("LspMappings", { clear = true }),
   pattern = "*",
   desc = "load LSP mappings",
   callback = function(event)
-    if vim.bo[event.buf].buftype == "" then
-      require("lang").setupMappings(event.buf)
-    end
+    require("lang").setupMappings(event.buf)
   end,
 })
 
