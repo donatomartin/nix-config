@@ -8,10 +8,6 @@
       "rev": "a791fe5b4433ac43a4dad921e94b7b5f88751048",
       "src": "https://github.com/RyanMillerC/better-vim-tmux-resizer"
     },
-    "bruno.nvim": {
-      "rev": "5e6675d0a1efa5d9e71e890e5a03af54aecddcd5",
-      "src": "https://github.com/SugarHashira/bruno.nvim"
-    },
     "cmp-buffer": {
       "rev": "b74fab3656eea9de20a9b8116afa3cfc4ec09657",
       "src": "https://github.com/hrsh7th/cmp-buffer"
