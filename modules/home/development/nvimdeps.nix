@@ -2,6 +2,7 @@
   pkgs,
   javahome ? null,
   lsjavahome ? null,
+  ...
 }:
 let
   finalJavaHome = if (javahome != null) then javahome else pkgs.temurin-bin-21;
