@@ -2,6 +2,7 @@
   config,
   lib,
   profileInput ? null,
+  ...
 }:
 {
   sops.templates."git-identity.conf".content = ''
