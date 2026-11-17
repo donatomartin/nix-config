@@ -120,7 +120,6 @@ in
     inkscape # Vector graphics editor
     davinci-resolve # Video Editor 
     rofi # GUI menu
-    discord # discord client
     heroic # games launcher
     qbittorrent # torrent client
     file-roller # archive manager
