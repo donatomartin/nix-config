@@ -29,7 +29,7 @@ function M.getDeclaredMasonPackages()
   return processMapByType("package")
 end
 
-function M.on_attach(_, bufnr)
+function M.setupMappings(bufnr)
   require("utils").enableMappings({
     { "<C-s>",      vim.lsp.buf.signature_help,                         buffer = bufnr, mode = "n" },
     { "K",          vim.lsp.buf.hover,                                  buffer = bufnr, mode = "n" },
@@ -84,7 +84,7 @@ function M.on_attach(_, bufnr)
 end
 
 function M.start()
-  require("lang.lspconfigs").config(M.on_attach)
+  require("lang.lspconfigs").config()
   vim.lsp.enable(M.getCustomLspConfigs())
 end
 

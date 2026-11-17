@@ -14,6 +14,19 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+-- Load LSP-related mappings when a file buffer is created, rather than when
+-- its language server attaches.
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("LspMappings", { clear = true }),
+  pattern = "*",
+  desc = "load LSP mappings",
+  callback = function(event)
+    if vim.bo[event.buf].buftype == "" then
+      require("lang").setupMappings(event.buf)
+    end
+  end,
+})
+
 -- Create missing directories for real file buffers only
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = vim.api.nvim_create_augroup("AutoCreateDirs", { clear = true }),

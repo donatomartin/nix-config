@@ -1,9 +1,8 @@
 local M = {}
 
-function M.config(on_attach)
+function M.config()
   vim.lsp.config("*", {
     root_markers = { ".git" },
-    on_attach = on_attach,
   })
 
   require("lang.lspconfigs.lua")
