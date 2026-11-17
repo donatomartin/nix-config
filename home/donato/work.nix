@@ -1,7 +1,5 @@
 {
   pkgs,
-  lib,
-  config,
   inputs,
   ...
 }:
@@ -9,33 +7,28 @@ let
   profileInput = "work";
 in
 {
+  _module.args = {
+    inherit profileInput;
+    javahome = pkgs.temurin-bin-17;
+    lsjavahome = pkgs.temurin-bin-25;
+  };
+
   home.username = "donato";
   home.homeDirectory = "/home/donato";
 
   imports = [
+
+    ../../modules/home/dotfiles.nix
 
     # Services
     ../../modules/home/services/pueue.nix
 
     # Other
     inputs.sops-nix.homeManagerModules.sops
-    (import ../../modules/home/development/secrets.nix {
-      inherit profileInput config lib;
-    })
-    (import ../../modules/home/development/nvimdeps.nix {
-      inherit pkgs;
-      javahome = pkgs.temurin-bin-17;
-      lsjavahome = pkgs.temurin-bin-25;
-    })
-    (import ../../modules/home/programs/git.nix {
-      inherit profileInput config lib;
-    })
-    (import ../../modules/home/programs/zsh.nix {
-      inherit pkgs;
-    })
-    (import ../../modules/home/programs/zsh.nix {
-      inherit pkgs;
-    })
+    ../../modules/home/development/secrets.nix
+    ../../modules/home/development/nvimdeps.nix
+    ../../modules/home/programs/git.nix
+    ../../modules/home/programs/zsh.nix
   ];
 
   home.packages = with pkgs; [
