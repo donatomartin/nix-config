@@ -22,6 +22,10 @@
 
   ];
 
+  # ╭─────────────────────────────────────────────────────────╮
+  # │ Machine
+  # ╰─────────────────────────────────────────────────────────╯
+
   documentation.man.enable = true;
   documentation.man.generateCaches = true;
 
@@ -64,13 +68,6 @@
     initrd.verbose = false;
   };
 
-  # Show systemd service status while booting.
-  boot.kernelParams = [
-    "quiet"
-    "rd.udev.log_level=3"
-    "rd.systemd.show_status=auto"
-  ];
-
   # Disable connecting to the network before the system is up
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services."home-manager-donato".serviceConfig = {
@@ -95,6 +92,7 @@
   networking.firewall.interfaces.raspi.allowedTCPPorts = [
     8080
     49374
+    22
   ];
 
   # Set your time zone.
@@ -117,14 +115,6 @@
 
   console.keyMap = "es";
 
-  environment.systemPackages = with pkgs; [
-    sdl3.lib
-    hyprpaper
-    ntfs3g
-    man-pages
-    man-pages-posix
-  ];
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.donato = {
     isNormalUser = true;
@@ -142,166 +132,161 @@
     shell = pkgs.zsh;
   };
 
-  # Configure Hardware
-  hardware = {
-    graphics.enable = true;
+  # ╭─────────────────────────────────────────────────────────╮
+  # │ Programs
+  # ╰─────────────────────────────────────────────────────────╯
 
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = true;
-      open = false; # Puedes poner true si quieres usar los drivers abiertos (beta)
-      nvidiaSettings = true;
-      prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
-
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-    };
-
-    bluetooth.enable = true;
-  };
+  environment.systemPackages = with pkgs; [
+    sdl3.lib
+    hyprpaper
+    ntfs3g
+    man-pages
+    man-pages-posix
+  ];
 
   programs = {
     zsh.enable = true;
     nix-ld.enable = true;
     steam.enable = true;
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
-    thunar = {
-      enable = true;
-      plugins = [ pkgs.thunar-archive-plugin ];
-    };
-    wireshark = {
-      enable = true;
-      package = pkgs.wireshark;
-      dumpcap.enable = true;
-    };
   };
 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  programs.thunar = {
+    enable = true;
+    plugins = [ pkgs.thunar-archive-plugin ];
+  };
+
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+    dumpcap.enable = true;
+  };
+
+  # ╭─────────────────────────────────────────────────────────╮
+  # │ Services
+  # ╰─────────────────────────────────────────────────────────╯
+
   services = {
-
-    envfs.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      pulse.enable = true;
-
-      extraConfig.pipewire."90-echo-cancel" = {
-        "context.modules" = [
-          {
-            name = "libpipewire-module-echo-cancel";
-
-            args = {
-              "library.name" = "aec/libspa-aec-webrtc";
-
-              # Important: use whatever is playing through the real
-              # default output as the AEC reference signal.
-              "monitor.mode" = true;
-
-              "audio.rate" = 48000;
-
-              "capture.props" = {
-                "node.name" = "echo_cancel.capture";
-                "node.passive" = true;
-              };
-
-              "source.props" = {
-                "node.name" = "echo_cancel.source";
-                "node.description" = "Microphone (Echo Cancelled)";
-
-                # Make applications prefer this source over the raw mic.
-                "priority.session" = 2000;
-                "priority.driver" = 2000;
-              };
-            };
-          }
-        ];
-      };
-    };
-
     gnome.gnome-keyring.enable = true;
-
     blueman.enable = true;
-
     udisks2.enable = true;
     gvfs.enable = true;
     tumbler.enable = true;
-
-    printing = {
-      enable = true;
-      drivers = [ pkgs.hplip ];
-    };
-
-    tlp = {
-      enable = true;
-      settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-
-        PLATFORM_PROFILE_ON_AC = "performance";
-        PLATFORM_PROFILE_ON_BAT = "quiet";
-
-        CPU_BOOST_ON_AC = 1;
-        CPU_BOOST_ON_BAT = 0;
-
-        CPU_HWP_DYN_BOOST_ON_AC = 1;
-        CPU_HWP_DYN_BOOST_ON_BAT = 0;
-      };
-    };
-
-    upower = {
-      enable = true;
-      usePercentageForPolicy = true;
-      percentageLow = 20;
-      percentageCritical = 10;
-      percentageAction = 7;
-      criticalPowerAction = "PowerOff";
-    };
-
+    envfs.enable = true;
     displayManager.ly.enable = true;
+  };
 
-    xserver = {
-      enable = true;
-      videoDrivers = [
-        "modesetting"
-        "nvidia"
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+
+    extraConfig.pipewire."90-echo-cancel" = {
+      "context.modules" = [
+        {
+          name = "libpipewire-module-echo-cancel";
+
+          args = {
+            "library.name" = "aec/libspa-aec-webrtc";
+
+            # Important: use whatever is playing through the real
+            # default output as the AEC reference signal.
+            "monitor.mode" = true;
+
+            "audio.rate" = 48000;
+
+            "capture.props" = {
+              "node.name" = "echo_cancel.capture";
+              "node.passive" = true;
+            };
+
+            "source.props" = {
+              "node.name" = "echo_cancel.source";
+              "node.description" = "Microphone (Echo Cancelled)";
+
+              # Make applications prefer this source over the raw mic.
+              "priority.session" = 2000;
+              "priority.driver" = 2000;
+            };
+          };
+        }
       ];
     };
+  };
 
-    avahi = {
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplip ];
+  };
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+      PLATFORM_PROFILE_ON_AC = "performance";
+      PLATFORM_PROFILE_ON_BAT = "quiet";
+
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+
+      CPU_HWP_DYN_BOOST_ON_AC = 1;
+      CPU_HWP_DYN_BOOST_ON_BAT = 0;
+    };
+  };
+
+  services.upower = {
+    enable = true;
+    usePercentageForPolicy = true;
+    percentageLow = 20;
+    percentageCritical = 10;
+    percentageAction = 7;
+    criticalPowerAction = "PowerOff";
+  };
+
+  services.xserver = {
+    enable = true;
+    videoDrivers = [
+      "modesetting"
+      "nvidia"
+    ];
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  # Map CapsLock to Escape or Ctrl when chording
+  services.interception-tools =
+    let
+      itools = pkgs.interception-tools;
+      itools-caps = pkgs.interception-tools-plugins.caps2esc;
+    in
+    {
       enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
+      plugins = [ itools-caps ];
+      # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
+      udevmonConfig = pkgs.lib.mkDefault ''
+        - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
+          DEVICE:
+            EVENTS:
+              EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+      '';
     };
 
-    # Map CapsLock to Escape or Ctrl when chording
-    interception-tools =
-      let
-        itools = pkgs.interception-tools;
-        itools-caps = pkgs.interception-tools-plugins.caps2esc;
-      in
-      {
-        enable = true;
-        plugins = [ itools-caps ];
-        # requires explicit paths: https://github.com/NixOS/nixpkgs/issues/126681
-        udevmonConfig = pkgs.lib.mkDefault ''
-          - JOB: "${itools}/bin/intercept -g $DEVNODE | ${itools-caps}/bin/caps2esc -m 1 | ${itools}/bin/uinput -d $DEVNODE"
-            DEVICE:
-              EVENTS:
-                EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-        '';
-      };
-
-  };
+  # ╭─────────────────────────────────────────────────────────╮
+  # │ Other
+  # ╰─────────────────────────────────────────────────────────╯
 
   virtualisation = {
     docker.enable = true;
@@ -312,12 +297,14 @@
     # };
   };
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-hyprland
-  ];
-  xdg.portal.config.common.default = "gtk";
+  xdg.portal = {
+    enable = true;
+    config.common.default = "gtk";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
