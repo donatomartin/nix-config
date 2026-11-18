@@ -177,20 +177,24 @@ hl.bind("XF86Calculator", hl.dsp.exec_cmd("libreoffice --calc"))
 
 local multiplier = 40
 local directions = {
-  left = { key = "h", coords = { x = -multiplier, y = 0, relative = true } },
-  down = { key = "j", coords = { x = 0, y = multiplier, relative = true } },
-  up = { key = "k", coords = { x = 0, y = -multiplier, relative = true } },
-  right = { key = "l", coords = { x = multiplier, y = 0, relative = true }
-  }
+  { direction = "left",  key = "h", coords = { x = -multiplier, y = 0, relative = true } },
+  { direction = "down",  key = "j", coords = { x = 0, y = multiplier, relative = true } },
+  { direction = "up",   key = "k", coords = { x = 0, y = -multiplier, relative = true } },
+  { direction = "right", key = "l", coords = { x = multiplier, y = 0, relative = true } },
 }
 
 -- Atajos de Tile
-for index, value in ipairs(directions) do
-  hl.bind(mainMod .. " + " .. value.key, hl.dsp.focus({ direction = index }))
-  hl.bind(mainMod .. " + SHIFT + " .. value.key, hl.dsp.window.move({ direction = index }))
-  hl.bind(mainMod .. " + CTRL + " .. value.key, hl.dsp.window.swap({ direction = index }))
-  hl.bind(mainMod .. " + ALT + " .. value.key, hl.dsp.window.resize(value.coords), { repeating = true })
-  hl.bind(mainMod .. " + ALT + SHIFT + " .. value.key, hl.dsp.window.move(value.coords), { repeating = true })
+for _, value in ipairs(directions) do
+  hl.bind(mainMod .. " + " .. value.key,
+    hl.dsp.focus({ direction = value.direction }))
+  hl.bind(mainMod .. " + SHIFT + " .. value.key,
+    hl.dsp.window.move({ direction = value.direction }))
+  hl.bind(mainMod .. " + CTRL + " .. value.key,
+    hl.dsp.window.swap({ direction = value.direction }))
+  hl.bind(mainMod .. " + ALT + " .. value.key,
+    hl.dsp.window.resize(value.coords), { repeating = true })
+  hl.bind(mainMod .. " + ALT + SHIFT + " .. value.key,
+    hl.dsp.window.move(value.coords), { repeating = true })
 end
 
 hl.bind(mainMod .. " + Tab", hl.dsp.window.cycle_next({ bring_active_to_top = true }))
