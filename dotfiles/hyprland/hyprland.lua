@@ -159,6 +159,30 @@ hl.window_rule({
   size = { 800, 450 }
 })
 
+local function should_close_on_blur(window)
+  if not window then return false end
+
+  local class = (window.class or ""):lower()
+
+  return class:find("pavucontrol", 1, true)
+      or class:find("blueman-manager", 1, true)
+      or class:find("network.manager", 1, true)
+end
+
+local previous = hl.get_active_window()
+
+hl.on("window.active", function(current)
+  if previous
+      and (not current or current.address ~= previous.address)
+      and previous.mapped
+      and should_close_on_blur(previous)
+  then
+    hl.dispatch(hl.dsp.window.close({ window = previous }))
+  end
+
+  previous = current
+end)
+
 -- Atajos: Lanzadores
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("brave"))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("kitty"))
