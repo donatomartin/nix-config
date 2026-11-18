@@ -30,6 +30,7 @@ in
     gopls
     sonarlint-ls
     bash-language-server
+    shellcheck
     sqlfluff
 
     # Plugin deps
