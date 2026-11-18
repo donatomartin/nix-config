@@ -40,7 +40,6 @@ in
     ../../modules/home/programs/zsh.nix
   ];
 
-
   home.packages = with pkgs; [
 
     # Fonts
@@ -118,7 +117,7 @@ in
     nwg-displays # Hyprland display manager
     freecad # 3D Modeler
     inkscape # Vector graphics editor
-    davinci-resolve # Video Editor 
+    davinci-resolve # Video Editor
     rofi # GUI menu
     heroic # games launcher
     qbittorrent # torrent client
@@ -132,8 +131,7 @@ in
     vscode # IDE
     brave # browser 1
     firefox # browser 2
-    tor-browser  # tor browser
-    pavucontrol # audio GUI manager
+    tor-browser # tor browser
     neovide # neovim frontend
     sqlite-web # SQLite web interface
     seahorse # secret manager
@@ -149,16 +147,10 @@ in
 
     # Programming Basics
     go # golang
-    air # live reload for go
-    delve # debugger for go
-
     nodejs # typescript, javascript
     pnpm # efficient package manager for javascript
-
     maven # java projects build automation tool
-
     python313 # python
-    python313Packages.debugpy # debugger for python
 
     rustc # rust compiler
     cargo # rust package manager and build tool

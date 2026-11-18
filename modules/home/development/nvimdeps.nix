@@ -33,6 +33,10 @@ in
     pkgs.shellcheck
     pkgs.sqlfluff
 
+    pkgs.air # live reload for go
+    pkgs.delve # debugger for go
+    pkgs.python313Packages.debugpy # debugger for python
+
     # Plugin deps
     pkgs.fd
     pkgs.ripgrep
