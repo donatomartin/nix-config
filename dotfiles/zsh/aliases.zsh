@@ -42,5 +42,5 @@ alias ndg="sudo nix-env --profile /nix/var/nix/profiles/system --delete-generati
 
 ###other
 alias neofetch="fastfetch"
-alias oc="opencode --port"
-
+alias oc="opencode"
+alias ocs="opencode service status"

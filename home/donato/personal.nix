@@ -96,7 +96,7 @@ in
 
     # TUI Apps
     unstable.opencode # code agent
-    opencode-claude-auth # opencode plugin
+    unstable.opencode-claude-auth # opencode plugin
     unstable.claude-code # anthropic's code agent
     unstable.codex # openai's code agent
     unstable.neovim # text editor
