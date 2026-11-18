@@ -8,6 +8,7 @@ in
     ".config/hypr".source = link "hyprland";
     ".config/nvim".source = link "nvim";
     ".config/tmux".source = link "tmux";
+    ".config/waybar".source = link "waybar";
     ".config/zsh".source = link "zsh";
   };
 }

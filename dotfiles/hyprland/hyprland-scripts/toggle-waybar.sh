@@ -6,5 +6,7 @@ if [ -z "$WAYBAR_PID" ]; then
   waybar &
 else
   # If Waybar is running, send SIGUSR1 to hide it
-  kill -USR1 $WAYBAR_PID
+  # If Waybar is running, send SIGUSR2 to reload it
+  # If Waybar is running, send 9 to kill it
+  kill -9 $WAYBAR_PID
 fi

@@ -1,0 +1,78 @@
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["custom/vpn", "bluetooth", "network", "pulseaudio", "battery"],
+
+    "bluetooth": {
+      // "controller": "controller1", // Specify the controller alias when more than one exists.
+      "format": "  0",
+      "format-disabled": " 󰂲",
+      "format-connected": "  {num_connections}",
+      "tooltip-format": "{controller_alias}\t{controller_address}",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "on-click": "blueman-manager",
+      "interval": 1
+    },
+
+    "clock": {
+      "format": "{:%H:%M:%S}",
+      "tooltip-format": "{:%A, %d %B %Y}",
+      "interval": 1
+    },
+
+    "battery": {
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{icon}{capacity}%",
+      "format-charging": " {capacity}%",
+      "format-plugged": " {capacity}%",
+      "format-alt": "{icon}{time}",
+      "format-full": "  {capacity}%",
+      "format-icons": ["󰂎 ", "󰁻 ", "󰁼 ", "󰁽 ", "󰁾 ", "󰁿 ", "󰂀 ", "󰂁 ", "󰂂 ", "󰁹 "],
+      "interval": 1
+    },
+
+    "network": {
+      "format": "{icon}  {signalStrength}%",
+      "format-ethernet": "󰈀",
+      "format-disconnected": "󰤫",
+      "format-disabled": "󰤮",
+      "tooltip-format": "{essid} [{ipaddr}] ({signalStrength}%)",
+      "format-icons": {
+        "default": ["󰤟", "󰤢", "󰤥", "󰤨"]
+      },
+      "on-click": "nmgui",
+      "interval": 1
+    },
+
+    "pulseaudio": {
+      "format": "{icon}{volume}%",
+      "format-muted": "  Muted",
+      "format-icons": {
+        "default": ["  ", "  ", "  "],
+        "headphone": " "
+      },
+      "on-click": "pavucontrol"
+    },
+
+    "hyprland/workspaces": {
+      "all-outputs": false
+    },
+
+    "custom/vpn": {
+      "exec": "sh -c 'wg show interfaces | grep -q . && echo \"󰖂 VPN\"'",
+      "interval": 5,
+      "format": "{}",
+      "hide-empty-text": true,
+      "tooltip": false
+    }
+  }
+]
