@@ -85,11 +85,14 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
-  networking.firewall.trustedInterfaces = [ "zt+" ];
   networking.firewall.allowedUDPPorts = [ ];
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedTCPPortRanges = [ ];
   networking.firewall.allowedUDPPortRanges = [ ];
+  networking.firewall.interfaces.raspi.allowedTCPPorts = [
+    8080
+    49374
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Madrid";
