@@ -159,6 +159,18 @@ in
 
   ];
 
+  systemd.user.services.opencode-vpn-proxy = {
+    Unit = {
+      Description = "OpenCode VPN proxy";
+      After = [ "network-online.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.socat}/bin/socat TCP-LISTEN:49374,bind=10.8.0.3,reuseaddr,fork TCP:127.0.0.1:49374";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = [ "default.target" ];
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
