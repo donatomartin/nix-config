@@ -11,7 +11,6 @@ require("monitors")
 -- Variables de entorno
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 hl.env("WLR_NO_HARDWARE_CURSORS", "1")
-hl.env("EDITOR", "nvim")
 
 -- Autostart (equivalente a exec-once)
 hl.on("hyprland.start", function()
@@ -108,8 +107,14 @@ hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "al
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 
 -- Reglas de ventana
-hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
-hl.window_rule({ match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false }, no_focus = true })
+hl.window_rule({
+  match = { class = ".*" },
+  suppress_event = "maximize"
+})
+hl.window_rule({
+  match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
+  no_focus = true
+})
 hl.window_rule({
   match = { class = "^(xwaylandvideobridge)$" },
   no_blur = true,
@@ -119,22 +124,40 @@ hl.window_rule({
   no_anim = true,
   opacity = "0.0"
 })
-hl.window_rule({ match = { class = "^(org.pulseaudio.pavucontrol)$" }, float = true, size = { 800, 450 }, move = { "monitor_w - 800", "31" } })
-hl.window_rule({ match = { class = "^(.blueman-manager-wrapped)$" }, float = true, size = { 800, 450 }, move = { "monitor_w - 800", "31" } })
-hl.window_rule({ match = { title = "^(.*Network Manager.*)$" }, float = true, size = { 800, 450 }, move = { "monitor_w - 800", "31" } })
-hl.window_rule({ match = { title = "^(Chromium-browser)$" }, tile = true })
-hl.window_rule({ match = { title = "^(Imagen en imagen)|(Picture in picture)$" }, float = true, pin = true, size = { 800, 450 } })
 hl.window_rule({
-  name = "bitwarden",
-  match = {
-    initial_class = "^brave-nngceckbapebfimnlniiiahkandclblb-Default$",
-  },
+  match = { class = "^(org.pulseaudio.pavucontrol)$" },
+  float = true,
+  size = { 800, 450 },
+  move = { "monitor_w - 800", "31" }
+})
+hl.window_rule({
+  match = { class = "^(.blueman-manager-wrapped)$" },
+  float = true,
+  size = { 800, 450 },
+  move = { "monitor_w - 800", "31" }
+})
+hl.window_rule({
+  match = { title = "^(.*Network Manager.*)$" },
+  float = true,
+  size = { 800, 450 },
+  move = { "monitor_w - 800", "31" }
+})
+hl.window_rule({
+  match = { initial_class = "^brave-nngceckbapebfimnlniiiahkandclblb-Default$", },
   float = true,
   size = { 480, 600 },
-  no_anim = true,
   move = { "monitor_w - 480", "31" },
 })
--- hl.window_rule({ match = { title = "^(discord.com está compartiendo tu pantalla.)$" } })
+hl.window_rule({
+  match = { title = "^(Chromium-browser)$" },
+  tile = true
+})
+hl.window_rule({
+  match = { title = "^(Imagen en imagen)|(Picture in picture)$" },
+  float = true,
+  pin = true,
+  size = { 800, 450 }
+})
 
 -- Atajos: Lanzadores
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("brave"))
@@ -152,131 +175,61 @@ hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(toggleBluelight))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("makoctl dismiss -a"))
 hl.bind("XF86Calculator", hl.dsp.exec_cmd("libreoffice --calc"))
 
--- Atajos: Flotante / pseudotile
+local multiplier = 40
+local directions = {
+  left = { key = "h", coords = { x = -multiplier, y = 0, relative = true } },
+  down = { key = "j", coords = { x = 0, y = multiplier, relative = true } },
+  up = { key = "k", coords = { x = 0, y = -multiplier, relative = true } },
+  right = { key = "l", coords = { x = multiplier, y = 0, relative = true }
+  }
+}
+
+-- Atajos de Tile
+for index, value in ipairs(directions) do
+  hl.bind(mainMod .. " + " .. value.key, hl.dsp.focus({ direction = index }))
+  hl.bind(mainMod .. " + SHIFT + " .. value.key, hl.dsp.window.move({ direction = index }))
+  hl.bind(mainMod .. " + CTRL + " .. value.key, hl.dsp.window.swap({ direction = index }))
+  hl.bind(mainMod .. " + ALT + " .. value.key, hl.dsp.window.resize(value.coords), { repeating = true })
+  hl.bind(mainMod .. " + ALT + SHIFT + " .. value.key, hl.dsp.window.move(value.coords), { repeating = true })
+end
+
+hl.bind(mainMod .. " + Tab", hl.dsp.window.cycle_next({ bring_active_to_top = true }))
 hl.bind(mainMod .. " + O", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + I", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Atajos: Foco (estilo vim)
-hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
-hl.bind(mainMod .. " + Tab", hl.dsp.window.cycle_next({ bring_active_to_top = true }))
-
--- Atajos: Mover ventanas (en tiling)
-hl.bind(mainMod .. " + SHIFT + h", hl.dsp.window.move({ direction = "left" }))
-hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.move({ direction = "right" }))
-hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.move({ direction = "up" }))
-hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.move({ direction = "down" }))
-
--- Atajos: Swap de ventanas
-hl.bind(mainMod .. " + CTRL + h", hl.dsp.window.swap({ direction = "left" }))
-hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.swap({ direction = "right" }))
-hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.swap({ direction = "up" }))
-hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.swap({ direction = "down" }))
-
--- Workspace groups (1-10 and 11-20)
-local ws_offset = 0
-
-local function opposite_workspace(id)
-  if id >= 1 and id <= 10 then
-    return id + 10
-  elseif id >= 11 and id <= 20 then
-    return id - 10
-  end
-  return nil
-end
-
--- SUPER + G: Switch to opposite workspace group
-hl.bind(mainMod .. " + G", function()
-  local ws = hl.get_active_workspace()
-  if not ws then return end
-
-  local target = opposite_workspace(ws.id)
-  if not target then return end
-
-  ws_offset = target > 10 and 10 or 0
-  hl.dispatch(hl.dsp.focus({ workspace = target }))
-end, { desc = "Alternar grupo de workspaces" })
-
--- SUPER + SHIFT + G: Move window and follow to opposite group
-hl.bind(mainMod .. " + SHIFT + G", function()
-  local ws = hl.get_active_workspace()
-  if not ws then return end
-
-  local target = opposite_workspace(ws.id)
-  if not target then return end
-
-  ws_offset = target > 10 and 10 or 0
-
-  hl.dispatch(hl.dsp.window.move({
-    workspace = target,
-    follow = true,
-  }))
-end, { desc = "Mover ventana y seguir al grupo opuesto" })
-
--- SUPER + 1..0: Switch workspace
--- SUPER + SHIFT + 1..0: Move focused window
+-- Atajos de Workspace
 for i = 1, 10 do
   local key = i % 10
-
-  hl.bind(mainMod .. " + " .. key, function()
-    hl.dispatch(hl.dsp.focus({
-      workspace = ws_offset + i,
-    }))
-  end)
-
-  hl.bind(mainMod .. " + SHIFT + " .. key, function()
-    hl.dispatch(hl.dsp.window.move({
-      workspace = ws_offset + i,
-    }))
-  end)
+  hl.bind(mainMod .. " + " .. key, function() hl.dispatch(hl.dsp.focus({ workspace = i, })) end)
+  hl.bind(mainMod .. " + SHIFT + " .. key, function() hl.dispatch(hl.dsp.window.move({ workspace = i, })) end)
 end
 
--- Navegación entre workspaces
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.focus({ workspace = "e-1" }))
-hl.bind("ALT + Tab", hl.dsp.focus({ workspace = "previous" }))
+hl.bind(mainMod .. " + SHIFT + Tab", hl.dsp.focus({ workspace = "previous" }))
 
 -- Capturas de pantalla
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -z -m region -o ~/Documents/screenshots/"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprshot -z -m output -o ~/Documents/screenshots/"))
 
--- Ratón: mover y redimensionar ventanas
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-
--- Redimensionar con teclado (repetible)
-hl.bind(mainMod .. " + ALT + h", hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + l", hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + k", hl.dsp.window.resize({ x = 0, y = -40, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + j", hl.dsp.window.resize({ x = 0, y = 40, relative = true }), { repeating = true })
-
--- Mover ventana flotante con teclado (repetible)
-hl.bind(mainMod .. " + ALT + SHIFT + h", hl.dsp.window.move({ x = -40, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + SHIFT + l", hl.dsp.window.move({ x = 40, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + SHIFT + k", hl.dsp.window.move({ x = 0, y = -40, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + SHIFT + j", hl.dsp.window.move({ x = 0, y = 40, relative = true }), { repeating = true })
+local ltrue = { locked = true, }
+local lrtrue = { locked = true, repeating = true }
 
 -- Volumen (bloqueado + repetible)
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"),
-  { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-  { locked = true, repeating = true })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-  { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
-  { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), lrtrue)
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), lrtrue)
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), lrtrue)
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), lrtrue)
 
 -- Brillo (bloqueado + repetible)
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 2.5%+"),
-  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 2.5%-"),
-  { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 2.5%+"), lrtrue)
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 2.5%-"), lrtrue)
 
 -- Controles de multimedia (bloqueado)
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), ltrue)
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), ltrue)
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), ltrue)
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), ltrue)
