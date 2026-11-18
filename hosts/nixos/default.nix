@@ -22,6 +22,9 @@
 
   ];
 
+  documentation.man.enable = true;
+  documentation.man.generateCaches = true;
+
   # Bootloader
   boot = {
     loader = {
@@ -120,7 +123,6 @@
     ntfs3g
     man-pages
     man-pages-posix
-    wikiman
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -165,15 +167,15 @@
 
   programs = {
     zsh.enable = true;
+    nix-ld.enable = true;
+    steam.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
     };
-    nix-ld.enable = true;
-    steam.enable = true;
     thunar = {
       enable = true;
-      plugins = with pkgs; [ thunar-archive-plugin ];
+      plugins = [ pkgs.thunar-archive-plugin ];
     };
     wireshark = {
       enable = true;
