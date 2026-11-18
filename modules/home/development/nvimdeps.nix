@@ -14,31 +14,32 @@ in
 {
 
   home.packages = [
+
+    jdtls
     finalJavaHome
     lombok
-    jdtls
     java-debug
-  ]
-  ++ (with pkgs; [
+
     # Language deps
-    nixd
-    nixfmt
-    lua-language-server
-    pyright
-    vtsls
-    emmet-language-server
-    gopls
-    sonarlint-ls
-    bash-language-server
-    shellcheck
-    sqlfluff
+    pkgs.nixd
+    pkgs.nixfmt
+    pkgs.lua-language-server
+    pkgs.pyright
+    pkgs.vtsls
+    pkgs.emmet-language-server
+    pkgs.gopls
+    pkgs.sonarlint-ls
+    pkgs.bash-language-server
+    pkgs.shellcheck
+    pkgs.sqlfluff
 
     # Plugin deps
-    fd
-    ripgrep
-    zoxide
-    tmux
-  ]);
+    pkgs.fd
+    pkgs.ripgrep
+    pkgs.zoxide
+    pkgs.tmux
+
+  ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
